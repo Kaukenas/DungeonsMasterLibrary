@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#f3ad4d</color>
+    <color name="colorKauke">#f3ad4d</color>
+    <color name="colorKauke2">#4d3524</color>
+    <color name="colorKau">#f8c989</color>
+    <color name="colorRamon">#e6d4cb</color>
+</resources>

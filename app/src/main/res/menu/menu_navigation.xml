@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/personajesItem"
+        android:icon="@drawable/ic_excalibur"
+        android:title="@string/personajes" />
+    <item
+        android:id="@+id/wikiItem"
+        android:icon="@drawable/ic_spellbook"
+        android:title="@string/wiki" />
+    <item
+        android:id="@+id/tiendaItem"
+        android:icon="@drawable/ic_money_bag"
+        android:title="@string/tienda" />
+    <item
+        android:id="@+id/masterItem"
+        android:icon="@drawable/ic_menu_crown"
+        android:title="@string/master" />
+
+
+</menu>

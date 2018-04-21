@@ -9,5 +9,7 @@ public class TresCreacionPersonajesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tres_creacion_personajes);
+
+
     }
 }

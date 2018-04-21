@@ -1,5 +1,9 @@
 package com.example.manu.dungeonmasterlibrary.POJOS;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -8,7 +12,7 @@ import java.util.ArrayList;
  * Created by Manu on 20/04/2018.
  */
 
-public class Clases {
+public class Clases implements Parcelable {
 
     private String nombre;
     private String descripcion;
@@ -32,6 +36,31 @@ public class Clases {
         this.clases = clases;
         this.dadoGolpe = dadoGolpe;
     }
+
+    protected Clases(Parcel in) {
+        nombre = in.readString();
+        descripcion = in.readString();
+        numHabilidades = in.readInt();
+        bonoDeCompetencia = in.readInt();
+        dadoGolpe = in.readInt();
+        try {
+            habilidadesEscoger = new JSONObject(in.readString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static final Creator<Clases> CREATOR = new Creator<Clases>() {
+        @Override
+        public Clases createFromParcel(Parcel in) {
+            return new Clases(in);
+        }
+
+        @Override
+        public Clases[] newArray(int size) {
+            return new Clases[size];
+        }
+    };
 
     public int getDadoGolpe() {
         return dadoGolpe;
@@ -95,5 +124,20 @@ public class Clases {
 
     public void setClases(ArrayList<Features> clases) {
         this.clases = clases;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(nombre);
+        parcel.writeString(descripcion);
+        parcel.writeInt(numHabilidades);
+        parcel.writeInt(bonoDeCompetencia);
+        parcel.writeInt(dadoGolpe);
+        parcel.writeString(habilidadesEscoger.toString());
     }
 }

@@ -16,6 +16,7 @@ import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
 import com.example.manu.dungeonmasterlibrary.POJOS.Razas;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,6 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
     int numero;
     MultiSelectionSpinner spinnerClases, spinnerRazas;
     CargarDatos cargarDatos;
-    Personajes personajes = new Personajes();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +73,9 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //IF ha seleccionado algo en clase y ha seleccionado algo en raza
-                if (!spinnerClases.getSelectedItem().equals("") && !spinnerRazas.getSelectedItem().equals("")){
-                    //startActivity(new Intent(UnoCreacionPersonajesActivity.this, DosCreacionPersonajesActivity.class));
-                    Clases c= new Clases();
+                if (!spinnerClases.getSelectedItemsAsString().equals("") && !spinnerRazas.getSelectedItemsAsString().equals("")){
+
+                    Clases c = new Clases();
                     Razas r = new Razas();
                     Personajes p = new Personajes();
                     try {
@@ -92,11 +92,30 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                             }
                         }
 
+                        JSONObject attrs = new JSONObject();
+                        attrs.put("fuerza", Integer.parseInt(txtFuerza.getText().toString()));
+                        attrs.put("destreza", Integer.parseInt(txtDestreza.getText().toString()));
+                        attrs.put("constitucion", Integer.parseInt(txtConstitucion.getText().toString()));
+                        attrs.put("inteligencia", Integer.parseInt(txtInteligencia.getText().toString()));
+                        attrs.put("sabiduria", Integer.parseInt(txtSabiduria.getText().toString()));
+                        attrs.put("carisma", Integer.parseInt(txtCarisma.getText().toString()));
+
                         p.setVIDA(c.getDadoGolpe()+obtenerBonoAtributo(Integer.parseInt(txtConstitucion.getText().toString())));
+                        p.setAtributos(attrs);
+                        p.setClases(c);
+                        p.setRazas(r);
+                        Toast.makeText(UnoCreacionPersonajesActivity.this.getApplicationContext(), "personaje = "+ p.getClases().getHabilidadesEscoger(), Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(UnoCreacionPersonajesActivity.this, DosCreacionPersonajesActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("PERSONAJE",p);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                    Toast.makeText(UnoCreacionPersonajesActivity.this, "Nombre de la clase: "+c.getNombre()+" Nombre de la raza " + r.getName(), Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(UnoCreacionPersonajesActivity.this, "Nombre de la clase: "+c.getNombre()+" Nombre de la raza " + r.getName(), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(UnoCreacionPersonajesActivity.this, "Debes seleccionar una Clase y una Raza, no intentes explotarnos la APP que te conozco", Toast.LENGTH_SHORT).show();
                 }
@@ -135,4 +154,6 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
         }
         return bono;
     }
+
+
 }

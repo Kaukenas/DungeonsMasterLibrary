@@ -1,6 +1,8 @@
 package com.example.manu.dungeonmasterlibrary.POJOS;
 
 import android.media.Image;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import org.json.JSONObject;
 
@@ -10,7 +12,7 @@ import java.util.ArrayList;
  * Created by Manu on 20/04/2018.
  */
 
-public class Personajes {
+public class Personajes implements Parcelable {
     private String nombre;
     private int CA;
     private int VIDA;
@@ -36,6 +38,29 @@ public class Personajes {
         this.razas = razas;
         this.idUsuario = idUsuario;
     }
+
+    protected Personajes(Parcel in) {
+        nombre = in.readString();
+        CA = in.readInt();
+        VIDA = in.readInt();
+        DAMAGE = in.readInt();
+        alineamiento = in.readString();
+        idUsuario = in.readInt();
+        clases = in.readParcelable(Clases.class.getClassLoader());
+        razas = in.readParcelable(Razas.class.getClassLoader());
+    }
+
+    public static final Creator<Personajes> CREATOR = new Creator<Personajes>() {
+        @Override
+        public Personajes createFromParcel(Parcel in) {
+            return new Personajes(in);
+        }
+
+        @Override
+        public Personajes[] newArray(int size) {
+            return new Personajes[size];
+        }
+    };
 
     public int getDAMAGE() {
         return DAMAGE;
@@ -123,5 +148,22 @@ public class Personajes {
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(nombre);
+        parcel.writeInt(CA);
+        parcel.writeInt(VIDA);
+        parcel.writeInt(DAMAGE);
+        parcel.writeString(alineamiento);
+        parcel.writeInt(idUsuario);
+        parcel.writeParcelable(clases,i);
+        parcel.writeParcelable(razas,i);
     }
 }

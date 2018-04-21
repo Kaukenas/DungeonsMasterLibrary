@@ -1,5 +1,8 @@
 package com.example.manu.dungeonmasterlibrary.POJOS;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -9,7 +12,7 @@ import java.util.ArrayList;
  * Created by Manu on 20/04/2018.
  */
 
-public class Razas {
+public class Razas implements Parcelable {
     private String name;
     private JSONObject puntosAtributos;
     private int velocidad;
@@ -26,6 +29,24 @@ public class Razas {
         this.tamaño = tamaño;
         this.razas = razas;
     }
+
+    protected Razas(Parcel in) {
+        name = in.readString();
+        velocidad = in.readInt();
+        tamaño = in.readString();
+    }
+
+    public static final Creator<Razas> CREATOR = new Creator<Razas>() {
+        @Override
+        public Razas createFromParcel(Parcel in) {
+            return new Razas(in);
+        }
+
+        @Override
+        public Razas[] newArray(int size) {
+            return new Razas[size];
+        }
+    };
 
     public String getName() {
         return name;
@@ -65,5 +86,17 @@ public class Razas {
 
     public void setRazas(ArrayList<Traits> razas) {
         this.razas = razas;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(name);
+        parcel.writeInt(velocidad);
+        parcel.writeString(tamaño);
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
@@ -23,6 +24,7 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
     Button btnCancelDos, btnNextDos;
     Personajes personajes;
     EditText txtNombrePersonaje;
+    TextView txtTituloElegirHabilidades;
 
 
     @Override
@@ -33,6 +35,9 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
         btnNextDos = findViewById(R.id.btnNextDos);
         btnCancelDos = findViewById(R.id.btnCancelDos);
         txtNombrePersonaje = findViewById(R.id.txtNombrePersonaje);
+        txtTituloElegirHabilidades = findViewById(R.id.txtTituloElegir);
+
+
 
         personajes = getIntent().getExtras().getParcelable("PERSONAJE");
         //Toast.makeText(this, "personaje = "+personajes.getClases().getHabilidadesEscoger(), Toast.LENGTH_LONG).show();
@@ -41,6 +46,8 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
         while(iterator.hasNext()){
             list.add(iterator.next());
         }
+
+        txtTituloElegirHabilidades.setText("Elegir " + personajes.getClases().getNumHabilidades() + " de las Siguientes Habilidades");
 
         spinner = findViewById(R.id.input1);
         spinner.setMax(personajes.getClases().getNumHabilidades());

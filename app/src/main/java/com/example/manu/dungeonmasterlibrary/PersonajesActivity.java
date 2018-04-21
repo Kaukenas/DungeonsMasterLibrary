@@ -63,17 +63,16 @@ public class PersonajesActivity extends AppCompatActivity
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 switch (item.getItemId()) {
+                    case R.id.partidasItem:
+                        break;
                     case R.id.personajesItem:
                         cargarPersonajes();
                         break;
                     case R.id.wikiItem:
-                        cargarPersonajes();
                         break;
                     case R.id.tiendaItem:
-                        cargarPersonajes();
                         break;
                     case R.id.masterItem:
-                        cargarPersonajes();
                         break;
                 }
 
@@ -81,7 +80,7 @@ public class PersonajesActivity extends AppCompatActivity
             }
         });
 
-        bottomNavigationView.setSelectedItemId(R.id.personajesItem);
+        bottomNavigationView.setSelectedItemId(R.id.partidasItem);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -5,10 +5,9 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.util.AttributeSet;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
-import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,6 +24,7 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
     int max = 0;
     int contador = 0;
     ArrayAdapter<String> simple_adapter;
+    ArrayList<String> seleccion;
 
     public MultiSelectionSpinner(Context context) {
         super(context);
@@ -47,7 +47,7 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
         if (mSelection != null && which < mSelection.length) {
             if (isChecked) {
                 if (contador < max) {
-                    Toast.makeText(getContext(), "Sumando: "+this.max+" "+this.contador, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Sumando: "+this.max+" "+this.contador, Toast.LENGTH_SHORT).show();
                     contador++;
                     simple_adapter.clear();
                     simple_adapter.add(buildSelectedItemString());
@@ -57,7 +57,7 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
                     ((AlertDialog)dialog).getListView().setItemChecked(which, false);
                 }
             } else {
-                Toast.makeText(getContext(), "Restando: ", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Restando: ", Toast.LENGTH_SHORT).show();
                 contador--;
                 simple_adapter.clear();
                 simple_adapter.add(buildSelectedItemString());
@@ -68,7 +68,6 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
         }
 
     }
-
     @Override
     public boolean performClick() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -77,13 +76,20 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface arg0, int arg1) {
-                //OK
+                seleccion = new ArrayList<>();
+                for (int i = 0; i < _items.length; ++i) {
+                    if (mSelection[i]) {
+                        seleccion.add(_items[i]);
+                    }
+                }
             }
         });
-
-
         builder.show();
         return true;
+    }
+
+    public ArrayList<String> obtenerSeleccion(){
+        return seleccion;
     }
 
     @Override

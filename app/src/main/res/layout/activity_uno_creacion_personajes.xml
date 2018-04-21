@@ -19,8 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-    <Spinner
-        android:id="@+id/spinnerDATAClase"
+    <com.example.manu.dungeonmasterlibrary.MultiSelectionSpinner
+        android:id="@+id/spinnerDATAClases"
         android:layout_width="0dp"
         android:layout_height="34dp"
         android:layout_marginEnd="38dp"
@@ -58,10 +58,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerDATAClase" />
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDATAClases" />
 
-    <Spinner
-        android:id="@+id/spinnerHabilidades"
+    <com.example.manu.dungeonmasterlibrary.MultiSelectionSpinner
+        android:id="@+id/spinnerDATARazas"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginBottom="8dp"
@@ -249,7 +249,7 @@
         android:text="Siguiente"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerHabilidades"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDATARazas"
         app:layout_constraintVertical_bias="0.428" />
 
     <Button
@@ -265,7 +265,7 @@
         app:layout_constraintEnd_toStartOf="@+id/btnNextUno"
         app:layout_constraintHorizontal_bias="0.369"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerHabilidades"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDATARazas"
         app:layout_constraintVertical_bias="0.428" />
 
 </android.support.constraint.ConstraintLayout>

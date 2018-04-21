@@ -12,14 +12,14 @@ import java.util.List;
 public class DosCreacionPersonajesActivity extends AppCompatActivity {
 
     MultiSelectionSpinner spinner, spinner2;
-    Button btnCancelDos, btnFinishCharacter;
+    Button btnCancelDos, btnNextDos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dos_creacion_personajes);
 
-        btnFinishCharacter = findViewById(R.id.btnFinishCharacter);
+        btnNextDos = findViewById(R.id.btnNextDos);
         btnCancelDos = findViewById(R.id.btnCancelDos);
 
         spinner = findViewById(R.id.input1);
@@ -39,7 +39,7 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
         list2.add("List2");
         spinner2.setItems(list);
 
-        btnFinishCharacter.setOnClickListener(new View.OnClickListener() {
+        btnNextDos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DosCreacionPersonajesActivity.this, PersonajesActivity.class));

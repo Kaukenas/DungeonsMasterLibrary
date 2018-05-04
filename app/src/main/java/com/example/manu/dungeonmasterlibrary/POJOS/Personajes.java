@@ -1,5 +1,6 @@
 package com.example.manu.dungeonmasterlibrary.POJOS;
 
+import android.graphics.Bitmap;
 import android.media.Image;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -17,26 +18,26 @@ public class Personajes implements Parcelable {
     private int CA;
     private int VIDA;
     private int DAMAGE;
-    private Image fotoPersonaje;
     private JSONObject atributos;
     private String alineamiento;
     private JSONObject habilidades;
     private Clases clases;
     private Razas razas;
     private int idUsuario;
+    private String fotoPersonaje;
 
     public Personajes() {
     }
 
-    public Personajes(String nombre, Image fotoPersonaje, JSONObject atributos, String alineamiento, JSONObject habilidades, Clases clases, Razas razas, int idUsuario) {
+    public Personajes(String nombre, JSONObject atributos, String alineamiento, JSONObject habilidades, Clases clases, Razas razas, int idUsuario, String fotoPersonaje) {
         this.nombre = nombre;
-        this.fotoPersonaje = fotoPersonaje;
         this.atributos = atributos;
         this.alineamiento = alineamiento;
         this.habilidades = habilidades;
         this.clases = clases;
         this.razas = razas;
         this.idUsuario = idUsuario;
+        this.fotoPersonaje = fotoPersonaje;
     }
 
     protected Personajes(Parcel in) {
@@ -46,8 +47,9 @@ public class Personajes implements Parcelable {
         DAMAGE = in.readInt();
         alineamiento = in.readString();
         idUsuario = in.readInt();
-        clases = in.readParcelable(Clases.class.getClassLoader());
-        razas = in.readParcelable(Razas.class.getClassLoader());
+        this.clases = in.readParcelable(Clases.class.getClassLoader());
+        this.razas = in.readParcelable(Razas.class.getClassLoader());
+        fotoPersonaje = in.readString();
     }
 
     public static final Creator<Personajes> CREATOR = new Creator<Personajes>() {
@@ -94,11 +96,11 @@ public class Personajes implements Parcelable {
         this.nombre = nombre;
     }
 
-    public Image getFotoPersonaje() {
+    public String getFotoPersonaje() {
         return fotoPersonaje;
     }
 
-    public void setFotoPersonaje(Image fotoPersonaje) {
+    public void setFotoPersonaje(String fotoPersonaje) {
         this.fotoPersonaje = fotoPersonaje;
     }
 
@@ -165,5 +167,6 @@ public class Personajes implements Parcelable {
         parcel.writeInt(idUsuario);
         parcel.writeParcelable(clases,i);
         parcel.writeParcelable(razas,i);
+        parcel.writeString(fotoPersonaje);
     }
 }

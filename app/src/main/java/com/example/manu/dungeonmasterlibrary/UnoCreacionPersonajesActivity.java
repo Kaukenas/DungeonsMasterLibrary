@@ -103,13 +103,19 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                         p.setVIDA(c.getDadoGolpe()+obtenerBonoAtributo(Integer.parseInt(txtConstitucion.getText().toString())));
                         p.setAtributos(attrs);
                         p.setClases(c);
+                        Toast.makeText(UnoCreacionPersonajesActivity.this, c.getNombre(), Toast.LENGTH_SHORT).show();
                         p.setRazas(r);
-                        Toast.makeText(UnoCreacionPersonajesActivity.this.getApplicationContext(), "personaje = "+ p.getClases().getHabilidadesEscoger(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(UnoCreacionPersonajesActivity.this, r.getName(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(UnoCreacionPersonajesActivity.this.getApplicationContext(), "personaje = "+ p.getClases().getHabilidadesEscoger(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(UnoCreacionPersonajesActivity.this, DosCreacionPersonajesActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("PERSONAJE",p);
                         intent.putExtras(bundle);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                         startActivity(intent);
+                        finish();
+
+
 
 
                     } catch (JSONException e) {
@@ -130,6 +136,7 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public void tirarDados(){
         txtFuerza.setText(""+tirarDadejo());

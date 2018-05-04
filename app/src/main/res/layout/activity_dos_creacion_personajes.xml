@@ -19,14 +19,13 @@
             android:paddingTop="30dp">
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/txtTituloElegir"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Elige 3 de las Siguientes Habilidades"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"

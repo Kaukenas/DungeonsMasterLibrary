@@ -40,7 +40,7 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
 
 
         personajes = getIntent().getExtras().getParcelable("PERSONAJE");
-        //Toast.makeText(this, "personaje = "+personajes.getClases().getHabilidadesEscoger(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "personaje = "+personajes.getClases().getNombre(), Toast.LENGTH_LONG).show();
         JSONObject habilidades = personajes.getClases().getHabilidadesEscoger();
         Iterator<String> iterator =habilidades.keys();
         while(iterator.hasNext()){
@@ -86,15 +86,19 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
                 p.setHabilidades(hab);
                 p.setNombre(txtNombrePersonaje.getText().toString());
                 p.setAlineamiento(spinner2.obtenerSeleccion().get(0));
-
+                Toast.makeText(DosCreacionPersonajesActivity.this, p.getNombre().toString(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(DosCreacionPersonajesActivity.this, TresCreacionPersonajesActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("PERSONAJE",p);
                 intent.putExtras(bundle);
+                intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 startActivity(intent);
+                finish();
 
             }
         });
+
+
 
         btnCancelDos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,4 +108,5 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
         });
 
     }
+
 }

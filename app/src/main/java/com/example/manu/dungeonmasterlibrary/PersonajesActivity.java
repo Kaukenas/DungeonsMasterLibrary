@@ -14,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -26,8 +27,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.Adapters.Adapter;
+import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
 import com.example.manu.dungeonmasterlibrary.POJOS.Pruebafotos;
 
 import java.lang.reflect.Field;
@@ -43,6 +46,7 @@ public class PersonajesActivity extends AppCompatActivity
     MenuItem btnAddPersonajes;
     MenuItem btnPersonaje;
     CardView cardViewChar;
+    ArrayList<Personajes> listaPersonajes = new ArrayList<Personajes>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +84,6 @@ public class PersonajesActivity extends AppCompatActivity
             }
         });
 
-        bottomNavigationView.setSelectedItemId(R.id.partidasItem);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar ac = getSupportActionBar();
@@ -100,6 +102,22 @@ public class PersonajesActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode==1){
+            Bundle bundle = data.getExtras();
+            Personajes personaje = bundle.getParcelable("PERSONAJE");
+            listaPersonajes.add(personaje);
+        }else{
+            Toast.makeText(this, "wah wah wah", Toast.LENGTH_SHORT).show();
+        }
+
+        bottomNavigationView.setSelectedItemId(R.id.personajesItem);
+
+    }
+
     private TextView getActionBarTextView(Toolbar toolbar) {
         TextView titleTextView = null;
 
@@ -138,7 +156,9 @@ public class PersonajesActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.btnAddPersonajes) {
-            startActivity(new Intent(PersonajesActivity.this, UnoCreacionPersonajesActivity.class));
+            startActivityForResult(
+                    new Intent(PersonajesActivity.this,
+                            UnoCreacionPersonajesActivity.class),1);
         }
 
         //noinspection SimplifiableIfStatement
@@ -148,10 +168,9 @@ public class PersonajesActivity extends AppCompatActivity
     }
 
     public void cargarPersonajes(){
-        ArrayList<Pruebafotos> listaFotos = new ArrayList<Pruebafotos>();
-        listaFotos.add(new Pruebafotos("Foto 1", 0, R.drawable.uno));
-        listaFotos.add(new Pruebafotos("Foto 2", 0, R.drawable.dos));
-        contenedor.setAdapter(new Adapter(listaFotos));
+
+
+        contenedor.setAdapter(new Adapter(listaPersonajes));
         contenedor.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

@@ -57,32 +57,24 @@ public class TresCreacionPersonajesActivity extends AppCompatActivity {
         btnBackTres = findViewById(R.id.btnBackTres);
         addListenerImageView();
 
-        btnBackTres.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        btnBackTres.setOnClickListener(view -> finish());
+
+
+        btnFinish.setOnClickListener(view -> {
+            if(bitmapend!=null){
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmapend.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] imageBytes = stream.toByteArray();
+                String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+                personajes.setFotoPersonaje(encodedImage);
+                Intent returnIntent = new Intent();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("PERSONAJE",personajes);
+                returnIntent.putExtras(bundle);
+                setResult(RESULT_OK,returnIntent);
                 finish();
-            }
-        });
-
-
-        btnFinish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(bitmapend!=null){
-                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    bitmapend.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                    byte[] imageBytes = stream.toByteArray();
-                    String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-                    personajes.setFotoPersonaje(encodedImage);
-                    Intent returnIntent = new Intent();
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("PERSONAJE",personajes);
-                    returnIntent.putExtras(bundle);
-                    setResult(RESULT_OK,returnIntent);
-                    finish();
-                }else{
-                    Toast.makeText(TresCreacionPersonajesActivity.this, "Manu no tiene puta idea", Toast.LENGTH_SHORT).show();
-                }
+            }else{
+                Toast.makeText(TresCreacionPersonajesActivity.this, "Manu no tiene puta idea", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -91,64 +83,53 @@ public class TresCreacionPersonajesActivity extends AppCompatActivity {
     public void addListenerImageView() {
 
 
-        imageViewMonje.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Drawable highlight = getResources().getDrawable( R.drawable.border_item);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    view.setBackground(highlight);
-                    imageViewGuerrero.setBackground(Drawable.createFromPath(""));
-                    imageViewBarbaro.setBackground(Drawable.createFromPath(""));
-                    imageViewPicaro.setBackground(Drawable.createFromPath(""));
-                    bitmapend = ((BitmapDrawable)imageViewMonje.getDrawable()).getBitmap();
-                }
+        imageViewMonje.setOnClickListener(view -> {
+            Drawable highlight = getResources().getDrawable( R.drawable.border_item);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                view.setBackground(highlight);
+                imageViewGuerrero.setBackground(Drawable.createFromPath(""));
+                imageViewBarbaro.setBackground(Drawable.createFromPath(""));
+                imageViewPicaro.setBackground(Drawable.createFromPath(""));
+                bitmapend = ((BitmapDrawable)imageViewMonje.getDrawable()).getBitmap();
+            }
 
+
+
+        });
+
+        imageViewGuerrero.setOnClickListener(view -> {
+            Drawable highlight = getResources().getDrawable( R.drawable.border_item);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                view.setBackground(highlight);
+                imageViewMonje.setBackground(Drawable.createFromPath(""));
+                imageViewBarbaro.setBackground(Drawable.createFromPath(""));
+                imageViewPicaro.setBackground(Drawable.createFromPath(""));
+                bitmapend = ((BitmapDrawable)imageViewGuerrero.getDrawable()).getBitmap();
             }
         });
 
-        imageViewGuerrero.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Drawable highlight = getResources().getDrawable( R.drawable.border_item);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    view.setBackground(highlight);
-                    imageViewMonje.setBackground(Drawable.createFromPath(""));
-                    imageViewBarbaro.setBackground(Drawable.createFromPath(""));
-                    imageViewPicaro.setBackground(Drawable.createFromPath(""));
-                    bitmapend = ((BitmapDrawable)imageViewGuerrero.getDrawable()).getBitmap();
-                }
-
+        imageViewBarbaro.setOnClickListener(view -> {
+            Drawable highlight = getResources().getDrawable( R.drawable.border_item);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                view.setBackground(highlight);
+                imageViewMonje.setBackground(Drawable.createFromPath(""));
+                imageViewGuerrero.setBackground(Drawable.createFromPath(""));
+                imageViewPicaro.setBackground(Drawable.createFromPath(""));
+                bitmapend = ((BitmapDrawable)imageViewBarbaro.getDrawable()).getBitmap();
             }
+
         });
 
-        imageViewBarbaro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Drawable highlight = getResources().getDrawable( R.drawable.border_item);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    view.setBackground(highlight);
-                    imageViewMonje.setBackground(Drawable.createFromPath(""));
-                    imageViewGuerrero.setBackground(Drawable.createFromPath(""));
-                    imageViewPicaro.setBackground(Drawable.createFromPath(""));
-                    bitmapend = ((BitmapDrawable)imageViewBarbaro.getDrawable()).getBitmap();
-                }
-
+        imageViewPicaro.setOnClickListener(view -> {
+            Drawable highlight = getResources().getDrawable( R.drawable.border_item);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                view.setBackground(highlight);
+                imageViewMonje.setBackground(Drawable.createFromPath(""));
+                imageViewGuerrero.setBackground(Drawable.createFromPath(""));
+                imageViewBarbaro.setBackground(Drawable.createFromPath(""));
+                bitmapend = ((BitmapDrawable)imageViewPicaro.getDrawable()).getBitmap();
             }
-        });
 
-        imageViewPicaro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Drawable highlight = getResources().getDrawable( R.drawable.border_item);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    view.setBackground(highlight);
-                    imageViewMonje.setBackground(Drawable.createFromPath(""));
-                    imageViewGuerrero.setBackground(Drawable.createFromPath(""));
-                    imageViewBarbaro.setBackground(Drawable.createFromPath(""));
-                    bitmapend = ((BitmapDrawable)imageViewPicaro.getDrawable()).getBitmap();
-                }
-
-            }
         });
     }
 }

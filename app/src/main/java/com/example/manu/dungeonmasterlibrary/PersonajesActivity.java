@@ -170,7 +170,7 @@ public class PersonajesActivity extends AppCompatActivity
     public void cargarPersonajes(){
 
 
-        contenedor.setAdapter(new Adapter(listaPersonajes));
+        contenedor.setAdapter(new Adapter(listaPersonajes, this.getApplicationContext()));
         contenedor.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

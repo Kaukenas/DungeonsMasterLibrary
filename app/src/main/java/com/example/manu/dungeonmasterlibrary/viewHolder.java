@@ -19,5 +19,7 @@ public class viewHolder extends RecyclerView.ViewHolder {
 
         txtTituloCardView = itemView.findViewById(R.id.txtTituloCardView);
         imgCardView = itemView.findViewById(R.id.imageViewCard);
+
+
     }
 }

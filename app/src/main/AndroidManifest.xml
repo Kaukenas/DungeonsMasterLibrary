@@ -36,7 +36,8 @@
             android:theme="@style/AppTheme" />
         -*º
         <activity android:name=".TresCreacionPersonajesActivity" />
-        <activity android:name=".MostrarUnoPersonajeActivity"></activity>
+        <activity android:name=".MostrarUnoPersonajeActivity" />
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>

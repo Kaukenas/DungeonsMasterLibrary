@@ -43,7 +43,7 @@ public class PersonajesActivity extends AppCompatActivity
 
     BottomNavigationView bottomNavigationView;
     RecyclerView contenedor;
-    MenuItem btnAddPersonajes;
+    MenuItem btnAddPersonajes, btnRamon;
     MenuItem btnPersonaje;
     CardView cardViewChar;
     ArrayList<Personajes> listaPersonajes = new ArrayList<Personajes>();
@@ -57,6 +57,7 @@ public class PersonajesActivity extends AppCompatActivity
 
         contenedor = findViewById(R.id.contenedor);
         btnAddPersonajes = findViewById(R.id.btnAddPersonajes);
+        btnRamon = findViewById(R.id.btnRamon);
         cardViewChar = findViewById(R.id.cardViewChar);
 
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
@@ -159,6 +160,10 @@ public class PersonajesActivity extends AppCompatActivity
             startActivityForResult(
                     new Intent(PersonajesActivity.this,
                             UnoCreacionPersonajesActivity.class),1);
+        }
+        if(id == R.id.btnRamon){
+            startActivity(
+                    new Intent(PersonajesActivity.this,TestActivity.class));
         }
 
         //noinspection SimplifiableIfStatement

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/combateItem"
+        android:icon="@drawable/ic_espada"
+        android:title="@string/combate" />
+    <item
+        android:id="@+id/habilidadesItem"
+        android:icon="@drawable/ic_archivo"
+        android:title="@string/habilidades" />
+    <item
+        android:id="@+id/equipamientoItem"
+        android:icon="@drawable/ic_mochila"
+        android:title="@string/equipamiento" />
+    <item
+        android:id="@+id/rasgosItem"
+        android:icon="@drawable/ic_habilidades"
+        android:title="@string/rasgos" />
+
+</menu>

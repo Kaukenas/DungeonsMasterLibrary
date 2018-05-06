@@ -25,4 +25,8 @@
     <string name="tienda">Tienda</string>
     <string name="master">Master</string>
     <string name="elige_de_las_siguientes_habilidades">Elige de las Siguientes Habilidades</string>
+    <string name="combate">Combate</string>
+    <string name="habilidades">Habilidades</string>
+    <string name="equipamiento">Equipamiento</string>
+    <string name="rasgos">Rasgos</string>
 </resources>

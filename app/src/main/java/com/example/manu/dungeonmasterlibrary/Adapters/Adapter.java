@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.manu.dungeonmasterlibrary.MostrarUnoPersonajeActivity;
 import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
 import com.example.manu.dungeonmasterlibrary.POJOS.Pruebafotos;
 import com.example.manu.dungeonmasterlibrary.PersonajesActivity;
@@ -41,6 +42,8 @@ public class Adapter extends RecyclerView.Adapter<viewHolder> {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context, "Ramon siempre tiene razon", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, MostrarUnoPersonajeActivity.class);
+                context.startActivity(intent);
             }
         });
         return new viewHolder(vista);

@@ -3,9 +3,12 @@ package com.example.manu.dungeonmasterlibrary;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
@@ -25,7 +28,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +56,8 @@ public class PersonajesActivity extends AppCompatActivity
     MenuItem btnPersonaje;
     CardView cardViewChar;
     ArrayList<Personajes> listaPersonajes = new ArrayList<Personajes>();
+    WebView mWebView;
+    ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +65,15 @@ public class PersonajesActivity extends AppCompatActivity
         setContentView(R.layout.activity_personajes);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
         contenedor = findViewById(R.id.contenedor);
         btnAddPersonajes = findViewById(R.id.btnAddPersonajes);
         btnRamon = findViewById(R.id.btnRamon);
         cardViewChar = findViewById(R.id.cardViewChar);
+
+
+
+        mWebView = findViewById(R.id.mWebView);
+        mProgressBar =  findViewById(R.id.progressBar);
 
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
 
@@ -74,11 +89,52 @@ public class PersonajesActivity extends AppCompatActivity
                         cargarPersonajes();
                         break;
                     case R.id.wikiItem:
-                        break;
-                    case R.id.tiendaItem:
-                        break;
-                    case R.id.masterItem:
-                        break;
+
+                        String url = "https://www.d20pfsrd.com/";
+                        if(savedInstanceState != null){
+                            url = savedInstanceState.getString("URL");
+                        }
+
+                        WebSettings webSettings = mWebView.getSettings();
+                        //webSettings.setJavaScriptEnabled(true);
+                        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+                        webSettings.setBlockNetworkLoads(false);
+                        webSettings.setDomStorageEnabled(true);
+
+                        mWebView.setWebViewClient(new WebViewClient(){
+                            @Override
+
+                            //Decidir que se carga dentro del WebView y que se carga fuera
+                            public boolean shouldOverrideUrlLoading(WebView view, String request) {
+                                if (Uri.parse(request).getHost().endsWith("https://www.d20pfsrd.com/")){
+                                    return false;
+                                } else {
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(request));
+                                    view.getContext().startActivity(intent);
+                                    return true;
+                                }
+                            }
+
+                            @Override
+                            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                                super.onPageStarted(view, url, favicon);
+                                mProgressBar.setVisibility(View.VISIBLE);
+                            }
+
+                            @Override
+                            public void onPageFinished(WebView view, String url) {
+                                super.onPageFinished(view, url);
+                                mProgressBar.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                                super.onReceivedError(view, request, error);
+                            }
+                        });
+
+                        //Cargar la URL
+                        mWebView.loadUrl(url);
                 }
 
                 return true;
@@ -102,6 +158,12 @@ public class PersonajesActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        outState.putString("URL",mWebView.getUrl());
     }
 
     @Override
@@ -140,6 +202,12 @@ public class PersonajesActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
+        if (mWebView.canGoBack()){
+            mWebView.goBack();
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
@@ -173,8 +241,6 @@ public class PersonajesActivity extends AppCompatActivity
     }
 
     public void cargarPersonajes(){
-
-
         contenedor.setAdapter(new Adapter(listaPersonajes, this.getApplicationContext()));
         contenedor.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());

@@ -72,7 +72,7 @@ public class PersonajesActivity extends AppCompatActivity
 
 
 
-        mWebView = findViewById(R.id.mWebView);
+
         mProgressBar =  findViewById(R.id.progressBar);
 
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
@@ -86,9 +86,14 @@ public class PersonajesActivity extends AppCompatActivity
                     case R.id.partidasItem:
                         break;
                     case R.id.personajesItem:
+                        setContentView(R.layout.activity_personajes);
                         cargarPersonajes();
                         break;
                     case R.id.wikiItem:
+                        //cambiando el layout
+                        setContentView(R.layout.webview_wiki);
+                        //obteniendo el webview
+                        mWebView = findViewById(R.id.mWebView);
 
                         String url = "https://www.d20pfsrd.com/";
                         if(savedInstanceState != null){
@@ -98,8 +103,11 @@ public class PersonajesActivity extends AppCompatActivity
                         WebSettings webSettings = mWebView.getSettings();
                         //webSettings.setJavaScriptEnabled(true);
                         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-                        webSettings.setBlockNetworkLoads(false);
-                        webSettings.setDomStorageEnabled(true);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
+                            webSettings.setBlockNetworkLoads(false);
+                            webSettings.setDomStorageEnabled(true);
+                        }
+
 
                         mWebView.setWebViewClient(new WebViewClient(){
                             @Override
@@ -118,13 +126,13 @@ public class PersonajesActivity extends AppCompatActivity
                             @Override
                             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                                 super.onPageStarted(view, url, favicon);
-                                mProgressBar.setVisibility(View.VISIBLE);
+                                //mProgressBar.setVisibility(View.VISIBLE);
                             }
 
                             @Override
                             public void onPageFinished(WebView view, String url) {
                                 super.onPageFinished(view, url);
-                                mProgressBar.setVisibility(View.GONE);
+                                //mProgressBar.setVisibility(View.GONE);
                             }
 
                             @Override

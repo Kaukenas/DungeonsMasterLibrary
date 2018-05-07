@@ -72,9 +72,6 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         builder.setTitle("Este es el resultado de tu tirada");
         // Get the layout inflater
         LayoutInflater inflater = this.getLayoutInflater();
-
-        // Inflate and set the layout for the dialog
-        // Pass null as the parent view because its going in the dialog layout
         builder.setView(inflater.inflate(R.layout.dialog_signin, null));
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override

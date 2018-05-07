@@ -36,7 +36,7 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         imageButtonDados1 = findViewById(R.id.imageButtonDados1);
         txtResultadoBoton = findViewById(R.id.txtResultadoBoton);
 
-        txtResultadoBoton.setText((int) numero);
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -45,9 +45,7 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
                     case R.id.combateItem:
                         break;
                     case R.id.habilidadesItem:
-                        View child1 = LayoutInflater.from(MostrarUnoPersonajeActivity.this).inflate(
-                                R.layout.activity_mostrar_dos_personajes, null);
-                        inclusionViewGroup.addView(child1);
+                        setContentView(R.layout.activity_mostrar_dos_personajes);
                         break;
                     case R.id.equipamientoItem:
                         break;
@@ -76,6 +74,7 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                txtResultadoBoton.setText((int) numero);
                 Toast.makeText(MostrarUnoPersonajeActivity.this, "Has efectuado tu tirada", Toast.LENGTH_SHORT).show();
             }
         });

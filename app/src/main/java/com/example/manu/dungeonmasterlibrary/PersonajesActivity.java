@@ -86,7 +86,7 @@ public class PersonajesActivity extends AppCompatActivity
                     case R.id.partidasItem:
                         break;
                     case R.id.personajesItem:
-                        setContentView(R.layout.activity_personajes);
+                        //setContentView(R.layout.activity_personajes);
                         cargarPersonajes();
                         break;
                     case R.id.wikiItem:
@@ -126,13 +126,13 @@ public class PersonajesActivity extends AppCompatActivity
                             @Override
                             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                                 super.onPageStarted(view, url, favicon);
-                                //mProgressBar.setVisibility(View.VISIBLE);
+                                mProgressBar.setVisibility(View.VISIBLE);
                             }
 
                             @Override
                             public void onPageFinished(WebView view, String url) {
                                 super.onPageFinished(view, url);
-                                //mProgressBar.setVisibility(View.GONE);
+                                mProgressBar.setVisibility(View.GONE);
                             }
 
                             @Override
@@ -204,15 +204,9 @@ public class PersonajesActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-
-        if (mWebView.canGoBack()){
-            mWebView.goBack();
         } else {
             super.onBackPressed();
         }

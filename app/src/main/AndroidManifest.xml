@@ -35,7 +35,7 @@
         <activity
             android:name=".DosCreacionPersonajesActivity"
             android:theme="@style/AppTheme" />
-        
+
         <activity android:name=".TresCreacionPersonajesActivity" />
         <activity android:name=".MostrarUnoPersonajeActivity" />
         <activity android:name=".TestActivity" />

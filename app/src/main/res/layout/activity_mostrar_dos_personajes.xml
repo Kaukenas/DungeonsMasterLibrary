@@ -84,14 +84,14 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/imgBtnMas1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_anadir_boton_circular_delineado" />
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/sdvmui"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -100,7 +100,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/scuo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -108,7 +108,7 @@
                     android:textSize="20sp" />
 
                 <ImageButton
-                    android:id="@+id/imageButtonDados"
+                    android:id="@+id/imgBtn1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -123,14 +123,14 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imageButton4"
+                    android:id="@+id/dVSDFG"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_anadir_boton_circular_delineado" />
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/thmoi"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -139,14 +139,14 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/textView25"
+                    android:id="@+id/vvvvv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center" />
 
                 <ImageButton
-                    android:id="@+id/imageButton5"
+                    android:id="@+id/imgBtn12"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -167,14 +167,14 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/sgsrbu"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_anadir_boton_circular_delineado" />
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/grgdrg"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -183,7 +183,7 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/tettever"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -191,7 +191,7 @@
                     android:textSize="20sp" />
 
                 <ImageButton
-                    android:id="@+id/imageButtonDados"
+                    android:id="@+id/imgBtn21"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -222,14 +222,14 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/textView25"
+                    android:id="@+id/textViewSaBiduria"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center" />
 
                 <ImageButton
-                    android:id="@+id/imageButton5"
+                    android:id="@+id/imgBtn22"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -250,23 +250,23 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/mamas"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_anadir_boton_circular_delineado" />
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/tetCON"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.95"
                     android:gravity="center"
                     android:text="CON:"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/txtCoNstitucion"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -274,7 +274,7 @@
                     android:textSize="20sp" />
 
                 <ImageButton
-                    android:id="@+id/imageButtonDados"
+                    android:id="@+id/imgBtn31"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -289,14 +289,14 @@
                 android:orientation="horizontal">
 
                 <ImageButton
-                    android:id="@+id/imageButton4"
+                    android:id="@+id/masMas"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/ic_anadir_boton_circular_delineado" />
 
                 <TextView
-                    android:id="@+id/textView24"
+                    android:id="@+id/tetCar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -305,14 +305,14 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/textView25"
+                    android:id="@+id/txtCaRisma"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center" />
 
                 <ImageButton
-                    android:id="@+id/imageButton5"
+                    android:id="@+id/imgBtn32"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

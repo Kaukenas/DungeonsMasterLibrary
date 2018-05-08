@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +24,9 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     ImageButton imageButtonDados1;
-    double numero = 12.0;
-    TextView txtResultadoBoton;
+    TextView txtResultadoTirada;
+    Dialog myDialog;
+    Button yes, no;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,22 +34,20 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mostrar_uno_personaje);
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        ViewGroup inclusionViewGroup = findViewById(R.id.linearLayout3);
         imageButtonDados1 = findViewById(R.id.imageButtonDados1);
-        txtResultadoBoton = findViewById(R.id.txtResultadoBoton);
-
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.combateItem:
+                        //setContentView(R.layout.activity_mostrar_uno_personaje);
                         break;
                     case R.id.habilidadesItem:
                         setContentView(R.layout.activity_mostrar_dos_personajes);
                         break;
                     case R.id.equipamientoItem:
+                        setContentView(R.layout.activity_mostrar_tres_personajes);
                         break;
                     case R.id.rasgosItem:
                         break;
@@ -59,29 +59,27 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         imageButtonDados1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tirarDadosButton();
+                MyCustomAlertDialog();
             }
         });
     }
 
-    public void tirarDadosButton(){
+    public void MyCustomAlertDialog(){
+        myDialog = new Dialog(MostrarUnoPersonajeActivity.this);
+        myDialog.setContentView(R.layout.dialog_signin);
+        myDialog.setTitle("My custom dialog");
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Este es el resultado de tu tirada");
-        // Get the layout inflater
-        LayoutInflater inflater = this.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.dialog_signin, null));
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                txtResultadoBoton.setText((int) numero);
-                Toast.makeText(MostrarUnoPersonajeActivity.this, "Has efectuado tu tirada", Toast.LENGTH_SHORT).show();
-            }
-        });
-        Dialog dialog = builder.create();
-        dialog.show();
+        yes = myDialog.findViewById(R.id.btn_yes);
+        no = myDialog.findViewById(R.id.btn_no);
+        txtResultadoTirada = findViewById(R.id.txtResultadoTirada);
+
+        //txtResultadoTirada.setText(String.valueOf(0)); Aquí es donde existe el fallo
+
+        yes.setEnabled(true);
+        no.setEnabled(true);
+
+        myDialog.show();
 
     }
-
 
 }

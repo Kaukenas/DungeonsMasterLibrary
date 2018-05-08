@@ -53,10 +53,10 @@ public class Razas implements Parcelable
         this.id = ((String) in.readValue((String.class.getClassLoader())));
         this.name = ((String) in.readValue((String.class.getClassLoader())));
         this.description = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.abilityScores, (com.example.manu.dungeonmasterlibrary.POJOS.AbilityScore.class.getClassLoader()));
+        in.readList(this.abilityScores, (com.example.manu.dungeonmasterlibrary.POJOS2.AbilityScore.class.getClassLoader()));
         this.speed = ((String) in.readValue((String.class.getClassLoader())));
         this.size = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.traits, (com.example.manu.dungeonmasterlibrary.POJOS.Trait.class.getClassLoader()));
+        in.readList(this.traits, (com.example.manu.dungeonmasterlibrary.POJOS2.Trait.class.getClassLoader()));
     }
 
     /**

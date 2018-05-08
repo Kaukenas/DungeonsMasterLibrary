@@ -35,7 +35,7 @@ public class RacesController implements Callback<List<Razas>> {
 
         RacesRetrofit racesApi = retrofit.create(RacesRetrofit.class);
 
-        Call<List<Razas>> call = racesApi.loadChanges("status:open");
+        Call<List<Razas>> call = racesApi.loadChanges();
         call.enqueue(this);
     }
 

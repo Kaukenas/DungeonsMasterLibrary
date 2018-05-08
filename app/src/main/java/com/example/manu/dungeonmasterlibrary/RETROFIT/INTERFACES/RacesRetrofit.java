@@ -10,5 +10,5 @@ import retrofit2.http.Query;
 
 public interface RacesRetrofit {
     @GET("index.php/RaceApi/races")
-    Call<List<Razas>> loadChanges(@Query("q") String status);
+    Call<List<Razas>> loadChanges();
 }

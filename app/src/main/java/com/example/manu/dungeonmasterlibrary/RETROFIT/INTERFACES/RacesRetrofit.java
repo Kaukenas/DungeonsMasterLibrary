@@ -1,6 +1,6 @@
 package com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES;
 
-import com.example.manu.dungeonmasterlibrary.POJOS.Razas;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Razas;
 
 import java.util.List;
 

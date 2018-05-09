@@ -53,6 +53,6 @@ public class RacesController implements Callback<List<Razas>> {
 
     @Override
     public void onFailure(Call<List<Razas>> call, Throwable t) {
-        Toast.makeText(context, "fallo en lapeticion", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "fallo en la peticion", Toast.LENGTH_SHORT).show();
     }
 }

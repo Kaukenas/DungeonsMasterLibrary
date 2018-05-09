@@ -72,8 +72,9 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         yes = myDialog.findViewById(R.id.btn_yes);
         no = myDialog.findViewById(R.id.btn_no);
         txtResultadoTirada = findViewById(R.id.txtResultadoTirada);
+        int tirada=1;
+        txtResultadoTirada.setText(""+tirada);
 
-        //txtResultadoTirada.setText(String.valueOf(0)); Aquí es donde existe el fallo
 
         yes.setEnabled(true);
         no.setEnabled(true);

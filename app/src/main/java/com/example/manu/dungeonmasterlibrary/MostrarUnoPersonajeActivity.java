@@ -1,6 +1,5 @@
 package com.example.manu.dungeonmasterlibrary;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,7 +24,6 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     ImageButton imageButtonDados1;
     TextView txtResultadoTirada;
-    Dialog myDialog;
     Button yes, no;
 
     @Override
@@ -59,25 +57,26 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         imageButtonDados1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MyCustomAlertDialog();
+                AlertDialog dialog =MyCustomAlertDialog();
+                dialog.show();
             }
         });
     }
 
-    public Dialog MyCustomAlertDialog(){
+    public AlertDialog MyCustomAlertDialog(){
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = this.getLayoutInflater();
-        builder.setView(layoutInflater.inflate(R.layout.dialog_signin, null)
-        ).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+        View mylayout =layoutInflater.inflate(R.layout.dialog_signin, null);
+        txtResultadoTirada =  mylayout.findViewById(R.id.txtResultadoTirada);
+        int tirada=1;
+        txtResultadoTirada.setText(""+tirada);
+        builder.setView(mylayout).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
             }
         });
-        txtResultadoTirada = findViewById(R.id.txtResultadoTirada);
-        int tirada=1;
-        txtResultadoTirada.setText(""+tirada);
         return builder.create();
         /*
         myDialog = new Dialog(MostrarUnoPersonajeActivity.this);

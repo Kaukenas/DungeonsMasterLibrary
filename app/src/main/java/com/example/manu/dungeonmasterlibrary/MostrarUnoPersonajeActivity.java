@@ -64,14 +64,29 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         });
     }
 
-    public void MyCustomAlertDialog(){
+    public Dialog MyCustomAlertDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater layoutInflater = this.getLayoutInflater();
+        builder.setView(layoutInflater.inflate(R.layout.dialog_signin, null)
+        ).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        txtResultadoTirada = findViewById(R.id.txtResultadoTirada);
+        int tirada=1;
+        txtResultadoTirada.setText(""+tirada);
+        return builder.create();
+        /*
         myDialog = new Dialog(MostrarUnoPersonajeActivity.this);
         myDialog.setContentView(R.layout.dialog_signin);
         myDialog.setTitle("My custom dialog");
-
         yes = myDialog.findViewById(R.id.btn_yes);
         no = myDialog.findViewById(R.id.btn_no);
         txtResultadoTirada = findViewById(R.id.txtResultadoTirada);
+
         int tirada=1;
         txtResultadoTirada.setText(""+tirada);
 
@@ -80,7 +95,7 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         no.setEnabled(true);
 
         myDialog.show();
-
+        */
     }
 
 }

@@ -22,7 +22,8 @@ import java.util.ArrayList;
 public class MostrarUnoPersonajeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    ImageButton imageButtonDados1;
+    ImageButton imageButtonDados1, imageButtonDados2,imageButtonDados3,imageButtonDados4,
+            imageButtonDados5,imageButtonDados6,imageButtonDados7;
     TextView txtResultadoTirada;
     Button yes, no;
 
@@ -33,6 +34,13 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         imageButtonDados1 = findViewById(R.id.imageButtonDados1);
+        imageButtonDados2 = findViewById(R.id.imageButtonDados2);
+        imageButtonDados3 = findViewById(R.id.imageButtonDados3);
+        imageButtonDados4 = findViewById(R.id.imageButtonDados4);
+        imageButtonDados5 = findViewById(R.id.imageButtonDados5);
+        imageButtonDados6 = findViewById(R.id.imageButtonDados6);
+        imageButtonDados7 = findViewById(R.id.imageButtonDados7);
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -61,6 +69,60 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+        imageButtonDados2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog dialog =MyCustomAlertDialog();
+                dialog.show();
+            }
+        });
+
+        imageButtonDados3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog dialog =MyCustomAlertDialog();
+                dialog.show();
+            }
+        });
+
+        imageButtonDados4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog dialog =MyCustomAlertDialog();
+                dialog.show();
+            }
+        });
+
+        imageButtonDados5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog dialog =MyCustomAlertDialog();
+                dialog.show();
+            }
+        });
+
+        imageButtonDados6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog dialog =MyCustomAlertDialog();
+                dialog.show();
+            }
+        });
+
+        imageButtonDados7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog dialog =MyCustomAlertDialog();
+                dialog.show();
+            }
+        });
+    }
+
+    public int tirarDado(int rango) {
+        double resultado;
+        resultado=Math.random()*rango;
+        return (int)resultado;
     }
 
     public AlertDialog MyCustomAlertDialog(){
@@ -69,7 +131,7 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         LayoutInflater layoutInflater = this.getLayoutInflater();
         View mylayout =layoutInflater.inflate(R.layout.dialog_signin, null);
         txtResultadoTirada =  mylayout.findViewById(R.id.txtResultadoTirada);
-        int tirada=1;
+        int tirada=tirarDado(20);
         txtResultadoTirada.setText(""+tirada);
         builder.setView(mylayout).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override

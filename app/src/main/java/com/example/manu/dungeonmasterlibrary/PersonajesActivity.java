@@ -57,7 +57,7 @@ public class PersonajesActivity extends AppCompatActivity
     CardView cardViewChar;
     ArrayList<Personajes> listaPersonajes = new ArrayList<Personajes>();
     WebView mWebView;
-    ProgressBar mProgressBar;
+    //ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ public class PersonajesActivity extends AppCompatActivity
 
 
 
-        mProgressBar =  findViewById(R.id.progressBar);
+        //mProgressBar =  findViewById(R.id.progressBar);
 
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
 
@@ -126,13 +126,13 @@ public class PersonajesActivity extends AppCompatActivity
                             @Override
                             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                                 super.onPageStarted(view, url, favicon);
-                                mProgressBar.setVisibility(View.VISIBLE);
+                                //mProgressBar.setVisibility(View.VISIBLE);
                             }
 
                             @Override
                             public void onPageFinished(WebView view, String url) {
                                 super.onPageFinished(view, url);
-                                mProgressBar.setVisibility(View.GONE);
+                                //mProgressBar.setVisibility(View.GONE);
                             }
 
                             @Override
@@ -207,7 +207,7 @@ public class PersonajesActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }  else {
             super.onBackPressed();
         }
     }

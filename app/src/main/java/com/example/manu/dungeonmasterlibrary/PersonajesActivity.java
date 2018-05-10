@@ -57,6 +57,7 @@ public class PersonajesActivity extends AppCompatActivity
     CardView cardViewChar;
     ArrayList<Personajes> listaPersonajes = new ArrayList<Personajes>();
     WebView mWebView;
+    Boolean webView = false;
     //ProgressBar mProgressBar;
 
     @Override
@@ -83,13 +84,12 @@ public class PersonajesActivity extends AppCompatActivity
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 switch (item.getItemId()) {
-                    case R.id.partidasItem:
-                        break;
                     case R.id.personajesItem:
                         //setContentView(R.layout.activity_personajes);
                         cargarPersonajes();
                         break;
                     case R.id.wikiItem:
+
                         //cambiando el layout
                         setContentView(R.layout.webview_wiki);
                         //obteniendo el webview
@@ -125,6 +125,7 @@ public class PersonajesActivity extends AppCompatActivity
                             @Override
                             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                                 super.onPageStarted(view, url, favicon);
+                                webView = true;
                                 //mProgressBar.setVisibility(View.VISIBLE);
                             }
 
@@ -142,6 +143,7 @@ public class PersonajesActivity extends AppCompatActivity
 
                         //Cargar la URL
                         mWebView.loadUrl(url);
+
                 }
 
                 return true;
@@ -203,12 +205,21 @@ public class PersonajesActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        }  else {
-            super.onBackPressed();
+
+        if (webView){
+            if (mWebView.canGoBack()){
+                mWebView.goBack();
+            } else {
+                webView=false;
+                super.onBackPressed();
+            }
+        } else {
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
         }
+
     }
 
     @Override

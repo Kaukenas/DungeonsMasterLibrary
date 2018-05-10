@@ -3,10 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/partidasItem"
-        android:icon="@drawable/ic_reunion_familiar_en_la_mesa"
-        android:title="Partidas" />
-    <item
         android:id="@+id/personajesItem"
         android:icon="@drawable/ic_excalibur"
         android:title="@string/personajes" />

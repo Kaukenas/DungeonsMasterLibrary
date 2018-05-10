@@ -75,7 +75,10 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
                         //setContentView(R.layout.activity_mostrar_uno_personaje);
                         break;
                     case R.id.habilidadesItem:
-                        setContentView(R.layout.activity_mostrar_dos_personajes);
+                        Intent intent = new Intent(MostrarUnoPersonajeActivity.this,MostrarDosPersonajesActivity.class);
+                        intent.putExtras(getIntent().getExtras());
+                        MostrarDosPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
+                        startActivity(intent);
                         break;
                     case R.id.equipamientoItem:
                         setContentView(R.layout.activity_mostrar_tres_personajes);
@@ -165,23 +168,6 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
             }
         });
         return builder.create();
-        /*
-        myDialog = new Dialog(MostrarUnoPersonajeActivity.this);
-        myDialog.setContentView(R.layout.dialog_signin);
-        myDialog.setTitle("My custom dialog");
-        yes = myDialog.findViewById(R.id.btn_yes);
-        no = myDialog.findViewById(R.id.btn_no);
-        txtResultadoTirada = findViewById(R.id.txtResultadoTirada);
-
-        int tirada=1;
-        txtResultadoTirada.setText(""+tirada);
-
-
-        yes.setEnabled(true);
-        no.setEnabled(true);
-
-        myDialog.show();
-        */
     }
 
 }

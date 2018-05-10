@@ -108,7 +108,6 @@ public class PersonajesActivity extends AppCompatActivity
                             webSettings.setDomStorageEnabled(true);
                         }
 
-
                         mWebView.setWebViewClient(new WebViewClient(){
                             @Override
 

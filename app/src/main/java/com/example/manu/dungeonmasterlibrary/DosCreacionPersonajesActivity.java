@@ -87,6 +87,7 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
                 p.setNombre(txtNombrePersonaje.getText().toString());
                 p.setAlineamiento(spinner2.obtenerSeleccion().get(0));
                 Toast.makeText(DosCreacionPersonajesActivity.this, p.getNombre().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(DosCreacionPersonajesActivity.this, "ATTTTTTRRS " + personajes.getAtributos() , Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(DosCreacionPersonajesActivity.this, TresCreacionPersonajesActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("PERSONAJE",p);

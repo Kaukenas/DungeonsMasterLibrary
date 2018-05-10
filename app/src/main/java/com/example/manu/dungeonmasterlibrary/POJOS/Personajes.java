@@ -5,6 +5,7 @@ import android.media.Image;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -42,6 +43,11 @@ public class Personajes implements Parcelable {
 
     protected Personajes(Parcel in) {
         nombre = in.readString();
+        try {
+            atributos = new JSONObject(in.readString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         CA = in.readInt();
         VIDA = in.readInt();
         DAMAGE = in.readInt();
@@ -160,6 +166,7 @@ public class Personajes implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(nombre);
+        parcel.writeString(atributos.toString());
         parcel.writeInt(CA);
         parcel.writeInt(VIDA);
         parcel.writeInt(DAMAGE);

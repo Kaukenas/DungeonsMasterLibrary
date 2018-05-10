@@ -17,6 +17,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
+
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class MostrarUnoPersonajeActivity extends AppCompatActivity {
@@ -24,8 +28,9 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     ImageButton imageButtonDados1, imageButtonDados2,imageButtonDados3,imageButtonDados4,
             imageButtonDados5,imageButtonDados6,imageButtonDados7;
-    TextView txtResultadoTirada;
-    Button yes, no;
+    TextView txtResultadoTirada, txtFuerza, txtInteligencia, txtDestreza, txtSabiduria,
+            txtConstitucion, txtCarisma;
+    Personajes personajes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +45,27 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         imageButtonDados5 = findViewById(R.id.imageButtonDados5);
         imageButtonDados6 = findViewById(R.id.imageButtonDados6);
         imageButtonDados7 = findViewById(R.id.imageButtonDados7);
+        txtFuerza = findViewById(R.id.txtFuerza);
+        txtInteligencia = findViewById(R.id.txtInteligencia);
+        txtDestreza = findViewById(R.id.txtDestreza);
+        txtSabiduria = findViewById(R.id.txtSabiduria);
+        txtConstitucion = findViewById(R.id.txtConstitucion);
+        txtCarisma = findViewById(R.id.txtCarisma);
 
+
+        personajes = getIntent().getExtras().getParcelable("PERSONAJE");
+        Toast.makeText(this, "Atributos"+ personajes.getAtributos(), Toast.LENGTH_SHORT).show();
+
+        try {
+            txtFuerza.setText(personajes.getAtributos().getString("fuerza"));
+            txtInteligencia.setText(personajes.getAtributos().getString("inteligencia"));
+            txtDestreza.setText(personajes.getAtributos().getString("destreza"));
+            txtSabiduria.setText(personajes.getAtributos().getString("sabiduria"));
+            txtConstitucion.setText(personajes.getAtributos().getString("constitucion"));
+            txtCarisma.setText(personajes.getAtributos().getString("carisma"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

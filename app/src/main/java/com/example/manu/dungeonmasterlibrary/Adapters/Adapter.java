@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -38,14 +39,6 @@ public class Adapter extends RecyclerView.Adapter<viewHolder> {
     @Override
     public viewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item,parent,false);
-        vista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(context, "Ramon siempre tiene razon", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, MostrarUnoPersonajeActivity.class);
-                context.startActivity(intent);
-            }
-        });
         return new viewHolder(vista);
     }
 
@@ -53,6 +46,17 @@ public class Adapter extends RecyclerView.Adapter<viewHolder> {
     public void onBindViewHolder(viewHolder holder, int position) {
         //holder.txtTituloCardView.setText(listaObjetos.get(position).getTitulo());
         //holder.imgCardView.setImageResource(listaObjetos.get(position).getImagen());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Ramon siempre tiene razon", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, MostrarUnoPersonajeActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("PERSONAJE", listaPersonajes.get(position));
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
         byte[] decodedString = Base64.decode(listaPersonajes.get(position).getFotoPersonaje(), Base64.DEFAULT);
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         holder.imgCardView.setImageBitmap(decodedByte);

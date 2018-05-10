@@ -109,7 +109,7 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                         Toast.makeText(UnoCreacionPersonajesActivity.this, c.getNombre(), Toast.LENGTH_SHORT).show();
                         p.setRazas(r);
                         Toast.makeText(UnoCreacionPersonajesActivity.this, r.getName(), Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(UnoCreacionPersonajesActivity.this.getApplicationContext(), "personaje = "+ p.getClases().getHabilidadesEscoger(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(UnoCreacionPersonajesActivity.this.getApplicationContext(), "atributo = "+ p.getAtributos(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(UnoCreacionPersonajesActivity.this, DosCreacionPersonajesActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("PERSONAJE",p);

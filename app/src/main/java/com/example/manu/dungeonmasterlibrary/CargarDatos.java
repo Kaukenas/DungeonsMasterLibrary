@@ -126,6 +126,7 @@ public class CargarDatos {
         puntosAtributo.remove("constitucion");
         puntosAtributo.put("destreza",2);
         r = new Razas("elfo",puntosAtributo,30,"mediano",cargarElfo());
+        listaRazas.add(r);
         return listaRazas;
     }
 

@@ -3,7 +3,7 @@ package com.example.manu.dungeonmasterlibrary;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.manu.dungeonmasterlibrary.RETROFIT.CONTROLLERS.RacesController;
+import com.example.manu.dungeonmasterlibrary.RETROFIT.CONTROLLERS.GetRacesController;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -11,7 +11,7 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
-        RacesController controller = new RacesController();
+        GetRacesController controller = new GetRacesController();
         controller.start(this.getApplicationContext());
     }
 }

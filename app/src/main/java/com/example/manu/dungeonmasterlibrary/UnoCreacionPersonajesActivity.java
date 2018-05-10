@@ -81,11 +81,14 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                     try {
                         ArrayList<Clases> clases = cargarDatos.cargarClases();
                         ArrayList<Razas> razas = cargarDatos.cargarRazas();
+
                         for (int i=0; i < clases.size(); i++){
                             if(clases.get(i).getNombre().equals(UnoCreacionPersonajesActivity.this.spinnerClases.obtenerSeleccion().get(0))){
+
                                 c = clases.get(i);
                             }
                         }
+
                         for (int i=0; i < razas.size(); i++){
                             if(razas.get(i).getName().equals(UnoCreacionPersonajesActivity.this.spinnerRazas.obtenerSeleccion().get(0))){
                                 r = razas.get(i);

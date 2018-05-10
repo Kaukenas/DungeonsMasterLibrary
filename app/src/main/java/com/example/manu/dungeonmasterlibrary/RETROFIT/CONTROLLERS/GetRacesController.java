@@ -7,7 +7,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.POJOS2.Razas;
-import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.RacesRetrofit;
+import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.GetRacesRetrofit;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -21,7 +21,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RacesController implements Callback<List<Razas>> {
+public class GetRacesController implements Callback<List<Razas>> {
 
     static final String baseurl = "http://thedmlibrary.ddns.net/api/";
     Context context;
@@ -36,7 +36,7 @@ public class RacesController implements Callback<List<Razas>> {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        RacesRetrofit racesApi = retrofit.create(RacesRetrofit.class);
+        GetRacesRetrofit racesApi = retrofit.create(GetRacesRetrofit.class);
 
         Call<List<Razas>> call = racesApi.loadChanges();
         call.enqueue(this);

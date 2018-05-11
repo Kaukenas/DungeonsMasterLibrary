@@ -41,9 +41,21 @@ import android.widget.Toast;
 import com.example.manu.dungeonmasterlibrary.Adapters.Adapter;
 import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
 import com.example.manu.dungeonmasterlibrary.POJOS.Pruebafotos;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
+import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CHARACTER.GetCharacterRetrofit;
+import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.RACES.GetRacesRetrofit;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.view.View.TEXT_ALIGNMENT_CENTER;
 
@@ -56,6 +68,7 @@ public class PersonajesActivity extends AppCompatActivity
     MenuItem btnPersonaje;
     CardView cardViewChar;
     ArrayList<Personajes> listaPersonajes = new ArrayList<Personajes>();
+    ArrayList<Character> listaCharacters = new ArrayList<Character>();
     WebView mWebView;
     Boolean webView = false;
     //ProgressBar mProgressBar;
@@ -170,6 +183,12 @@ public class PersonajesActivity extends AppCompatActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        bottomNavigationView.setSelectedItemId(R.id.personajesItem);
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         outState.putString("URL",mWebView.getUrl());
@@ -253,11 +272,39 @@ public class PersonajesActivity extends AppCompatActivity
     }
 
     public void cargarPersonajes(){
-        contenedor.setAdapter(new Adapter(listaPersonajes, this.getApplicationContext()));
-        contenedor.setHasFixedSize(true);
+        String baseurl = "http://thedmlibrary.ddns.net/api/index.php/";
+
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseurl)
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .build();
+
+        GetCharacterRetrofit Api = retrofit.create(GetCharacterRetrofit.class);
+
+        Call <Character> call = Api.loadChanges(1);
+        call.enqueue(new Callback<Character>() {
+            @Override
+            public void onResponse(Call<Character> call, Response<Character> response) {
+                Character c = response.body();
+                listaCharacters.add(c);
+                contenedor.setAdapter(new Adapter(listaCharacters, PersonajesActivity.this));
+                contenedor.setHasFixedSize(true);
+            }
+
+            @Override
+            public void onFailure(Call<Character> call, Throwable t) {
+
+            }
+        });
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         contenedor.setLayoutManager(layoutManager);
+
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

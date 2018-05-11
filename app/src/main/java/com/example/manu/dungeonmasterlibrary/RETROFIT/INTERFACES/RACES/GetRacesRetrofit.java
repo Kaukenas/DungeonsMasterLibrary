@@ -1,4 +1,4 @@
-package com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES;
+package com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.RACES;
 
 import com.example.manu.dungeonmasterlibrary.POJOS2.Razas;
 
@@ -9,6 +9,6 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface GetRacesRetrofit {
-    @GET("index.php/RaceApi/races")
+    @GET("RaceApi/races")
     Call<List<Razas>> loadChanges();
 }

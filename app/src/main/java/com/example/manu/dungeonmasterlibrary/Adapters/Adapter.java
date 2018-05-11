@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.MostrarUnoPersonajeActivity;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
 import com.example.manu.dungeonmasterlibrary.POJOS.Pruebafotos;
 import com.example.manu.dungeonmasterlibrary.PersonajesActivity;
@@ -27,10 +28,10 @@ import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<viewHolder> {
 
-    List<Personajes> listaPersonajes;
+    List<Character> listaPersonajes;
     Context context;
 
-    public Adapter(List<Personajes> listaPersonajes, Context context) {
+    public Adapter(List<Character> listaPersonajes, Context context) {
         this.listaPersonajes = listaPersonajes;
         this.context=context;
     }
@@ -57,10 +58,10 @@ public class Adapter extends RecyclerView.Adapter<viewHolder> {
                 context.startActivity(intent);
             }
         });
-        byte[] decodedString = Base64.decode(listaPersonajes.get(position).getFotoPersonaje(), Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        holder.imgCardView.setImageBitmap(decodedByte);
-        holder.txtTituloCardView.setText(listaPersonajes.get(position).getNombre());
+        //byte[] decodedString = Base64.decode(listaPersonajes.get(position).getFotoPersonaje(), Base64.DEFAULT);
+        //Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        //holder.imgCardView.setImageBitmap(decodedByte);
+        holder.txtTituloCardView.setText(listaPersonajes.get(position).getName());
 
     }
 

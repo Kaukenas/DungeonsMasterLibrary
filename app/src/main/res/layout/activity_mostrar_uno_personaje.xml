@@ -398,6 +398,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
@@ -414,7 +415,7 @@
                     android:layout_weight="0.75"
                     android:gravity="center"
                     android:text="Iniciativa:"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txtIniciativa"
@@ -453,7 +454,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.25"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textSize="20sp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -523,7 +525,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.25"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textSize="20sp" />
 
             </LinearLayout>
         </LinearLayout>

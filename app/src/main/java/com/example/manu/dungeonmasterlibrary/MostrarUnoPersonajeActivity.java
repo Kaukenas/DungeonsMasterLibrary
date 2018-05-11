@@ -31,7 +31,8 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
     ImageButton imageButtonDados1, imageButtonDados2,imageButtonDados3,imageButtonDados4,
             imageButtonDados5,imageButtonDados6,imageButtonDados7, imageButton51, imageButton52;
     TextView txtResultadoTirada, txtFuerza, txtInteligencia, txtDestreza, txtSabiduria,
-            txtConstitucion, txtCarisma, txtVidaCambia, txtVida100;
+            txtConstitucion, txtCarisma, txtVidaCambia, txtIniciativa, txtAtaqueCC, txtCA,
+            txtADistancia;
     Personajes personajes;
     ProgressBar pbVida;
     int sumar = 0;
@@ -59,6 +60,10 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         txtConstitucion = findViewById(R.id.txtConstitucion);
         txtCarisma = findViewById(R.id.txtCarisma);
         txtVidaCambia = findViewById(R.id.txtVidaCambia);
+        txtIniciativa = findViewById(R.id.txtIniciativa);
+        txtAtaqueCC = findViewById(R.id.txtAtaqueCC);
+        txtCA = findViewById(R.id.txtCA);
+        txtADistancia = findViewById(R.id.txtADistancia);
 
         pbVida.setProgress(100);
         pbVida.getProgressDrawable().setColorFilter(
@@ -122,6 +127,24 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+        int destreza = Integer.parseInt(String.valueOf(txtDestreza.getText()));
+        if (destreza %2 == 0) {
+            txtIniciativa.setText(String.valueOf((destreza - 10)/2));
+        } else {
+            txtIniciativa.setText(String.valueOf((destreza - 11)/2));
+        }
+
+        int fuerza = Integer.parseInt(String.valueOf(txtFuerza.getText()));
+        if (fuerza %2 == 0) {
+            txtAtaqueCC.setText(String.valueOf((fuerza - 10)/2));
+        } else {
+            txtAtaqueCC.setText(String.valueOf((fuerza - 11)/2));
+        }
+
+        int iniciativa = Integer.parseInt(String.valueOf(txtIniciativa.getText()));
+        txtCA.setText(String.valueOf(iniciativa+14));
+        txtADistancia.setText(String.valueOf(iniciativa));
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

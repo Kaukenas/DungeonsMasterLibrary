@@ -29,7 +29,8 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     ImageButton imageButtonDados1, imageButtonDados2,imageButtonDados3,imageButtonDados4,
-            imageButtonDados5,imageButtonDados6,imageButtonDados7, imageButton51, imageButton52;
+            imageButtonDados5,imageButtonDados6,imageButtonDados7, imageButton51, imageButton52,
+            imageButton61, imageButton62;
     TextView txtResultadoTirada, txtFuerza, txtInteligencia, txtDestreza, txtSabiduria,
             txtConstitucion, txtCarisma, txtVidaCambia, txtIniciativa, txtAtaqueCC, txtCA,
             txtADistancia;
@@ -53,6 +54,8 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         imageButtonDados5 = findViewById(R.id.imageButtonDados5);
         imageButtonDados6 = findViewById(R.id.imageButtonDados6);
         imageButtonDados7 = findViewById(R.id.imageButtonDados7);
+        imageButton61 = findViewById(R.id.imageButton61);
+        imageButton62 = findViewById(R.id.imageButton62);
         txtFuerza = findViewById(R.id.txtFuerza);
         txtInteligencia = findViewById(R.id.txtInteligencia);
         txtDestreza = findViewById(R.id.txtDestreza);
@@ -145,6 +148,22 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         int iniciativa = Integer.parseInt(String.valueOf(txtIniciativa.getText()));
         txtCA.setText(String.valueOf(iniciativa+14));
         txtADistancia.setText(String.valueOf(iniciativa));
+
+        imageButton62.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int CA = Integer.parseInt(String.valueOf(txtCA.getText()));
+                txtCA.setText(String.valueOf(CA+1));
+            }
+        });
+
+        imageButton61.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int CA = Integer.parseInt(String.valueOf(txtCA.getText()));
+                txtCA.setText(String.valueOf(CA-1));
+            }
+        });
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

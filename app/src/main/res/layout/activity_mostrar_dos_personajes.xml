@@ -11,6 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="222dp"
         android:layout_marginBottom="8dp"
+        android:layout_marginTop="15dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
@@ -143,7 +144,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textSize="20sp" />
 
                 <ImageButton
                     android:id="@+id/imgBtn12"
@@ -226,7 +228,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textSize="20sp" />
 
                 <ImageButton
                     android:id="@+id/imgBtn22"
@@ -309,7 +312,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:textSize="20sp" />
 
                 <ImageButton
                     android:id="@+id/imgBtn32"

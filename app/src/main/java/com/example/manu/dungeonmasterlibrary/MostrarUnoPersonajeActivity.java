@@ -19,6 +19,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.manu.dungeonmasterlibrary.POJOS.Clases;
+import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
 import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
 
 import org.json.JSONException;
@@ -68,6 +70,14 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         txtCA = findViewById(R.id.txtCA);
         txtADistancia = findViewById(R.id.txtADistancia);
 
+        Objetos o = new Objetos();
+        ArrayList<Objetos> objetosArrayList = cargarArmas();
+        for (int i=0; i < objetosArrayList.size(); i++) {
+            o = objetosArrayList.get(i);
+            Toast.makeText(this, "NOMBRE ARMA " + o.getNombreArma(), Toast.LENGTH_SHORT).show();
+        }
+
+
         pbVida.setProgress(100);
         pbVida.getProgressDrawable().setColorFilter(
                 Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
@@ -113,9 +123,6 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
             }
 
         });
-
-
-
 
         personajes = getIntent().getExtras().getParcelable("PERSONAJE");
         Toast.makeText(this, "Atributos"+ personajes.getAtributos(), Toast.LENGTH_SHORT).show();
@@ -165,6 +172,7 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
             }
         });
 
+        Objetos finalO = o;
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -179,8 +187,15 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.equipamientoItem:
-                        setContentView(R.layout.activity_mostrar_tres_personajes);
+                        Intent intentEquipamiento = new Intent(MostrarUnoPersonajeActivity.this,TresCreacionPersonajesActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putParcelable("ARMAS", finalO);
+                        intentEquipamiento.putExtras(bundle);
+                        MostrarTresPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
+                        startActivity(intentEquipamiento);
                         break;
+                        //setContentView(R.layout.activity_mostrar_tres_personajes);
+                        //break;
                     case R.id.rasgosItem:
                         break;
                 }
@@ -266,6 +281,13 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
             }
         });
         return builder.create();
+    }
+
+    public ArrayList<Objetos> cargarArmas(){
+        ArrayList<Objetos> listaClases = new ArrayList<>();
+        Objetos objetos = new Objetos("Espada corta",1,6,1,"Armadura");
+        listaClases.add(objetos);
+        return listaClases;
     }
 
 }

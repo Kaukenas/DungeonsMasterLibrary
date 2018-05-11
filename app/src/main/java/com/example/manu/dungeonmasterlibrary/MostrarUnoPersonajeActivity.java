@@ -3,6 +3,7 @@ package com.example.manu.dungeonmasterlibrary;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,16 +29,21 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     ImageButton imageButtonDados1, imageButtonDados2,imageButtonDados3,imageButtonDados4,
-            imageButtonDados5,imageButtonDados6,imageButtonDados7;
+            imageButtonDados5,imageButtonDados6,imageButtonDados7, imageButton51, imageButton52;
     TextView txtResultadoTirada, txtFuerza, txtInteligencia, txtDestreza, txtSabiduria,
-            txtConstitucion, txtCarisma;
+            txtConstitucion, txtCarisma, txtVidaCambia, txtVida100;
     Personajes personajes;
+    ProgressBar pbVida;
+    int sumar = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_uno_personaje);
 
+        pbVida= findViewById(R.id.pbVida);
+        imageButton51 = findViewById(R.id.imageButton51);
+        imageButton52 = findViewById(R.id.imageButton52);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         imageButtonDados1 = findViewById(R.id.imageButtonDados1);
         imageButtonDados2 = findViewById(R.id.imageButtonDados2);
@@ -51,6 +58,55 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         txtSabiduria = findViewById(R.id.txtSabiduria);
         txtConstitucion = findViewById(R.id.txtConstitucion);
         txtCarisma = findViewById(R.id.txtCarisma);
+        txtVidaCambia = findViewById(R.id.txtVidaCambia);
+
+        pbVida.setProgress(100);
+        pbVida.getProgressDrawable().setColorFilter(
+                Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
+        txtVidaCambia.setText(String.valueOf(100));
+
+        imageButton51.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sumar = sumar -2;
+                int x = pbVida.getProgress();
+                pbVida.setProgress(x + (sumar));
+                int z = Integer.parseInt(String.valueOf(txtVidaCambia.getText()));
+                txtVidaCambia.setText(String.valueOf(z + (sumar)));
+                sumar=0;
+
+                if (pbVida.getProgress() >= 50){
+                    pbVida.getProgressDrawable().setColorFilter(
+                            Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
+                } else {
+                    pbVida.getProgressDrawable().setColorFilter(
+                            Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                }
+            }
+        });
+
+        imageButton52.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sumar = sumar +2;
+                int y = pbVida.getProgress();
+                pbVida.setProgress(y + (sumar));
+                int w = Integer.parseInt(String.valueOf(txtVidaCambia.getText()));
+                txtVidaCambia.setText(String.valueOf(w + (sumar)));
+                sumar=0;
+
+                if (pbVida.getProgress() >= 50){
+                    pbVida.getProgressDrawable().setColorFilter(
+                            Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
+                } else {
+                    pbVida.getProgressDrawable().setColorFilter(
+                            Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+                }
+            }
+
+        });
+
+
 
 
         personajes = getIntent().getExtras().getParcelable("PERSONAJE");

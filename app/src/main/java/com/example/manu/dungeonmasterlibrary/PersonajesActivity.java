@@ -261,8 +261,6 @@ public class PersonajesActivity extends AppCompatActivity
                             UnoCreacionPersonajesActivity.class),1);
         }
         if(id == R.id.btnRamon){
-            startActivity(
-                    new Intent(PersonajesActivity.this,TestActivity.class));
         }
 
         //noinspection SimplifiableIfStatement

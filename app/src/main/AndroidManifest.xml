@@ -38,7 +38,6 @@
 
         <activity android:name=".TresCreacionPersonajesActivity" />
         <activity android:name=".MostrarUnoPersonajeActivity" />
-        <activity android:name=".TestActivity" />
         <activity android:name=".MostrarDosPersonajesActivity" />
         <activity android:name=".MostrarTresPersonajesActivity"></activity>
     </application>

@@ -1,6 +1,7 @@
 
 package com.example.manu.dungeonmasterlibrary.POJOS2;
 
+import java.util.ArrayList;
 import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -19,10 +20,10 @@ public class Character implements Parcelable
     private String name;
     @SerializedName("abilities")
     @Expose
-    private List<Ability> abilities = null;
+    private List<Ability> abilities = new ArrayList<>();
     @SerializedName("skills")
     @Expose
-    private List<Skill> skills = null;
+    private List<Skill> skills = new ArrayList<>();
     @SerializedName("level")
     @Expose
     private String level;
@@ -56,8 +57,8 @@ public class Character implements Parcelable
     protected Character(Parcel in) {
         this.id = ((String) in.readValue((String.class.getClassLoader())));
         this.name = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.abilities, (com.example.manu.dungeonmasterlibrary.POJOS2.Ability.class.getClassLoader()));
-        in.readList(this.skills, (com.example.manu.dungeonmasterlibrary.POJOS2.Skill.class.getClassLoader()));
+        in.readTypedList(this.abilities, Ability.CREATOR);
+        in.readTypedList(this.skills, Skill.CREATOR);
         this.level = ((String) in.readValue((String.class.getClassLoader())));
         this.classesId = ((String) in.readValue((String.class.getClassLoader())));
         this.racesId = ((String) in.readValue((String.class.getClassLoader())));
@@ -161,8 +162,8 @@ public class Character implements Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(id);
         dest.writeValue(name);
-        dest.writeList(abilities);
-        dest.writeList(skills);
+        dest.writeTypedList(abilities);
+        dest.writeTypedList(skills);
         dest.writeValue(level);
         dest.writeValue(classesId);
         dest.writeValue(racesId);

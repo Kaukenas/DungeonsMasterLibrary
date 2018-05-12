@@ -7,7 +7,9 @@ import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Ability implements Parcelable
+import java.io.Serializable;
+
+public class Ability implements Parcelable, Serializable
 {
 
     @SerializedName("fuerza")

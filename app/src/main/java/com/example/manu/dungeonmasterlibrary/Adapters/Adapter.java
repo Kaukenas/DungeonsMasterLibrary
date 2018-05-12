@@ -53,7 +53,9 @@ public class Adapter extends RecyclerView.Adapter<viewHolder> {
                 Toast.makeText(context, "Ramon siempre tiene razon", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, MostrarUnoPersonajeActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("PERSONAJE", listaPersonajes.get(position));
+                Character c =listaPersonajes.get(position);
+                Toast.makeText(context, ""+c.getAbilities().get(0).getFuerza(), Toast.LENGTH_SHORT).show();
+                bundle.putParcelable("PERSONAJE", c);
                 intent.putExtras(bundle);
                 context.startActivity(intent);
             }

@@ -22,10 +22,12 @@ import android.widget.Toast;
 import com.example.manu.dungeonmasterlibrary.POJOS.Clases;
 import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
 import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MostrarUnoPersonajeActivity extends AppCompatActivity {
 
@@ -36,7 +38,7 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
     TextView txtResultadoTirada, txtFuerza, txtInteligencia, txtDestreza, txtSabiduria,
             txtConstitucion, txtCarisma, txtVidaCambia, txtIniciativa, txtAtaqueCC, txtCA,
             txtADistancia;
-    Personajes personajes;
+    Character personajes;
     ProgressBar pbVida;
     int sumar = 0;
 
@@ -125,18 +127,12 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         });
 
         personajes = getIntent().getExtras().getParcelable("PERSONAJE");
-        Toast.makeText(this, "Atributos"+ personajes.getAtributos(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Atributos"+ personajes.getAtributos(), Toast.LENGTH_SHORT).show();
 
-        try {
-            txtFuerza.setText(personajes.getAtributos().getString("fuerza"));
-            txtInteligencia.setText(personajes.getAtributos().getString("inteligencia"));
-            txtDestreza.setText(personajes.getAtributos().getString("destreza"));
-            txtSabiduria.setText(personajes.getAtributos().getString("sabiduria"));
-            txtConstitucion.setText(personajes.getAtributos().getString("constitucion"));
-            txtCarisma.setText(personajes.getAtributos().getString("carisma"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
+        cargarAtributos();
+
+
 
         int destreza = Integer.parseInt(String.valueOf(txtDestreza.getText()));
         if (destreza %2 == 0) {
@@ -260,6 +256,19 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         });
     }
 
+    public void cargarAtributos(){
+            /* txtFuerza.setText(personajes.getAbilities().get(0).getFuerza());
+            txtInteligencia.setText(personajes.getAtributos().getString("inteligencia"));
+            txtDestreza.setText(personajes.getAtributos().getString("destreza"));
+            txtSabiduria.setText(personajes.getAtributos().getString("sabiduria"));
+            txtConstitucion.setText(personajes.getAtributos().getString("constitucion"));
+            txtCarisma.setText(personajes.getAtributos().getString("carisma"));*/
+            List abilities = personajes.getAbilities();
+        for(int i=0;i<abilities.size();i++){
+            Toast.makeText(this, ""+abilities.get(i), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public int tirarDado(int rango) {
         double resultado;
         resultado=Math.random()*rango;
@@ -285,7 +294,7 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
 
     public ArrayList<Objetos> cargarArmas(){
         ArrayList<Objetos> listaClases = new ArrayList<>();
-        Objetos objetos = new Objetos("Espada corta",1,6,1,"Armadura");
+        Objetos objetos = new Objetos("Espada corta",1,6,1,"Arma");
         listaClases.add(objetos);
         return listaClases;
     }

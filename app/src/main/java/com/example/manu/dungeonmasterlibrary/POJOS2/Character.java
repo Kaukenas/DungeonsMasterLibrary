@@ -35,6 +35,7 @@ public class Character implements Parcelable
     @SerializedName("usersId")
     @Expose
     private String usersId;
+
     public final static Parcelable.Creator<Character> CREATOR = new Creator<Character>() {
 
 

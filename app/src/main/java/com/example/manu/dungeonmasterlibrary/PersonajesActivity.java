@@ -289,6 +289,7 @@ public class PersonajesActivity extends AppCompatActivity
             @Override
             public void onResponse(Call<Character> call, Response<Character> response) {
                 Character c = response.body();
+                Toast.makeText(PersonajesActivity.this, ""+c.getAbilities().get(0).getFuerza(), Toast.LENGTH_SHORT).show();
                 listaCharacters.add(c);
                 contenedor.setAdapter(new Adapter(listaCharacters, PersonajesActivity.this));
                 contenedor.setHasFixedSize(true);

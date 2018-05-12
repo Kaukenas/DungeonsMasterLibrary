@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Ability implements Parcelable, Serializable
+public class Ability implements Parcelable
 {
 
     @SerializedName("fuerza")

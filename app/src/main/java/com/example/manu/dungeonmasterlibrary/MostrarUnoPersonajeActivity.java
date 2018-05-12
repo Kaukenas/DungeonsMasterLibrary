@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.manu.dungeonmasterlibrary.POJOS.Clases;
 import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
 import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Ability;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 
 import org.json.JSONException;
@@ -257,16 +258,12 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
     }
 
     public void cargarAtributos(){
-            /* txtFuerza.setText(personajes.getAbilities().get(0).getFuerza());
-            txtInteligencia.setText(personajes.getAtributos().getString("inteligencia"));
-            txtDestreza.setText(personajes.getAtributos().getString("destreza"));
-            txtSabiduria.setText(personajes.getAtributos().getString("sabiduria"));
-            txtConstitucion.setText(personajes.getAtributos().getString("constitucion"));
-            txtCarisma.setText(personajes.getAtributos().getString("carisma"));*/
-            List abilities = personajes.getAbilities();
-        for(int i=0;i<abilities.size();i++){
-            Toast.makeText(this, ""+abilities.get(i), Toast.LENGTH_SHORT).show();
-        }
+            txtFuerza.setText(personajes.getAbilities().get(0).getFuerza());
+            txtInteligencia.setText(personajes.getAbilities().get(1).getDestreza());
+            txtDestreza.setText(personajes.getAbilities().get(2).getConstitucion());
+            txtSabiduria.setText(personajes.getAbilities().get(3).getInteligencia());
+            txtConstitucion.setText(personajes.getAbilities().get(4).getSabiduria());
+            txtCarisma.setText(personajes.getAbilities().get(5).getCarisma());
     }
 
     public int tirarDado(int rango) {

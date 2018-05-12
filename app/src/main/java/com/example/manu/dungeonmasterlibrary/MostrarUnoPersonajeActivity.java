@@ -187,7 +187,7 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.equipamientoItem:
-                        Intent intentEquipamiento = new Intent(MostrarUnoPersonajeActivity.this,TresCreacionPersonajesActivity.class);
+                        Intent intentEquipamiento = new Intent(MostrarUnoPersonajeActivity.this,MostrarTresPersonajesActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("ARMAS", finalO);
                         intentEquipamiento.putExtras(bundle);

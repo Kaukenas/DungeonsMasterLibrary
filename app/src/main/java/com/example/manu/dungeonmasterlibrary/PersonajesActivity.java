@@ -199,8 +199,8 @@ public class PersonajesActivity extends AppCompatActivity
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode==1){
             Bundle bundle = data.getExtras();
-            Personajes personaje = bundle.getParcelable("PERSONAJE");
-            listaPersonajes.add(personaje);
+            Character personaje = bundle.getParcelable("PERSONAJE");
+
         }else{
             Toast.makeText(this, "wah wah wah", Toast.LENGTH_SHORT).show();
         }

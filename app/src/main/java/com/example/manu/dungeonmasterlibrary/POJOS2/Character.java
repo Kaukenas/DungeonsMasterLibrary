@@ -37,6 +37,15 @@ public class Character implements Parcelable
     @Expose
     private String usersId;
 
+    ////////////////////
+    private Razas raza;
+
+////////////////////////////
+
+    public static Creator<Character> getCREATOR() {
+        return CREATOR;
+    }
+
     public final static Parcelable.Creator<Character> CREATOR = new Creator<Character>() {
 
 
@@ -92,6 +101,18 @@ public class Character implements Parcelable
         this.level = level;
         this.classesId = classesId;
         this.racesId = racesId;
+        this.usersId = usersId;
+    }
+
+    public Character(String id, String name, List<Ability> abilities, List<Skill> skills, String level, String classesId, Razas raza, String usersId) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.abilities = abilities;
+        this.skills = skills;
+        this.level = level;
+        this.classesId = classesId;
+        this.raza = raza;
         this.usersId = usersId;
     }
 
@@ -157,6 +178,15 @@ public class Character implements Parcelable
 
     public void setUsersId(String usersId) {
         this.usersId = usersId;
+    }
+
+    //////////////////////////////////////////////////////////////////
+    public Razas getRaza() {
+        return raza;
+    }
+
+    public void setRaza(Razas raza) {
+        this.raza = raza;
     }
 
     public void writeToParcel(Parcel dest, int flags) {

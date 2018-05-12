@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.POJOS.Clases;
-import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 import com.example.manu.dungeonmasterlibrary.POJOS.Razas;
 
 import org.json.JSONException;
@@ -77,7 +77,7 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
 
                     Clases c = new Clases();
                     Razas r = new Razas();
-                    Personajes p = new Personajes();
+                    Character p = new Character();
                     try {
                         ArrayList<Clases> clases = cargarDatos.cargarClases();
                         ArrayList<Razas> razas = cargarDatos.cargarRazas();
@@ -106,7 +106,7 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                         p.setVIDA(c.getDadoGolpe()+obtenerBonoAtributo(Integer.parseInt(txtConstitucion.getText().toString())));
                         p.setAtributos(attrs);
                         p.setClases(c);
-                        p.setRazas(r);
+                        p.setRaza(r);
                         //Toast.makeText(UnoCreacionPersonajesActivity.this, c.getNombre(), Toast.LENGTH_SHORT).show();
                         //Toast.makeText(UnoCreacionPersonajesActivity.this, r.getName(), Toast.LENGTH_SHORT).show();
                         //Toast.makeText(UnoCreacionPersonajesActivity.this.getApplicationContext(), "atributo = "+ p.getAtributos(), Toast.LENGTH_LONG).show();

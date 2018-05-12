@@ -135,7 +135,7 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
 
 
 
-        /*int destreza = Integer.parseInt(String.valueOf(txtDestreza.getText()));
+        int destreza = Integer.parseInt(String.valueOf(txtDestreza.getText()));
         if (destreza %2 == 0) {
             txtIniciativa.setText(String.valueOf((destreza - 10)/2));
         } else {
@@ -159,7 +159,7 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
                 int CA = Integer.parseInt(String.valueOf(txtCA.getText()));
                 txtCA.setText(String.valueOf(CA+1));
             }
-        });*/
+        });
 
         imageButton61.setOnClickListener(new View.OnClickListener() {
             @Override

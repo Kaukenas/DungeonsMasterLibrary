@@ -166,6 +166,19 @@ public class Razas implements Parcelable
         this.traits = traits;
     }
 
+    /////////////////////////////////////////////////////////////////////
+
+    public ArrayList<Traits> getTraitsArrayList() {
+        return traitsArrayList;
+    }
+
+    public void setTraitsArrayList(ArrayList<Traits> traitsArrayList) {
+        this.traitsArrayList = traitsArrayList;
+    }
+
+
+    //////////////////////////////////////////////////////////////////////
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(id);
         dest.writeValue(name);

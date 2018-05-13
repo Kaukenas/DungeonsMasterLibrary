@@ -10,6 +10,8 @@ import com.example.manu.dungeonmasterlibrary.POJOS2.Razas;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Class;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Skill;
 import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CLASSES.GetClassesRetrofit;
+import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.RACES.GetRaceRetrofit;
+import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.RACES.GetRacesRetrofit;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -40,7 +42,7 @@ public class CargarDatos {
         this.context = context;
     }
 
-    public ArrayList<Class> cargarClases(){
+    public void cargarClases(){
 
 
         String baseurl = "http://thedmlibrary.ddns.net/api/index.php/";
@@ -82,7 +84,7 @@ public class CargarDatos {
                     }
                     listaClases.add(c.get(i));
                 }
-
+                UnoCreacionPersonajesActivity.setListaClases(listaClases);
             }
 
             @Override
@@ -90,7 +92,7 @@ public class CargarDatos {
 
             }
         });
-        return listaClases;
+
     }
 
     public ArrayList<Features> cargarGuerrero() {
@@ -369,7 +371,7 @@ public class CargarDatos {
         return listaFeatures;
     }
 
-    public ArrayList<Razas> cargarRazas() throws JSONException {
+    public void cargarRazas() {
 
 
         String baseurl = "http://thedmlibrary.ddns.net/api/index.php/";
@@ -383,43 +385,35 @@ public class CargarDatos {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        GetClassesRetrofit Api = retrofit.create(GetClassesRetrofit.class);
+        GetRacesRetrofit Api = retrofit.create(GetRacesRetrofit.class);
 
-        Call<List<Class>> call = Api.loadChanges();
-        call.enqueue(new Callback<List<Class>>() {
+        Call<List<Razas>> call = Api.loadChanges();
+        call.enqueue(new Callback<List<Razas>>() {
             @Override
-            public void onResponse(Call<List<Class>> call, Response<List<Class>> response) {
-                List<Class> c = response.body();
+            public void onResponse(Call<List<Razas>> call, Response<List<Razas>> response) {
+                List<Razas> c = response.body();
                 for (int i = 0; i <c.size() ; i++) {
                     switch (c.get(i).getId()){
                         case "1":{
-                            c.get(i).setFeatures(cargarGuerrero());
+                            c.get(i).setTraitsArrayList(cargarEnano());
                             break;
                         }
                         case "2":{
-                            c.get(i).setFeatures(cargarMonje());
-                            break;
-                        }
-                        case "3":{
-                            c.get(i).setFeatures(cargarPicaro());
-                            break;
-                        }
-                        case "4":{
-                            c.get(i).setFeatures(cargarBarbaro());
+                            c.get(i).setTraitsArrayList(cargarElfo());
                             break;
                         }
                     }
-                    listaClases.add(c.get(i));
+                    listaRazas.add(c.get(i));
                 }
-
+                UnoCreacionPersonajesActivity.setListaRazas(listaRazas);
             }
 
             @Override
-            public void onFailure(Call<List<Class>> call, Throwable t) {
+            public void onFailure(Call<List<Razas>> call, Throwable t) {
 
             }
         });
-        return listaRazas;
+
     }
 
     public ArrayList<Traits> cargarEnano(){

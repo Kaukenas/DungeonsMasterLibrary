@@ -39,7 +39,7 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
 
 
 
-        personajes = getIntent().getExtras().getParcelable("PERSONAJE");
+        /*personajes = getIntent().getExtras().getParcelable("PERSONAJE");
         Toast.makeText(this, "personaje = "+personajes.getClases().getNombre(), Toast.LENGTH_LONG).show();
         JSONObject habilidades = personajes.getClases().getHabilidadesEscoger();
         Iterator<String> iterator =habilidades.keys();
@@ -107,7 +107,7 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        */
     }
 
 }

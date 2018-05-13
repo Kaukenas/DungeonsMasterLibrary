@@ -3,6 +3,7 @@ package com.example.manu.dungeonmasterlibrary;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,6 +33,8 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
     int numero;
     MultiSelectionSpinner spinnerClases, spinnerRazas;
     CargarDatos cargarDatos;
+    static ArrayList<Class> listaclases;
+    static ArrayList<Razas> listarazas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,20 +87,19 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                     Class c = new Class();
                     Razas r = new Razas();
                     Character p = new Character();
-                    try {
-                        ArrayList<Class> clases = cargarDatos.cargarClases();
-                        ArrayList<Razas> razas = cargarDatos.cargarRazas();
+                    cargarDatos.cargarClases();
+                    cargarDatos.cargarRazas();
 
-                        for (int i=0; i < clases.size(); i++){
-                            if(clases.get(i).getName().equals(UnoCreacionPersonajesActivity.this.spinnerClases.obtenerSeleccion().get(0))){
-
-                                c = clases.get(i);
+                        for (int i=0; i < listaclases.size(); i++){
+                            if(listaclases.get(i).equals(UnoCreacionPersonajesActivity.this.spinnerClases.obtenerSeleccion().get(0))){
+                                c = listaclases.get(i);
                             }
                         }
 
-                        for (int i=0; i < razas.size(); i++){
-                            if(razas.get(i).getName().equals(UnoCreacionPersonajesActivity.this.spinnerRazas.obtenerSeleccion().get(0))){
-                                r = razas.get(i);
+
+                        for (int i=0; i < listarazas.size(); i++){
+                            if(listarazas.get(i).getName().equals(UnoCreacionPersonajesActivity.this.spinnerRazas.obtenerSeleccion().get(0))){
+                                r = listarazas.get(i);
                             }
                         }
 
@@ -121,14 +123,11 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                         Ability carisma = new Ability();
                         fuerza.setCarisma(txtCarisma.getText().toString());
                         attrs.add(carisma);
-
-                        p.setVida(Integer.parseInt(c.getHitDice())+obtenerBonoAtributo(Integer.parseInt(txtConstitucion.getText().toString())));
+                        Toast.makeText(UnoCreacionPersonajesActivity.this, ""+c.getHitDice(), Toast.LENGTH_SHORT).show();
+                        //p.setVida(Integer.parseInt(c.getHitDice())+obtenerBonoAtributo(Integer.parseInt(txtConstitucion.getText().toString())));
                         p.setAbilities(attrs);
                         p.setaClass(c);
                         p.setRaza(r);
-                        //Toast.makeText(UnoCreacionPersonajesActivity.this, c.getNombre(), Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(UnoCreacionPersonajesActivity.this, r.getName(), Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(UnoCreacionPersonajesActivity.this.getApplicationContext(), "atributo = "+ p.getAtributos(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(UnoCreacionPersonajesActivity.this, DosCreacionPersonajesActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("PERSONAJE",p);
@@ -136,14 +135,6 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                         intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                         startActivity(intent);
                         finish();
-
-
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                   // Toast.makeText(UnoCreacionPersonajesActivity.this, "Nombre de la clase: "+c.getNombre()+" Nombre de la raza " + r.getName(), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(UnoCreacionPersonajesActivity.this, "Debes seleccionar una Clase y una Raza, no intentes explotarnos la APP que te conozco", Toast.LENGTH_SHORT).show();
                 }
@@ -185,4 +176,12 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
     }
 
 
+
+    public static void setListaClases(ArrayList<Class> c){
+        listaclases=c;
+    }
+
+    public static void setListaRazas(ArrayList<Razas> r){
+        listarazas=r;
+    }
 }

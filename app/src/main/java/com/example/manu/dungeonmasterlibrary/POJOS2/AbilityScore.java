@@ -28,7 +28,7 @@ public class AbilityScore implements Parcelable
     @SerializedName("carisma")
     @Expose
     private String carisma;
-    public final static Creator<AbilityScore> CREATOR = new Creator<AbilityScore>() {
+    public final static Parcelable.Creator<AbilityScore> CREATOR = new Creator<AbilityScore>() {
 
 
         @SuppressWarnings({

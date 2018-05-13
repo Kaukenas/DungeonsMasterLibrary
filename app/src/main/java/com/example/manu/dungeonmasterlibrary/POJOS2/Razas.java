@@ -1,10 +1,13 @@
 
 package com.example.manu.dungeonmasterlibrary.POJOS2;
 
+import java.util.ArrayList;
 import java.util.List;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.Parcelable.Creator;
+
+import com.example.manu.dungeonmasterlibrary.POJOS.Traits;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -32,6 +35,13 @@ public class Razas implements Parcelable
     @SerializedName("traits")
     @Expose
     private List<Trait> traits = null;
+
+    ////////////////////////////////////////
+
+    private ArrayList<Traits> traitsArrayList;
+
+    //////////////////////////////////////
+
     public final static Creator<Razas> CREATOR = new Creator<Razas>() {
 
 
@@ -86,6 +96,19 @@ public class Razas implements Parcelable
         this.size = size;
         this.traits = traits;
     }
+
+    public Razas(String id, String name, String description, List<AbilityScore> abilityScores, String speed, String size, List<Trait> traits, ArrayList traitsArrayList) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.abilityScores = abilityScores;
+        this.speed = speed;
+        this.size = size;
+        this.traits = traits;
+        this.traitsArrayList = traitsArrayList;
+    }
+
 
     public String getId() {
         return id;

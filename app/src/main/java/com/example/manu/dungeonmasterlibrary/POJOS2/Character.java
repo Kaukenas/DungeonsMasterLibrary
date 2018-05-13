@@ -39,6 +39,8 @@ public class Character implements Parcelable
 
     ////////////////////
     private Razas raza;
+    private Class aClass;
+    private int vida;
 
 ////////////////////////////
 
@@ -104,7 +106,7 @@ public class Character implements Parcelable
         this.usersId = usersId;
     }
 
-    public Character(String id, String name, List<Ability> abilities, List<Skill> skills, String level, String classesId, Razas raza, String usersId) {
+    public Character(String id, String name, List<Ability> abilities, List<Skill> skills, String level, String classesId, String racesId, Razas raza, Class aClass, int vida, String usersId) {
         super();
         this.id = id;
         this.name = name;
@@ -112,7 +114,10 @@ public class Character implements Parcelable
         this.skills = skills;
         this.level = level;
         this.classesId = classesId;
+        this.racesId = racesId;
         this.raza = raza;
+        this.aClass=aClass;
+        this.vida=vida;
         this.usersId = usersId;
     }
 
@@ -188,6 +193,24 @@ public class Character implements Parcelable
     public void setRaza(Razas raza) {
         this.raza = raza;
     }
+
+    public Class getaClass() {
+        return aClass;
+    }
+
+    public void setaClass(Class aClass) {
+        this.aClass = aClass;
+    }
+
+    public int getVida() {
+        return vida;
+    }
+
+    public void setVida(int vida) {
+        this.vida = vida;
+    }
+
+    ////////////////////////////////////////////////////////////////////
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(id);

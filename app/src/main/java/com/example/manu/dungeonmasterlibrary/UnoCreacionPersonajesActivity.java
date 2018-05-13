@@ -12,8 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.POJOS.Clases;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Ability;
+import com.example.manu.dungeonmasterlibrary.POJOS2.AbilityScore;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
-import com.example.manu.dungeonmasterlibrary.POJOS.Razas;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Razas;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Class;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,6 +57,9 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
 
         List<String> clases = new ArrayList<>();
         clases.add("guerrero");
+        clases.add("monje");
+        clases.add("picaro");
+        clases.add("barbaro");
 
         List<String> razas = new ArrayList<>();
         razas.add("elfo");
@@ -75,15 +81,15 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                 //IF ha seleccionado algo en clase y ha seleccionado algo en raza
                 if (!spinnerClases.getSelectedItemsAsString().equals("") && !spinnerRazas.getSelectedItemsAsString().equals("")){
 
-                    Clases c = new Clases();
+                    Class c = new Class();
                     Razas r = new Razas();
                     Character p = new Character();
                     try {
-                        ArrayList<Clases> clases = cargarDatos.cargarClases();
+                        ArrayList<Class> clases = cargarDatos.cargarClases();
                         ArrayList<Razas> razas = cargarDatos.cargarRazas();
 
                         for (int i=0; i < clases.size(); i++){
-                            if(clases.get(i).getNombre().equals(UnoCreacionPersonajesActivity.this.spinnerClases.obtenerSeleccion().get(0))){
+                            if(clases.get(i).getName().equals(UnoCreacionPersonajesActivity.this.spinnerClases.obtenerSeleccion().get(0))){
 
                                 c = clases.get(i);
                             }
@@ -95,17 +101,30 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                             }
                         }
 
-                        JSONObject attrs = new JSONObject();
-                        attrs.put("fuerza", Integer.parseInt(txtFuerza.getText().toString()));
-                        attrs.put("destreza", Integer.parseInt(txtDestreza.getText().toString()));
-                        attrs.put("constitucion", Integer.parseInt(txtConstitucion.getText().toString()));
-                        attrs.put("inteligencia", Integer.parseInt(txtInteligencia.getText().toString()));
-                        attrs.put("sabiduria", Integer.parseInt(txtSabiduria.getText().toString()));
-                        attrs.put("carisma", Integer.parseInt(txtCarisma.getText().toString()));
+                        List<Ability> attrs = new ArrayList<Ability>();
 
-                        p.setVIDA(c.getDadoGolpe()+obtenerBonoAtributo(Integer.parseInt(txtConstitucion.getText().toString())));
-                        p.setAtributos(attrs);
-                        p.setClases(c);
+                        Ability fuerza = new Ability();
+                        fuerza.setFuerza(txtFuerza.getText().toString());
+                        attrs.add(fuerza);
+                        Ability destreza = new Ability();
+                        fuerza.setDestreza(txtDestreza.getText().toString());
+                        attrs.add(destreza);
+                        Ability constitucion = new Ability();
+                        fuerza.setConstitucion(txtConstitucion.getText().toString());
+                        attrs.add(constitucion);
+                        Ability inteligencia = new Ability();
+                        fuerza.setInteligencia(txtInteligencia.getText().toString());
+                        attrs.add(inteligencia);
+                        Ability sabiduria = new Ability();
+                        fuerza.setSabiduria(txtSabiduria.getText().toString());
+                        attrs.add(sabiduria);
+                        Ability carisma = new Ability();
+                        fuerza.setCarisma(txtCarisma.getText().toString());
+                        attrs.add(carisma);
+
+                        p.setVida(Integer.parseInt(c.getHitDice())+obtenerBonoAtributo(Integer.parseInt(txtConstitucion.getText().toString())));
+                        p.setAbilities(attrs);
+                        p.setaClass(c);
                         p.setRaza(r);
                         //Toast.makeText(UnoCreacionPersonajesActivity.this, c.getNombre(), Toast.LENGTH_SHORT).show();
                         //Toast.makeText(UnoCreacionPersonajesActivity.this, r.getName(), Toast.LENGTH_SHORT).show();

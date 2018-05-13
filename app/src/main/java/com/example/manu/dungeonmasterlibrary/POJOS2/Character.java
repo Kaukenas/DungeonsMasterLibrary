@@ -41,6 +41,8 @@ public class Character implements Parcelable
     private Razas raza;
     private Class aClass;
     private int vida;
+    private int CA;
+    private int DAMAGE;
 
 ////////////////////////////
 
@@ -208,6 +210,22 @@ public class Character implements Parcelable
 
     public void setVida(int vida) {
         this.vida = vida;
+    }
+
+    public int getCA() {
+        return CA;
+    }
+
+    public void setCA(int CA) {
+        this.CA = CA;
+    }
+
+    public int getDAMAGE() {
+        return DAMAGE;
+    }
+
+    public void setDAMAGE(int DAMAGE) {
+        this.DAMAGE = DAMAGE;
     }
 
     ////////////////////////////////////////////////////////////////////

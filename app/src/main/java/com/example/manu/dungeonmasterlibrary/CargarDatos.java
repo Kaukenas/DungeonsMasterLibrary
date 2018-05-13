@@ -4,10 +4,11 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.POJOS.Features;
-import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 import com.example.manu.dungeonmasterlibrary.POJOS.Traits;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Razas;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Class;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Skill;
 import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CLASSES.GetClassesRetrofit;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -95,16 +96,16 @@ public class CargarDatos {
     public ArrayList<Features> cargarGuerrero() {
         ArrayList<Features> listaFeatures = new ArrayList<>();
         Features f = new Features("Estilo de combate","Descripcion de Estilo de Combate",false,"CA",1) {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
                 p.setCA(p.getCA()+1);
             }
         };
         listaFeatures.add(f);
         f = new Features("Nuevas Energias","Descripcion de Nuevas Energias",true,"HEAL",1) {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
-                p.setVIDA(p.getVIDA()+5);
+                p.setVida(p.getVida()+5);
             }
         };
         listaFeatures.add(f);
@@ -116,7 +117,7 @@ public class CargarDatos {
         };
         listaFeatures.add(f);
         f = new Features("Arquetipo Marcial", "Descripcion de Arquetipo Marcial", false, "DAMAGE",3) {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
                 p.setDAMAGE(p.getDAMAGE()+1);
             }
@@ -144,7 +145,7 @@ public class CargarDatos {
         };
         listaFeatures.add(f);
         f = new Features ("Estilo Combate 2", "Descripcion de Estilo Combate 2", false, "CA",7){
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
                 p.setCA(p.getCA()+2);
             }
@@ -164,16 +165,16 @@ public class CargarDatos {
     public ArrayList<Features> cargarMonje() {
         ArrayList<Features> listaFeatures = new ArrayList<>();
         Features f = new Features("Estilo de combate","Descripcion de Estilo de Combate",false,"CA",1) {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
                 p.setCA(p.getCA()+1);
             }
         };
         listaFeatures.add(f);
         f = new Features("Nuevas Energias","Descripcion de Nuevas Energias",true,"HEAL",1) {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
-                p.setVIDA(p.getVIDA()+5);
+                p.setVida(p.getVida()+5);
             }
         };
         listaFeatures.add(f);
@@ -185,7 +186,7 @@ public class CargarDatos {
         };
         listaFeatures.add(f);
         f = new Features("Arquetipo Marcial", "Descripcion de Arquetipo Marcial", false, "DAMAGE",3) {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
                 p.setDAMAGE(p.getDAMAGE()+1);
             }
@@ -213,7 +214,7 @@ public class CargarDatos {
         };
         listaFeatures.add(f);
         f = new Features ("Estilo Combate 2", "Descripcion de Estilo Combate 2", false, "CA",7){
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
                 p.setCA(p.getCA()+2);
             }
@@ -233,16 +234,16 @@ public class CargarDatos {
     public ArrayList<Features> cargarPicaro() {
         ArrayList<Features> listaFeatures = new ArrayList<>();
         Features f = new Features("Estilo de combate","Descripcion de Estilo de Combate",false,"CA",1) {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
                 p.setCA(p.getCA()+1);
             }
         };
         listaFeatures.add(f);
         f = new Features("Nuevas Energias","Descripcion de Nuevas Energias",true,"HEAL",1) {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
-                p.setVIDA(p.getVIDA()+5);
+                p.setVida(p.getVida()+5);
             }
         };
         listaFeatures.add(f);
@@ -254,7 +255,7 @@ public class CargarDatos {
         };
         listaFeatures.add(f);
         f = new Features("Arquetipo Marcial", "Descripcion de Arquetipo Marcial", false, "DAMAGE",3) {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
                 p.setDAMAGE(p.getDAMAGE()+1);
             }
@@ -282,7 +283,7 @@ public class CargarDatos {
         };
         listaFeatures.add(f);
         f = new Features ("Estilo Combate 2", "Descripcion de Estilo Combate 2", false, "CA",7){
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
                 p.setCA(p.getCA()+2);
             }
@@ -302,16 +303,16 @@ public class CargarDatos {
     public ArrayList<Features> cargarBarbaro() {
         ArrayList<Features> listaFeatures = new ArrayList<>();
         Features f = new Features("Estilo de combate","Descripcion de Estilo de Combate",false,"CA",1) {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
                 p.setCA(p.getCA()+1);
             }
         };
         listaFeatures.add(f);
         f = new Features("Nuevas Energias","Descripcion de Nuevas Energias",true,"HEAL",1) {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
-                p.setVIDA(p.getVIDA()+5);
+                p.setVida(p.getVida()+5);
             }
         };
         listaFeatures.add(f);
@@ -323,7 +324,7 @@ public class CargarDatos {
         };
         listaFeatures.add(f);
         f = new Features("Arquetipo Marcial", "Descripcion de Arquetipo Marcial", false, "DAMAGE",3) {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
                 p.setDAMAGE(p.getDAMAGE()+1);
             }
@@ -351,7 +352,7 @@ public class CargarDatos {
         };
         listaFeatures.add(f);
         f = new Features ("Estilo Combate 2", "Descripcion de Estilo Combate 2", false, "CA",7){
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
                 p.setCA(p.getCA()+2);
             }
@@ -481,15 +482,11 @@ public class CargarDatos {
     public ArrayList<Traits> cargarElfo(){
         ArrayList<Traits> listaTraits = new ArrayList<>();
         Traits t = new Traits("sentidos agudos", "eres competente con la habilidad percepcion") {
-            public void accion(Personajes p) {
+            public void accion(Character p) {
                 super.accion();
-                JSONObject h = p.getHabilidades();
-                try {
-                    h.put("percepcion", 0);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                p.setHabilidades(h);
+                List<Skill> h = p.getSkills();
+                h.add(new Skill("percepcion"));
+                p.setSkills(h);
             }
         };
         listaTraits.add(t);

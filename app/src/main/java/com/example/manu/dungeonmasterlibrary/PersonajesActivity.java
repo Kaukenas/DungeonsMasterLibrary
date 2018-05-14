@@ -59,8 +59,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.view.View.TEXT_ALIGNMENT_CENTER;
 
-public class PersonajesActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class PersonajesActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     RecyclerView contenedor;
@@ -71,7 +70,6 @@ public class PersonajesActivity extends AppCompatActivity
     ArrayList<Character> listaCharacters = new ArrayList<Character>();
     WebView mWebView;
     Boolean webView = false;
-    //ProgressBar mProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,10 +82,6 @@ public class PersonajesActivity extends AppCompatActivity
         btnRamon = findViewById(R.id.btnRamon);
         cardViewChar = findViewById(R.id.cardViewChar);
 
-
-
-
-        //mProgressBar =  findViewById(R.id.progressBar);
 
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
 
@@ -171,15 +165,6 @@ public class PersonajesActivity extends AppCompatActivity
         TextView titulo = getActionBarTextView(toolbar);
         titulo.setTypeface(face);
         ac.setTitle("PERSONAJES");
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -305,29 +290,5 @@ public class PersonajesActivity extends AppCompatActivity
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         contenedor.setLayoutManager(layoutManager);
 
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_character) {
-
-            cargarPersonajes();
-
-
-        } /*else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        }*/
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }

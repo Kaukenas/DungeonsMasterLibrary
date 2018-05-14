@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -36,11 +36,11 @@
         <activity
             android:name=".DosCreacionPersonajesActivity"
             android:theme="@style/AppTheme" />
-
         <activity android:name=".TresCreacionPersonajesActivity" />
         <activity android:name=".MostrarUnoPersonajeActivity" />
         <activity android:name=".MostrarDosPersonajesActivity" />
-        <activity android:name=".MostrarTresPersonajesActivity"></activity>
+        <activity android:name=".MostrarTresPersonajesActivity" />
+        <activity android:name=".MostrarCuatroPersonajesActivity"></activity>
     </application>
 
 </manifest>

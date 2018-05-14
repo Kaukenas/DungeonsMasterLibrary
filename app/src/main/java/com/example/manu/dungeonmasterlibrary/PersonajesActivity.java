@@ -3,6 +3,7 @@ package com.example.manu.dungeonmasterlibrary;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -69,7 +70,6 @@ public class PersonajesActivity extends AppCompatActivity {
     ArrayList<Personajes> listaPersonajes = new ArrayList<Personajes>();
     ArrayList<Character> listaCharacters = new ArrayList<Character>();
     WebView mWebView;
-    Boolean webView = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,6 @@ public class PersonajesActivity extends AppCompatActivity {
 
 
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

@@ -59,14 +59,14 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
         tirarDados();
 
         List<String> clases = new ArrayList<>();
-        clases.add("guerrero");
-        clases.add("monje");
-        clases.add("picaro");
-        clases.add("barbaro");
+        clases.add("Guerrero");
+        clases.add("Monje");
+        clases.add("Pícaro");
+        clases.add("Barbaro");
 
         List<String> razas = new ArrayList<>();
-        razas.add("elfo");
-        razas.add("enano");
+        razas.add("Elfo");
+        razas.add("Enano");
 
         spinnerClases.setItems(clases);
         spinnerRazas.setItems(razas);
@@ -136,7 +136,7 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                 } else {
-                    Toast.makeText(UnoCreacionPersonajesActivity.this, "Debes seleccionar una Clase y una Raza, no intentes explotarnos la APP que te conozco", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UnoCreacionPersonajesActivity.this, "Debes seleccionar una Clase y una Raza, no intentes explotarnos la APP", Toast.LENGTH_SHORT).show();
                 }
 
             }

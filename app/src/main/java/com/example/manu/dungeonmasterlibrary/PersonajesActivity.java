@@ -96,8 +96,6 @@ public class PersonajesActivity extends AppCompatActivity {
                         cargarPersonajes();
                         break;
                     case R.id.wikiItem:
-
-                        //cambiando el layout
                         setContentView(R.layout.webview_wiki);
                         //obteniendo el webview
                         mWebView = findViewById(R.id.mWebView);
@@ -108,46 +106,25 @@ public class PersonajesActivity extends AppCompatActivity {
                         }
 
                         WebSettings webSettings = mWebView.getSettings();
-                        //webSettings.setJavaScriptEnabled(true);
+                        webSettings.setJavaScriptEnabled(true);
+                        mWebView.setFocusable(true);
+                        mWebView.setFocusableInTouchMode(true);
+                        webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
                         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+                        webSettings.setDatabaseEnabled(true);
+                        webSettings.setAppCacheEnabled(true);
+                        mWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
-                            webSettings.setBlockNetworkLoads(false);
+                            //webSettings.setBlockNetworkLoads(false);
                             webSettings.setDomStorageEnabled(true);
                         }
-
                         mWebView.setWebViewClient(new WebViewClient(){
                             @Override
-
-                            //Decidir que se carga dentro del WebView y que se carga fuera
-                            public boolean shouldOverrideUrlLoading(WebView view, String request) {
-                                if (Uri.parse(request).getHost().endsWith("https://www.d20pfsrd.com/")){
-                                    return false;
-                                } else {
-                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(request));
-                                    view.getContext().startActivity(intent);
-                                    return true;
-                                }
-                            }
-
-                            @Override
-                            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                                super.onPageStarted(view, url, favicon);
-                                webView = true;
-                                //mProgressBar.setVisibility(View.VISIBLE);
-                            }
-
-                            @Override
-                            public void onPageFinished(WebView view, String url) {
-                                super.onPageFinished(view, url);
-                                //mProgressBar.setVisibility(View.GONE);
-                            }
-
-                            @Override
-                            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                                super.onReceivedError(view, request, error);
+                            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                                view.loadUrl(url);
+                                return true;
                             }
                         });
-
                         //Cargar la URL
                         mWebView.loadUrl(url);
 
@@ -210,18 +187,10 @@ public class PersonajesActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-        if (webView){
-            if (mWebView.canGoBack()){
-                mWebView.goBack();
-            } else {
-                webView=false;
-                super.onBackPressed();
-            }
+        if (mWebView.canGoBack()){
+            mWebView.goBack();
         } else {
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            if (drawer.isDrawerOpen(GravityCompat.START)) {
-                drawer.closeDrawer(GravityCompat.START);
-            }
+            super.onBackPressed();
         }
 
     }

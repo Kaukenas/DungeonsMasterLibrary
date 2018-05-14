@@ -29,9 +29,6 @@ public class MostrarTresPersonajesActivity extends AppCompatActivity {
         spinnerBag.setItems(list);
 
 
-
-
-
     }
 
     public static void setActivity(Activity activity){

@@ -36,11 +36,13 @@ public class AdapterMochila extends RecyclerView.Adapter<viewHolderMochila> {
 
     @Override
     public void onBindViewHolder(viewHolderMochila holder, int position) {
+        holder.txtNombreArma.setText(listaObjetos.get(position).getNombreArma());
 
     }
 
     @Override
     public int getItemCount() {
         return 0;
+        //listaObjetos.size();
     }
 }

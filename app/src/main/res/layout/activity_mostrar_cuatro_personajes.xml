@@ -4,18 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.manu.dungeonmasterlibrary.MostrarCuatroPersonajesActivity">
+    tools:context="com.example.manu.dungeonmasterlibrary.MostrarCuatroPersonajesActivity"
+    tools:layout_editor_absoluteY="25dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerRasgos"
+    <include
+        android:id="@+id/include2"
+        layout="@layout/content_bottom"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerRasgos"
+        android:layout_width="0dp"
+        android:layout_height="510dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include2" />
 </android.support.constraint.ConstraintLayout>

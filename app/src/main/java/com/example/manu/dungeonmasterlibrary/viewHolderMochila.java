@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 public class viewHolderMochila extends RecyclerView.ViewHolder {
 
-    ImageButton btnAddAtack, btnEliminarAtack;
-    TextView txtNombreArma;
+    public ImageButton btnAddAtack, btnEliminarAtack;
+    public TextView txtNombreArma;
 
     public viewHolderMochila(View itemView) {
         super(itemView);

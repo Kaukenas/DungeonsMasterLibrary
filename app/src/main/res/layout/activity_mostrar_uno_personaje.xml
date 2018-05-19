@@ -554,13 +554,6 @@
                     android:text="Ataques:"
                     android:textSize="20sp" />
 
-                <ImageButton
-                    android:id="@+id/imageButton71"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    app:srcCompat="@drawable/ic_anadir_boton_circular_delineado" />
-
             </LinearLayout>
 
         </LinearLayout>

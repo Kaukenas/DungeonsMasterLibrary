@@ -1,6 +1,6 @@
 package com.example.manu.dungeonmasterlibrary;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,26 +9,22 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.manu.dungeonmasterlibrary.POJOS.Clases;
+import com.example.manu.dungeonmasterlibrary.Adapters.AdapterAtaques;
+import com.example.manu.dungeonmasterlibrary.Adapters.AdapterMochila;
 import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
-import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
-import com.example.manu.dungeonmasterlibrary.POJOS2.Ability;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class MostrarUnoPersonajeActivity extends AppCompatActivity {
 
@@ -42,6 +38,10 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
     Character personajes;
     ProgressBar pbVida;
     int sumar = 0;
+    public static ArrayList<Objetos> listaObjetos = new ArrayList<>();
+    RecyclerView recyclerAtaques;
+    static Activity MA;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +72,15 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         txtAtaqueCC = findViewById(R.id.txtAtaqueCC);
         txtCA = findViewById(R.id.txtCA);
         txtADistancia = findViewById(R.id.txtADistancia);
+        recyclerAtaques = findViewById(R.id.recyclerAtaques);
+
+        bottomNavigationView.setSelectedItemId(R.id.combateItem);
+
+        recyclerAtaques.setAdapter(new AdapterAtaques(listaObjetos,MostrarUnoPersonajeActivity.this, this.getLayoutInflater()));
+        recyclerAtaques.setHasFixedSize(true);
+        LinearLayoutManager layoutManagerr = new LinearLayoutManager(getApplicationContext());
+        layoutManagerr.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerAtaques.setLayoutManager(layoutManagerr);
 
         Objetos o = new Objetos();
         ArrayList<Objetos> objetosArrayList = cargarArmas();
@@ -191,11 +200,14 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
                         MostrarTresPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
                         startActivity(intentEquipamiento);
                         break;
-                        //setContentView(R.layout.activity_mostrar_tres_personajes);
-                        //break;
                     case R.id.rasgosItem:
+                        Intent intentRas = new Intent(MostrarUnoPersonajeActivity.this,MostrarCuatroPersonajesActivity.class);
+                        intentRas.putExtras(getIntent().getExtras());
+                        MostrarCuatroPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
+                        startActivity(intentRas);
                         break;
                 }
+
                 return true;
             }
         });
@@ -290,10 +302,13 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
     }
 
     public ArrayList<Objetos> cargarArmas(){
-        ArrayList<Objetos> listaClases = new ArrayList<>();
         Objetos objetos = new Objetos("Espada corta",1,6,1,"Arma");
-        listaClases.add(objetos);
-        return listaClases;
+        listaObjetos.add(objetos);
+        return listaObjetos;
+    }
+
+    public static void setActivity(Activity activity){
+        MostrarUnoPersonajeActivity.MA=activity;
     }
 
 }

@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.manu.dungeonmasterlibrary.MostrarUnoPersonajeActivity;
 import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
-import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 import com.example.manu.dungeonmasterlibrary.R;
-import com.example.manu.dungeonmasterlibrary.viewHolder;
 import com.example.manu.dungeonmasterlibrary.viewHolderMochila;
 
 import java.util.List;
@@ -36,8 +35,22 @@ public class AdapterMochila extends RecyclerView.Adapter<viewHolderMochila> {
 
     @Override
     public void onBindViewHolder(viewHolderMochila holder, int position) {
-        holder.txtNombreArma.setText(listaObjetos.get(position).getNombreArma());
+        holder.btnEliminarAtack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listaObjetos.remove(position);
+                notifyDataSetChanged();
+            }
+        });
 
+        holder.btnAddAtack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MostrarUnoPersonajeActivity.listaObjetos.add(listaObjetos.get(position));
+            }
+        });
+
+        holder.txtNombreArma.setText(listaObjetos.get(position).getNombreArma());
     }
 
     @Override

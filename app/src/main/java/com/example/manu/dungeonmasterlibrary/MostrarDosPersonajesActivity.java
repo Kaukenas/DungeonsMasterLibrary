@@ -2,10 +2,14 @@ package com.example.manu.dungeonmasterlibrary;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -22,6 +26,7 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
     ImageButton imgBtn1, imgBtn12, imgBtn21, imgBtn22, imgBtn31, imgBtn32;
     Character personajes;
     static Activity a;
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,9 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
         textViewSabiduriA = findViewById(R.id.textViewSaBiduria);
         textViewConstitucioN = findViewById(R.id.txtCoNstitucion);
         textViewCarismA = findViewById(R.id.txtCaRisma);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
+
+        bottomNavigationView.setSelectedItemId(R.id.habilidadesItem);
 
         a.finish();
         personajes = getIntent().getExtras().getParcelable("PERSONAJE");
@@ -51,7 +59,34 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
             textViewSabiduriA.setText(personajes.getAbilities().get(4).getSabiduria());
             textViewCarismA.setText(personajes.getAbilities().get(5).getCarisma());
 
-
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.combateItem:
+                        Intent intent = new Intent(MostrarDosPersonajesActivity.this,MostrarUnoPersonajeActivity.class);
+                        intent.putExtras(getIntent().getExtras());
+                        MostrarUnoPersonajeActivity.setActivity(MostrarDosPersonajesActivity.this);
+                        startActivity(intent);
+                        break;
+                    case R.id.habilidadesItem:
+                        break;
+                    case R.id.equipamientoItem:
+                        Intent intentEqui = new Intent(MostrarDosPersonajesActivity.this,MostrarTresPersonajesActivity.class);
+                        intentEqui.putExtras(getIntent().getExtras());
+                        MostrarTresPersonajesActivity.setActivity(MostrarDosPersonajesActivity.this);
+                        startActivity(intentEqui);
+                        break;
+                    case R.id.rasgosItem:
+                        Intent intentRas = new Intent(MostrarDosPersonajesActivity.this,MostrarCuatroPersonajesActivity.class);
+                        intentRas.putExtras(getIntent().getExtras());
+                        MostrarCuatroPersonajesActivity.setActivity(MostrarDosPersonajesActivity.this);
+                        startActivity(intentRas);
+                        break;
+                }
+                return true;
+            }
+        });
         imgBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

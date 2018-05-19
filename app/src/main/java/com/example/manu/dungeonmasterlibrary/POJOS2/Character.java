@@ -44,6 +44,7 @@ public class Character implements Parcelable
     private int CA;
     private int DAMAGE;
     private String Alineamiento;
+    private String photo;
 
 ////////////////////////////
 
@@ -73,6 +74,13 @@ public class Character implements Parcelable
         this.name = ((String) in.readValue((String.class.getClassLoader())));
         in.readTypedList(this.abilities, Ability.CREATOR);
         in.readTypedList(this.skills, Skill.CREATOR);
+        this.aClass = (Class) in.readValue(Class.class.getClassLoader());
+        this.raza = (Razas) in.readValue(Razas.class.getClassLoader());
+        this.vida = (int) in.readValue(int.class.getClassLoader());
+        this.CA = (int) in.readValue(int.class.getClassLoader());
+        this.DAMAGE = (int) in.readValue(int.class.getClassLoader());
+        this.Alineamiento = (String) in.readValue(String.class.getClassLoader());
+        this.photo = (String) in.readValue(String.class.getClassLoader());
         this.level = ((String) in.readValue((String.class.getClassLoader())));
         this.classesId = ((String) in.readValue((String.class.getClassLoader())));
         this.racesId = ((String) in.readValue((String.class.getClassLoader())));
@@ -237,6 +245,14 @@ public class Character implements Parcelable
         Alineamiento = alineamiento;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     ////////////////////////////////////////////////////////////////////
 
     public void writeToParcel(Parcel dest, int flags) {
@@ -244,6 +260,13 @@ public class Character implements Parcelable
         dest.writeValue(name);
         dest.writeTypedList(abilities);
         dest.writeTypedList(skills);
+        dest.writeValue(aClass);
+        dest.writeValue(raza);
+        dest.writeValue(vida);
+        dest.writeValue(CA);
+        dest.writeValue(DAMAGE);
+        dest.writeValue(Alineamiento);
+        dest.writeValue(photo);
         dest.writeValue(level);
         dest.writeValue(classesId);
         dest.writeValue(racesId);

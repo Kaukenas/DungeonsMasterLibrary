@@ -42,7 +42,7 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
 
 
         personajes = getIntent().getExtras().getParcelable("PERSONAJE");
-        Toast.makeText(this, "personaje = "+personajes.getaClass().getName(), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "personaje = "+personajes, Toast.LENGTH_LONG).show();
         List<Skill> habilidades = personajes.getaClass().getSkills();
         for (int i = 0; i <habilidades.size() ; i++) {
             list.add(habilidades.get(i).getHabilidad());

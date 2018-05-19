@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 
 import java.io.ByteArrayOutputStream;
 
@@ -21,7 +22,7 @@ public class TresCreacionPersonajesActivity extends AppCompatActivity {
 
     Button btnBackTres, btnFinish;
     ImageView imageViewMonje, imageViewPicaro, imageViewBarbaro, imageViewGuerrero;
-    Personajes personajes;
+    Character personajes;
     Bitmap bitmapend= null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class TresCreacionPersonajesActivity extends AppCompatActivity {
                 bitmapend.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                 byte[] imageBytes = stream.toByteArray();
                 String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-                personajes.setFotoPersonaje(encodedImage);
+                personajes.setPhoto(encodedImage);
                 Intent returnIntent = new Intent();
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("PERSONAJE",personajes);

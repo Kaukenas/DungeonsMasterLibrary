@@ -161,6 +161,12 @@ public class PersonajesActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode==1){
             Bundle bundle = data.getExtras();
             Character personaje = bundle.getParcelable("PERSONAJE");
+            listaCharacters.add(personaje);
+            contenedor.setAdapter(new Adapter(listaCharacters, PersonajesActivity.this));
+            contenedor.setHasFixedSize(true);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            contenedor.setLayoutManager(layoutManager);
 
         }else{
             Toast.makeText(this, "wah wah wah", Toast.LENGTH_SHORT).show();

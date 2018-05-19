@@ -28,7 +28,7 @@ public class Class implements Parcelable
     private String hitDice;
     @SerializedName("savingThrows")
     @Expose
-    private List<SavingThrow> savingThrows = null;
+    private List<SavingThrow> savingThrows = new ArrayList<>();
     @SerializedName("skills")
     @Expose
     private List<Skill> skills = new ArrayList<>();
@@ -63,8 +63,8 @@ public class Class implements Parcelable
         this.name = ((String) in.readValue((String.class.getClassLoader())));
         this.description = ((String) in.readValue((String.class.getClassLoader())));
         this.hitDice = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.savingThrows, (com.example.manu.dungeonmasterlibrary.POJOS2.SavingThrow.class.getClassLoader()));
-        in.readList(this.skills, (com.example.manu.dungeonmasterlibrary.POJOS2.Skill.class.getClassLoader()));
+        in.readTypedList(this.savingThrows, SavingThrow.CREATOR);
+        in.readTypedList(this.skills,Skill.CREATOR);
         this.numOfSkills = ((String) in.readValue((String.class.getClassLoader())));
     }
 
@@ -181,8 +181,8 @@ public class Class implements Parcelable
         dest.writeValue(name);
         dest.writeValue(description);
         dest.writeValue(hitDice);
-        dest.writeList(savingThrows);
-        dest.writeList(skills);
+        dest.writeTypedList(savingThrows);
+        dest.writeTypedList(skills);
         dest.writeValue(numOfSkills);
     }
 

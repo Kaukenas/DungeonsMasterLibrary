@@ -102,8 +102,6 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
 
                     Toast.makeText(UnoCreacionPersonajesActivity.this, ""+listaclases.size(), Toast.LENGTH_SHORT).show();
                         for (int i=0; i < listaclases.size(); i++){
-                            Toast.makeText(UnoCreacionPersonajesActivity.this, "Nombre clase: "+listaclases.get(i).getName()
-                                    + " Nombre lista: "+ UnoCreacionPersonajesActivity.this.spinnerClases.obtenerSeleccion().get(0), Toast.LENGTH_SHORT).show();
                             if(listaclases.get(i).getName().equals(UnoCreacionPersonajesActivity.this.spinnerClases.obtenerSeleccion().get(0))){
                                 Toast.makeText(UnoCreacionPersonajesActivity.this, "entrando al if", Toast.LENGTH_SHORT).show();
                                 c = listaclases.get(i);

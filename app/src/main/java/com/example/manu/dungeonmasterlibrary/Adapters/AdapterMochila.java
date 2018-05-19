@@ -42,7 +42,6 @@ public class AdapterMochila extends RecyclerView.Adapter<viewHolderMochila> {
 
     @Override
     public int getItemCount() {
-        return 0;
-        //listaObjetos.size();
+        return listaObjetos.size();
     }
 }

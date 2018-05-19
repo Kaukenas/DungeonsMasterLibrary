@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 
 import org.json.JSONException;
 
@@ -20,7 +20,7 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
     TextView txtResultadoTirada, textViewFuerzA, textViewInteligenciA, textViewDestrezA, textViewSabiduriA,
             textViewConstitucioN, textViewCarismA;
     ImageButton imgBtn1, imgBtn12, imgBtn21, imgBtn22, imgBtn31, imgBtn32;
-    Personajes personajes;
+    Character personajes;
     static Activity a;
 
     @Override
@@ -43,18 +43,14 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
 
         a.finish();
         personajes = getIntent().getExtras().getParcelable("PERSONAJE");
-        Toast.makeText(this, "Atributos"+ personajes.getAtributos(), Toast.LENGTH_SHORT).show();
 
-        try {
-            textViewFuerzA.setText(personajes.getAtributos().getString("fuerza"));
-            textViewInteligenciA.setText(personajes.getAtributos().getString("inteligencia"));
-            textViewDestrezA.setText(personajes.getAtributos().getString("destreza"));
-            textViewSabiduriA.setText(personajes.getAtributos().getString("sabiduria"));
-            textViewConstitucioN.setText(personajes.getAtributos().getString("constitucion"));
-            textViewCarismA.setText(personajes.getAtributos().getString("carisma"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+            textViewFuerzA.setText(personajes.getAbilities().get(0).getFuerza());
+            textViewDestrezA.setText(personajes.getAbilities().get(1).getDestreza());
+            textViewConstitucioN.setText(personajes.getAbilities().get(2).getConstitucion());
+            textViewInteligenciA.setText(personajes.getAbilities().get(3).getInteligencia());
+            textViewSabiduriA.setText(personajes.getAbilities().get(4).getSabiduria());
+            textViewCarismA.setText(personajes.getAbilities().get(5).getCarisma());
+
 
         imgBtn1.setOnClickListener(new View.OnClickListener() {
             @Override

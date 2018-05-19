@@ -182,12 +182,11 @@ public class PersonajesActivity extends AppCompatActivity {
                 }
             });
             listaCharacters.add(personaje);
-            contenedor.setAdapter(new AdapterPersonajes(listaCharacters, PersonajesActivity.this));
-            contenedor.setHasFixedSize(true);
+        contenedor.setAdapter(new AdapterPersonajes(listaCharacters, PersonajesActivity.this));
+        contenedor.setHasFixedSize(true);
             LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             contenedor.setLayoutManager(layoutManager);
-
         }else{
             Toast.makeText(this, "wah wah wah", Toast.LENGTH_SHORT).show();
         }
@@ -267,6 +266,7 @@ public class PersonajesActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<Character>>() {
             @Override
             public void onResponse(Call<List<Character>> call, Response<List<Character>> response) {
+                listaCharacters= new ArrayList<>();
                 List<Character> characters = response.body();
                 for (int i = 0; i <characters.size() ; i++) {
                     listaCharacters.add(characters.get(i));

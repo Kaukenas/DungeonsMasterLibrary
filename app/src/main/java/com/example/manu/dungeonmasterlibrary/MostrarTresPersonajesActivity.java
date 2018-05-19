@@ -25,7 +25,7 @@ public class MostrarTresPersonajesActivity extends AppCompatActivity {
         c.finish();
         objetos = getIntent().getExtras().getParcelable("ARMAS");
         List<String> list = new ArrayList<String>();
-        list.add(String.valueOf(objetos));
+        list.add(objetos.getNombreArma());
         spinnerBag.setItems(list);
 
 

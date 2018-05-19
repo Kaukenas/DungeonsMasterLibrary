@@ -26,12 +26,12 @@ import java.util.List;
  * Created by Manu on 21/03/2018.
  */
 
-public class Adapter extends RecyclerView.Adapter<viewHolder> {
+public class AdapterPersonajes extends RecyclerView.Adapter<viewHolder> {
 
     List<Character> listaPersonajes;
     Context context;
 
-    public Adapter(List<Character> listaPersonajes, Context context) {
+    public AdapterPersonajes(List<Character> listaPersonajes, Context context) {
         this.listaPersonajes = listaPersonajes;
         this.context=context;
     }

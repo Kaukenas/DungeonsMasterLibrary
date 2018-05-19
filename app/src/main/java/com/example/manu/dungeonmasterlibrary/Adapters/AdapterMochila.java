@@ -1,9 +1,18 @@
 package com.example.manu.dungeonmasterlibrary.Adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
+import com.example.manu.dungeonmasterlibrary.R;
+import com.example.manu.dungeonmasterlibrary.viewHolder;
 import com.example.manu.dungeonmasterlibrary.viewHolderMochila;
+
+import java.util.List;
 
 /**
  * Created by Manu on 19/05/2018.
@@ -11,11 +20,18 @@ import com.example.manu.dungeonmasterlibrary.viewHolderMochila;
 
 public class AdapterMochila extends RecyclerView.Adapter<viewHolderMochila> {
 
+    List<Objetos> listaObjetos;
+    Context context;
 
+    public AdapterMochila(List<Objetos> listaObjetos, Context context) {
+        this.listaObjetos = listaObjetos;
+        this.context=context;
+    }
 
     @Override
     public viewHolderMochila onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_mochila,parent,false);
+        return new viewHolderMochila(vista);
     }
 
     @Override

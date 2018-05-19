@@ -26,7 +26,7 @@
     <include
         android:id="@+id/include"
         layout="@layout/content_personajes"
-        android:layout_height="454dp" />
+        android:layout_height="458dp" />
 
 
 </android.support.design.widget.CoordinatorLayout>

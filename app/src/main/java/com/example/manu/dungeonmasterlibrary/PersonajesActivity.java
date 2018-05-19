@@ -1,53 +1,37 @@
 package com.example.manu.dungeonmasterlibrary;
 
-import android.annotation.SuppressLint;
-import android.app.Fragment;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.Adapters.Adapter;
 import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
-import com.example.manu.dungeonmasterlibrary.POJOS.Pruebafotos;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
-import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CHARACTER.GetCharacterRetrofit;
-import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.RACES.GetRacesRetrofit;
+import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CHARACTER.GetCharactersRetrofit;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +41,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import static android.view.View.TEXT_ALIGNMENT_CENTER;
 
 public class PersonajesActivity extends AppCompatActivity {
 
@@ -161,6 +143,39 @@ public class PersonajesActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode==1){
             Bundle bundle = data.getExtras();
             Character personaje = bundle.getParcelable("PERSONAJE");
+            String baseurl = "http://thedmlibrary.ddns.net/api/index.php/";
+
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
+
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(baseurl)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+
+            UploadCharacterRetrofit Api = retrofit.create(UploadCharacterRetrofit.class);
+
+            Call <List<Character>> call = Api.loadChanges();
+            call.enqueue(new Callback<List<Character>>() {
+                @Override
+                public void onResponse(Call<List<Character>> call, Response<List<Character>> response) {
+                    List<Character> characters = response.body();
+                    for (int i = 0; i <characters.size() ; i++) {
+                        listaCharacters.add(characters.get(i));
+                    }
+                    contenedor.setAdapter(new Adapter(listaCharacters, PersonajesActivity.this));
+                    contenedor.setHasFixedSize(true);
+                }
+
+                @Override
+                public void onFailure(Call<List<Character>> call, Throwable t) {
+                    StringWriter errors = new StringWriter();
+                    t.printStackTrace(new PrintWriter(errors));
+                    Log.e("ERROR",errors.toString());
+                    Toast.makeText(PersonajesActivity.this, errors.toString(), Toast.LENGTH_SHORT).show();
+                }
+            });
             listaCharacters.add(personaje);
             contenedor.setAdapter(new Adapter(listaCharacters, PersonajesActivity.this));
             contenedor.setHasFixedSize(true);
@@ -241,22 +256,26 @@ public class PersonajesActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
 
-        GetCharacterRetrofit Api = retrofit.create(GetCharacterRetrofit.class);
+        GetCharactersRetrofit Api = retrofit.create(GetCharactersRetrofit.class);
 
-        Call <Character> call = Api.loadChanges(1);
-        call.enqueue(new Callback<Character>() {
+        Call <List<Character>> call = Api.loadChanges();
+        call.enqueue(new Callback<List<Character>>() {
             @Override
-            public void onResponse(Call<Character> call, Response<Character> response) {
-                Character c = response.body();
-                Toast.makeText(PersonajesActivity.this, ""+c.getAbilities().get(0).getFuerza(), Toast.LENGTH_SHORT).show();
-                listaCharacters.add(c);
+            public void onResponse(Call<List<Character>> call, Response<List<Character>> response) {
+                List<Character> characters = response.body();
+                for (int i = 0; i <characters.size() ; i++) {
+                    listaCharacters.add(characters.get(i));
+                }
                 contenedor.setAdapter(new Adapter(listaCharacters, PersonajesActivity.this));
                 contenedor.setHasFixedSize(true);
             }
 
             @Override
-            public void onFailure(Call<Character> call, Throwable t) {
-
+            public void onFailure(Call<List<Character>> call, Throwable t) {
+                StringWriter errors = new StringWriter();
+                t.printStackTrace(new PrintWriter(errors));
+                Log.e("ERROR",errors.toString());
+                Toast.makeText(PersonajesActivity.this, errors.toString(), Toast.LENGTH_SHORT).show();
             }
         });
 

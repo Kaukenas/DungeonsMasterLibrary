@@ -121,19 +121,19 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                         fuerza.setFuerza(txtFuerza.getText().toString());
                         attrs.add(fuerza);
                         Ability destreza = new Ability();
-                        fuerza.setDestreza(txtDestreza.getText().toString());
+                        destreza.setDestreza(txtDestreza.getText().toString());
                         attrs.add(destreza);
                         Ability constitucion = new Ability();
-                        fuerza.setConstitucion(txtConstitucion.getText().toString());
+                        constitucion.setConstitucion(txtConstitucion.getText().toString());
                         attrs.add(constitucion);
                         Ability inteligencia = new Ability();
-                        fuerza.setInteligencia(txtInteligencia.getText().toString());
+                        inteligencia.setInteligencia(txtInteligencia.getText().toString());
                         attrs.add(inteligencia);
                         Ability sabiduria = new Ability();
-                        fuerza.setSabiduria(txtSabiduria.getText().toString());
+                        sabiduria.setSabiduria(txtSabiduria.getText().toString());
                         attrs.add(sabiduria);
                         Ability carisma = new Ability();
-                        fuerza.setCarisma(txtCarisma.getText().toString());
+                        carisma.setCarisma(txtCarisma.getText().toString());
                         attrs.add(carisma);
 
                         p.setVida(Integer.parseInt(c.getHitDice())+obtenerBonoAtributo(Integer.parseInt(txtConstitucion.getText().toString())));

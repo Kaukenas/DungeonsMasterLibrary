@@ -36,7 +36,9 @@ public class Character implements Parcelable
     @SerializedName("usersId")
     @Expose
     private String usersId;
-
+    @SerializedName("photo")
+    @Expose
+    private String photo;
     ////////////////////
     private Razas raza;
     private Class aClass;
@@ -44,7 +46,7 @@ public class Character implements Parcelable
     private int CA;
     private int DAMAGE;
     private String Alineamiento;
-    private String photo;
+
 
 ////////////////////////////
 
@@ -105,7 +107,7 @@ public class Character implements Parcelable
      * @param name
      * @param usersId
      */
-    public Character(String id, String name, List<Ability> abilities, List<Skill> skills, String level, String classesId, String racesId, String usersId) {
+    public Character(String id, String name, List<Ability> abilities, List<Skill> skills, String level, String classesId, String racesId, String usersId, String photo) {
         super();
         this.id = id;
         this.name = name;
@@ -115,6 +117,7 @@ public class Character implements Parcelable
         this.classesId = classesId;
         this.racesId = racesId;
         this.usersId = usersId;
+        this.photo = photo;
     }
 
     public Character(String id, String name, List<Ability> abilities, List<Skill> skills, String level, String classesId, String racesId, Razas raza, Class aClass, int vida, String usersId) {

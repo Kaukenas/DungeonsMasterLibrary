@@ -28,6 +28,7 @@ import com.example.manu.dungeonmasterlibrary.Adapters.AdapterPersonajes;
 import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CHARACTER.GetCharactersRetrofit;
+import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CHARACTER.UploadCharacterRetrofit;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -157,20 +158,16 @@ public class PersonajesActivity extends AppCompatActivity {
 
             UploadCharacterRetrofit Api = retrofit.create(UploadCharacterRetrofit.class);
 
-            Call <List<Character>> call = Api.loadChanges();
-            call.enqueue(new Callback<List<Character>>() {
+            Call <Character> call = Api.loadChanges(personaje);
+            call.enqueue(new Callback<Character>() {
                 @Override
-                public void onResponse(Call<List<Character>> call, Response<List<Character>> response) {
-                    List<Character> characters = response.body();
-                    for (int i = 0; i <characters.size() ; i++) {
-                        listaCharacters.add(characters.get(i));
-                    }
-                    contenedor.setAdapter(new AdapterPersonajes(listaCharacters, PersonajesActivity.this));
-                    contenedor.setHasFixedSize(true);
+                public void onResponse(Call<Character> call, Response<Character> response) {
+                    String characters = response.body().toString();
+                    Log.e("ERROR", characters);
                 }
 
                 @Override
-                public void onFailure(Call<List<Character>> call, Throwable t) {
+                public void onFailure(Call<Character> call, Throwable t) {
                     StringWriter errors = new StringWriter();
                     t.printStackTrace(new PrintWriter(errors));
                     Log.e("ERROR",errors.toString());
@@ -267,7 +264,7 @@ public class PersonajesActivity extends AppCompatActivity {
                 for (int i = 0; i <characters.size() ; i++) {
                     listaCharacters.add(characters.get(i));
                 }
-                contenedor.setAdapter(new Adapter(listaCharacters, PersonajesActivity.this));
+                contenedor.setAdapter(new AdapterPersonajes(listaCharacters, PersonajesActivity.this));
                 contenedor.setHasFixedSize(true);
             }
 

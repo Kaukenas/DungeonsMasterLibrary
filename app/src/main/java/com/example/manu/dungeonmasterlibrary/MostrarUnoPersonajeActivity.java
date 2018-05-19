@@ -303,9 +303,10 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
     }
 
     public ArrayList<Objetos> cargarArmas(){
+        ArrayList listanueva = new ArrayList();
         Objetos objetos = new Objetos("Espada corta",1,6,1,"Arma");
-        listaObjetos.add(objetos);
-        return listaObjetos;
+        listanueva.add(objetos);
+        return listanueva;
     }
 
     public static void setActivity(Activity activity){

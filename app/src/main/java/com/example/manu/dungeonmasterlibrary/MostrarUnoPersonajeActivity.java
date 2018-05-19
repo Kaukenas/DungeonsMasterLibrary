@@ -182,27 +182,28 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("ARMAS", finalO);
+                bundle.putParcelable("PERSONAJE",getIntent().getExtras().getParcelable("PERSONAJE"));
                 switch (item.getItemId()) {
                     case R.id.combateItem:
                         //setContentView(R.layout.activity_mostrar_uno_personaje);
                         break;
                     case R.id.habilidadesItem:
                         Intent intent = new Intent(MostrarUnoPersonajeActivity.this,MostrarDosPersonajesActivity.class);
-                        intent.putExtras(getIntent().getExtras());
+                        intent.putExtras(bundle);
                         MostrarDosPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
                         startActivity(intent);
                         break;
                     case R.id.equipamientoItem:
                         Intent intentEquipamiento = new Intent(MostrarUnoPersonajeActivity.this,MostrarTresPersonajesActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putParcelable("ARMAS", finalO);
                         intentEquipamiento.putExtras(bundle);
                         MostrarTresPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
                         startActivity(intentEquipamiento);
                         break;
                     case R.id.rasgosItem:
                         Intent intentRas = new Intent(MostrarUnoPersonajeActivity.this,MostrarCuatroPersonajesActivity.class);
-                        intentRas.putExtras(getIntent().getExtras());
+                        intentRas.putExtras(bundle);
                         MostrarCuatroPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
                         startActivity(intentRas);
                         break;

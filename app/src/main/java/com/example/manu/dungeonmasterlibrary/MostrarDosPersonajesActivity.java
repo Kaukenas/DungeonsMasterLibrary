@@ -15,9 +15,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 
 import org.json.JSONException;
+
+import java.util.ArrayList;
 
 public class MostrarDosPersonajesActivity extends AppCompatActivity {
 
@@ -27,7 +30,7 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
     Character personajes;
     static Activity a;
     BottomNavigationView bottomNavigationView;
-
+    ArrayList<Objetos> listaObjetos = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,13 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
             textViewSabiduriA.setText(personajes.getAbilities().get(4).getSabiduria());
             textViewCarismA.setText(personajes.getAbilities().get(5).getCarisma());
 
+        Objetos o = new Objetos();
+        ArrayList<Objetos> objetosArrayList = cargarArmas();
+        for(int i=0; i < objetosArrayList.size(); i++) {
+            o = objetosArrayList.get(i);
+            Toast.makeText(this, "NOMBRE ARMA " + o.getNombreArma(), Toast.LENGTH_SHORT).show();
+        }
+        Objetos finalO = o;
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -72,10 +82,11 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
                     case R.id.habilidadesItem:
                         break;
                     case R.id.equipamientoItem:
-                        Intent intentEqui = new Intent(MostrarDosPersonajesActivity.this,MostrarTresPersonajesActivity.class);
-                        intentEqui.putExtras(getIntent().getExtras());
+                        Intent intentEquipamiento = new Intent(MostrarDosPersonajesActivity.this,MostrarTresPersonajesActivity.class);
+                        Bundle bundle = new Bundle();
+                        intentEquipamiento.putExtras(getIntent().getExtras());
                         MostrarTresPersonajesActivity.setActivity(MostrarDosPersonajesActivity.this);
-                        startActivity(intentEqui);
+                        startActivity(intentEquipamiento);
                         break;
                     case R.id.rasgosItem:
                         Intent intentRas = new Intent(MostrarDosPersonajesActivity.this,MostrarCuatroPersonajesActivity.class);
@@ -160,7 +171,14 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
         return builder.create();
     }
 
+
+
     public static void setActivity(Activity activity){
         MostrarDosPersonajesActivity.a=activity;
+    }
+    public ArrayList<Objetos> cargarArmas(){
+        Objetos objetos = new Objetos("Espada corta",1,6,1,"Arma");
+        listaObjetos.add(objetos);
+        return listaObjetos;
     }
 }

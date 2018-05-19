@@ -7,6 +7,6 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface UploadCharacterRetrofit {
-    @POST("affiliates/login")
+    @POST("CharacterApi/character")
     Call<Character> loadChanges(@Body Character c);
 }

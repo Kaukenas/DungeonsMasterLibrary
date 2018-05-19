@@ -77,8 +77,8 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
         clases.add("barbaro");
 
         List<String> razas = new ArrayList<>();
-        razas.add("elfo");
-        razas.add("enano");
+        razas.add("Elfo");
+        razas.add("Enano");
 
         spinnerClases.setItems(clases);
         spinnerRazas.setItems(razas);
@@ -100,17 +100,19 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                     Razas r = new Razas();
                     Character p = new Character();
 
-                    Toast.makeText(UnoCreacionPersonajesActivity.this, ""+listaclases.size(), Toast.LENGTH_SHORT).show();
                         for (int i=0; i < listaclases.size(); i++){
                             if(listaclases.get(i).getName().equals(UnoCreacionPersonajesActivity.this.spinnerClases.obtenerSeleccion().get(0))){
-                                Toast.makeText(UnoCreacionPersonajesActivity.this, "entrando al if", Toast.LENGTH_SHORT).show();
+
                                 c = listaclases.get(i);
                             }
                         }
 
 
                         for (int i=0; i < listarazas.size(); i++){
+                            Toast.makeText(UnoCreacionPersonajesActivity.this,"lista raza "+listarazas.get(i).getName()+" raza "+UnoCreacionPersonajesActivity.this.spinnerRazas.obtenerSeleccion().get(0), Toast.LENGTH_SHORT).show();
                             if(listarazas.get(i).getName().equals(UnoCreacionPersonajesActivity.this.spinnerRazas.obtenerSeleccion().get(0))){
+
+                                Toast.makeText(UnoCreacionPersonajesActivity.this, "entrando al if", Toast.LENGTH_SHORT).show();
                                 r = listarazas.get(i);
                             }
                         }
@@ -140,7 +142,7 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                         p.setAbilities(attrs);
                         p.setaClass(c);
                         p.setRaza(r);
-                        Toast.makeText(UnoCreacionPersonajesActivity.this, ""+p.getaClass().getHitDice(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UnoCreacionPersonajesActivity.this, ""+p.getRaza().getName(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(UnoCreacionPersonajesActivity.this, DosCreacionPersonajesActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putParcelable("PERSONAJE",p);
@@ -358,7 +360,6 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
             public void onResponse(Call<List<Class>> call, Response<List<Class>> response) {
                 List<Class> c = response.body();
                 for (int i = 0; i <c.size() ; i++) {
-                    Toast.makeText(UnoCreacionPersonajesActivity.this, c.get(i).getName(), Toast.LENGTH_SHORT).show();
                     switch (c.get(i).getId()){
                         case "1":{
                             c.get(i).setFeatures(cargarGuerrero());

@@ -23,9 +23,9 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.example.manu.dungeonmasterlibrary.Adapters.Adapter;
+
 import com.example.manu.dungeonmasterlibrary.Adapters.AdapterPersonajes;
-import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
+//import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CHARACTER.GetCharactersRetrofit;
 import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CHARACTER.UploadCharacterRetrofit;
@@ -51,7 +51,6 @@ public class PersonajesActivity extends AppCompatActivity {
     MenuItem btnAddPersonajes, btnRamon;
     MenuItem btnPersonaje;
     CardView cardViewChar;
-    ArrayList<Personajes> listaPersonajes = new ArrayList<Personajes>();
     ArrayList<Character> listaCharacters = new ArrayList<Character>();
     WebView mWebView;
 
@@ -145,7 +144,15 @@ public class PersonajesActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode==1){
             Bundle bundle = data.getExtras();
             Character personaje = bundle.getParcelable("PERSONAJE");
-            /*String baseurl = "http://thedmlibrary.ddns.net/api/index.php/";
+            Character uppersonaje = new Character();
+            uppersonaje.setSkills(personaje.getSkills());
+            uppersonaje.setName(personaje.getName());
+            uppersonaje.setAbilities(personaje.getAbilities());
+            uppersonaje.setLevel("1");
+            uppersonaje.setClassesId(personaje.getaClass().getId());
+            uppersonaje.setUsersId("1");
+            uppersonaje.setRacesId(personaje.getRaza().getId());
+            String baseurl = "http://thedmlibrary.ddns.net/api/index.php/";
 
             Gson gson = new GsonBuilder()
                     .setLenient()
@@ -158,22 +165,22 @@ public class PersonajesActivity extends AppCompatActivity {
 
             UploadCharacterRetrofit Api = retrofit.create(UploadCharacterRetrofit.class);
 
-            Call <Character> call = Api.loadChanges(personaje);
+            Call <Character> call = Api.loadChanges(uppersonaje);
             call.enqueue(new Callback<Character>() {
                 @Override
                 public void onResponse(Call<Character> call, Response<Character> response) {
                     String characters = response.body().toString();
-                    Log.e("ERROR", characters);
+                    Log.e("string", characters);
                 }
 
                 @Override
                 public void onFailure(Call<Character> call, Throwable t) {
                     StringWriter errors = new StringWriter();
                     t.printStackTrace(new PrintWriter(errors));
-                    Log.e("ERROR",errors.toString());
+                    Log.e("ERROR subir",errors.toString());
                     Toast.makeText(PersonajesActivity.this, errors.toString(), Toast.LENGTH_SHORT).show();
                 }
-            });*/
+            });
             listaCharacters.add(personaje);
             contenedor.setAdapter(new AdapterPersonajes(listaCharacters, PersonajesActivity.this));
             contenedor.setHasFixedSize(true);

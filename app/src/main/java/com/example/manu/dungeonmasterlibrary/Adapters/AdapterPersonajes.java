@@ -60,9 +60,9 @@ public class AdapterPersonajes extends RecyclerView.Adapter<viewHolder> {
                 context.startActivity(intent);
             }
         });
-        byte[] decodedString = Base64.decode(listaPersonajes.get(position).getPhoto(), Base64.DEFAULT);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        holder.imgCardView.setImageBitmap(decodedByte);
+        //byte[] decodedString = Base64.decode(listaPersonajes.get(position).getPhoto(), Base64.DEFAULT);
+        //Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        holder.imgCardView.setImageResource(R.drawable.barbaro);
         holder.txtTituloCardView.setText(listaPersonajes.get(position).getName());
 
     }

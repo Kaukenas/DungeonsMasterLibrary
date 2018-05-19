@@ -25,7 +25,7 @@ public class Razas implements Parcelable
     private String description;
     @SerializedName("abilityScores")
     @Expose
-    private List<AbilityScore> abilityScores = null;
+    private List<AbilityScore> abilityScores = new ArrayList<>();
     @SerializedName("speed")
     @Expose
     private String speed;
@@ -34,7 +34,7 @@ public class Razas implements Parcelable
     private String size;
     @SerializedName("traits")
     @Expose
-    private List<Trait> traits = null;
+    private List<Trait> traits = new ArrayList<>();
 
     ////////////////////////////////////////
 
@@ -63,10 +63,10 @@ public class Razas implements Parcelable
         this.id = ((String) in.readValue((String.class.getClassLoader())));
         this.name = ((String) in.readValue((String.class.getClassLoader())));
         this.description = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.abilityScores, (com.example.manu.dungeonmasterlibrary.POJOS2.AbilityScore.class.getClassLoader()));
+        in.readTypedList(this.abilityScores, AbilityScore.CREATOR);
         this.speed = ((String) in.readValue((String.class.getClassLoader())));
         this.size = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.traits, (com.example.manu.dungeonmasterlibrary.POJOS2.Trait.class.getClassLoader()));
+        in.readTypedList(this.traits, Trait.CREATOR);
     }
 
     /**
@@ -183,10 +183,10 @@ public class Razas implements Parcelable
         dest.writeValue(id);
         dest.writeValue(name);
         dest.writeValue(description);
-        dest.writeList(abilityScores);
+        dest.writeTypedList(abilityScores);
         dest.writeValue(speed);
         dest.writeValue(size);
-        dest.writeList(traits);
+        dest.writeTypedList(traits);
     }
 
     public int describeContents() {

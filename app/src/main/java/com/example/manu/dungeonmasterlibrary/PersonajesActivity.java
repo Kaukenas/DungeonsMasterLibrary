@@ -24,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.Adapters.Adapter;
+import com.example.manu.dungeonmasterlibrary.Adapters.AdapterPersonajes;
 import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CHARACTER.GetCharactersRetrofit;
@@ -164,7 +165,7 @@ public class PersonajesActivity extends AppCompatActivity {
                     for (int i = 0; i <characters.size() ; i++) {
                         listaCharacters.add(characters.get(i));
                     }
-                    contenedor.setAdapter(new Adapter(listaCharacters, PersonajesActivity.this));
+                    contenedor.setAdapter(new AdapterPersonajes(listaCharacters, PersonajesActivity.this));
                     contenedor.setHasFixedSize(true);
                 }
 
@@ -177,7 +178,7 @@ public class PersonajesActivity extends AppCompatActivity {
                 }
             });
             listaCharacters.add(personaje);
-            contenedor.setAdapter(new Adapter(listaCharacters, PersonajesActivity.this));
+            contenedor.setAdapter(new AdapterPersonajes(listaCharacters, PersonajesActivity.this));
             contenedor.setHasFixedSize(true);
             LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

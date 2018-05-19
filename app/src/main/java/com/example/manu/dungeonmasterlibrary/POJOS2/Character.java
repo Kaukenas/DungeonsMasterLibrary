@@ -43,6 +43,7 @@ public class Character implements Parcelable
     private int vida;
     private int CA;
     private int DAMAGE;
+    private String Alineamiento;
 
 ////////////////////////////
 
@@ -226,6 +227,14 @@ public class Character implements Parcelable
 
     public void setDAMAGE(int DAMAGE) {
         this.DAMAGE = DAMAGE;
+    }
+
+    public String getAlineamiento() {
+        return Alineamiento;
+    }
+
+    public void setAlineamiento(String alineamiento) {
+        Alineamiento = alineamiento;
     }
 
     ////////////////////////////////////////////////////////////////////

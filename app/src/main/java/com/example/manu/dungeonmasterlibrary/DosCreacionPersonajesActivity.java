@@ -9,7 +9,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Class;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Skill;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +24,7 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
 
     MultiSelectionSpinner spinner, spinner2;
     Button btnCancelDos, btnNextDos;
-    Personajes personajes;
+    Character personajes;
     EditText txtNombrePersonaje;
     TextView txtTituloElegirHabilidades;
 
@@ -39,18 +41,17 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
 
 
 
-        /*personajes = getIntent().getExtras().getParcelable("PERSONAJE");
-        Toast.makeText(this, "personaje = "+personajes.getClases().getNombre(), Toast.LENGTH_LONG).show();
-        JSONObject habilidades = personajes.getClases().getHabilidadesEscoger();
-        Iterator<String> iterator =habilidades.keys();
-        while(iterator.hasNext()){
-            list.add(iterator.next());
+        personajes = getIntent().getExtras().getParcelable("PERSONAJE");
+        Toast.makeText(this, "personaje = "+personajes.getaClass().getName(), Toast.LENGTH_LONG).show();
+        List<Skill> habilidades = personajes.getaClass().getSkills();
+        for (int i = 0; i <habilidades.size() ; i++) {
+            list.add(habilidades.get(i).getHabilidad());
         }
 
-        txtTituloElegirHabilidades.setText("Elegir " + personajes.getClases().getNumHabilidades() + " de las Siguientes Habilidades");
+        txtTituloElegirHabilidades.setText("Elegir " + personajes.getaClass().getNumOfSkills() + " de las Siguientes Habilidades");
 
         spinner = findViewById(R.id.input1);
-        spinner.setMax(personajes.getClases().getNumHabilidades());
+        spinner.setMax(Integer.parseInt(personajes.getaClass().getNumOfSkills()));
         spinner2 = findViewById(R.id.input2);
         spinner2.setMax(1);
         spinner.setItems(list);
@@ -72,22 +73,19 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //startActivity(new Intent(DosCreacionPersonajesActivity.this, PersonajesActivity.class));
-                Personajes p = personajes;
+                Character p = personajes;
                 ArrayList<String> habilidades =spinner.obtenerSeleccion();
-                JSONObject hab = new JSONObject();
-                try {
-                    for(int i = 0; i<habilidades.size();i++){
-                        hab.put(habilidades.get(i),0);
-                    }
-                }catch (JSONException e) {
-                    e.printStackTrace();
+                ArrayList<Skill> hab = new ArrayList<>();
+                for(int i = 0; i<habilidades.size();i++){
+                        hab.add(new Skill(habilidades.get(i)));
                 }
 
-                p.setHabilidades(hab);
-                p.setNombre(txtNombrePersonaje.getText().toString());
+
+                p.setSkills(hab);
+                p.setName(txtNombrePersonaje.getText().toString());
                 p.setAlineamiento(spinner2.obtenerSeleccion().get(0));
-                Toast.makeText(DosCreacionPersonajesActivity.this, p.getNombre().toString(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(DosCreacionPersonajesActivity.this, "ATTTTTTRRS " + personajes.getAtributos() , Toast.LENGTH_SHORT).show();
+                Toast.makeText(DosCreacionPersonajesActivity.this, p.getName().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(DosCreacionPersonajesActivity.this, "ATTTTTTRRS " + personajes.getAbilities() , Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(DosCreacionPersonajesActivity.this, TresCreacionPersonajesActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("PERSONAJE",p);
@@ -107,7 +105,7 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
                 finish();
             }
         });
-        */
+        
     }
 
 }

@@ -31,7 +31,7 @@ public class Class implements Parcelable
     private List<SavingThrow> savingThrows = null;
     @SerializedName("skills")
     @Expose
-    private List<Skill> skills = null;
+    private List<Skill> skills = new ArrayList<>();
     @SerializedName("numOfSkills")
     @Expose
     private String numOfSkills;

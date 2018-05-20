@@ -36,10 +36,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.Adapters.AdapterPersonajes;
+import com.example.manu.dungeonmasterlibrary.POJOS.Features;
 import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
+import com.example.manu.dungeonmasterlibrary.POJOS.Traits;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Class;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Razas;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Skill;
 import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CHARACTER.GetCharactersRetrofit;
 import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CLASSES.GetClassesRetrofit;
 import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.RACES.GetRaceRetrofit;
@@ -389,6 +392,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             List<Razas> listarazas= new ArrayList<>();
             try {
                 listarazas = razasCall.execute().body();
+                for (int i = 0; i <listarazas.size() ; i++) {
+                    switch (listarazas.get(i).getId()){
+                        case "1":{
+                            listarazas.get(i).setTraitsArrayList(cargarEnano());
+                            break;
+                        }
+                        case "2":{
+                            listarazas.get(i).setTraitsArrayList(cargarElfo());
+                            break;
+                        }
+                    }
+                    razas.add(listarazas.get(i));
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -402,13 +419,35 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             List<Class> listaclases= new ArrayList<>();
             try {
                 listaclases = clasesCall.execute().body();
+                for (int i = 0; i <listaclases.size() ; i++) {
+                    switch (listaclases.get(i).getId()){
+                        case "1":{
+                            listaclases.get(i).setFeatures(cargarGuerrero());
+                            break;
+                        }
+                        case "2":{
+                            listaclases.get(i).setFeatures(cargarMonje());
+                            break;
+                        }
+                        case "3":{
+                            listaclases.get(i).setFeatures(cargarPicaro());
+                            break;
+                        }
+                        case "4":{
+                            listaclases.get(i).setFeatures(cargarBarbaro());
+                            break;
+                        }
+                    }
+                    clases.add(listaclases.get(i));
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             for (int i = 0; i <listaCharacters.size() ; i++) {
-                listaCharacters.get(i).setaClass(listaclases.get((Integer.parseInt(listaCharacters.get(i).getClassesId()))-1));
-                listaCharacters.get(i).setRaza(listarazas.get((Integer.parseInt(listaCharacters.get(i).getRacesId()))-1));
+                listaCharacters.get(i).setaClass(clases.get((Integer.parseInt(listaCharacters.get(i).getClassesId()))-1));
+                listaCharacters.get(i).setRaza(razas.get((Integer.parseInt(listaCharacters.get(i).getRacesId()))-1));
             }
 
 
@@ -437,6 +476,385 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+    }
+
+    public ArrayList<Traits> cargarEnano(){
+        ArrayList<Traits> listaTraits = new ArrayList<>();
+        Traits t = new Traits("aguante enano", "ventaja en tiradas de salvacion contra veneno") {
+            @Override
+            public void accion() {
+                super.accion();
+                int numero = (int) (Math.random() * 1) + 19;
+                int numero2 = (int) (Math.random() * 1) +19;
+                int resultado = 0;
+                if (numero > numero2){
+                    resultado = numero;
+                } else {
+                    resultado = numero2;
+                }
+                Toast.makeText(getApplicationContext(), "Tu tirada es de: " + resultado, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaTraits.add(t);
+        t = new Traits("entrenamiento de combate", "Tienes competencia con hacha de batalla, hacha, martillo ligero y martillo de guerra") {};
+        listaTraits.add(t);
+        t = new Traits("oompetencia con herramientas", "ganas competencia con una de las siguientes herramientas: de herrero, de cervecero, de masoneria") {};
+        listaTraits.add(t);
+        t = new Traits("afinidad con la piedra", "Siempre que hagas una tirada con trabajos relacionados en piedra tines ventsja") {
+            @Override
+            public void accion() {
+                super.accion();
+                int numero = (int) (Math.random() * 1) + 19;
+                int numero2 = (int) (Math.random() * 1) +19;
+                int resultado = 0;
+                if (numero > numero2){
+                    resultado = numero;
+                } else {
+                    resultado = numero2;
+                }
+                Toast.makeText(getApplicationContext(), "Tu tirada es de: " + resultado, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaTraits.add(t);
+        t = new Traits("vision en la oscuridad", "Ves a 60 pies en la oscuridad") {
+            @Override
+            public void accion() {
+                super.accion();
+                int numero = (int) (Math.random() * 1) + 19;
+                int numero2 = (int) (Math.random() * 1) +19;
+                int resultado = 0;
+                if (numero > numero2){
+                    resultado = numero;
+                } else {
+                    resultado = numero2;
+                }
+                Toast.makeText(getApplicationContext(), "Tu tirada es de: " + resultado, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaTraits.add(t);
+        return listaTraits;
+    }
+
+    public ArrayList<Traits> cargarElfo(){
+        ArrayList<Traits> listaTraits = new ArrayList<>();
+        Traits t = new Traits("sentidos agudos", "eres competente con la habilidad percepcion") {
+            public void accion(Character p) {
+                super.accion();
+                List<Skill> h = p.getSkills();
+                h.add(new Skill("percepcion"));
+                p.setSkills(h);
+            }
+        };
+        listaTraits.add(t);
+        t = new Traits("origen feerico", "Ventaja en tiradas de dormir") {
+            public void accion() {
+                super.accion();
+                int numero = (int) (Math.random() * 1) + 19;
+                int numero2 = (int) (Math.random() * 1) +19;
+                int resultado = 0;
+                if (numero > numero2){
+                    resultado = numero;
+                } else {
+                    resultado = numero2;
+                }
+                Toast.makeText(getApplicationContext(), "Tu tirada es de: " + resultado, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaTraits.add(t);
+        t = new Traits("trance", "no necesitas dormir, solo meditar 4 horas") {};
+        listaTraits.add(t);
+        t = new Traits("vision en la oscuridad", "Ves a 60 pies en la oscuridad") {
+            @Override
+            public void accion() {
+                super.accion();
+                int numero = (int) (Math.random() * 1) + 19;
+                int numero2 = (int) (Math.random() * 1) +19;
+                int resultado = 0;
+                if (numero > numero2){
+                    resultado = numero;
+                } else {
+                    resultado = numero2;
+                }
+                Toast.makeText(getApplicationContext(), "Tu tirada es de: " + resultado, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaTraits.add(t);
+        return listaTraits;
+    }
+    public ArrayList<Features> cargarGuerrero() {
+        ArrayList<Features> listaFeatures = new ArrayList<>();
+        Features f = new Features("Estilo de combate","Descripcion de Estilo de Combate",false,"CA",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Nuevas Energias","Descripcion de Nuevas Energias",true,"HEAL",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setVida(p.getVida()+5);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Oleada de Accion", "Descripcion de Oleada de Accion", true, "NULL",2) {
+            @Override
+            public void accion() {
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Arquetipo Marcial", "Descripcion de Arquetipo Marcial", false, "DAMAGE",3) {
+            public void accion(Character p) {
+                super.accion();
+                p.setDAMAGE(p.getDAMAGE()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",4){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 4, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Ataque Extra", "Descripcion de Ataque Extra", true, "NULL",5){
+            public void accion(){
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",6){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 6, Toast.LENGTH_SHORT).show();
+
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Estilo Combate 2", "Descripcion de Estilo Combate 2", false, "CA",7){
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+2);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",8){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 8, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+
+        return listaFeatures;
+    }
+
+    public ArrayList<Features> cargarMonje() {
+        ArrayList<Features> listaFeatures = new ArrayList<>();
+        Features f = new Features("Estilo de combate","Descripcion de Estilo de Combate",false,"CA",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Nuevas Energias","Descripcion de Nuevas Energias",true,"HEAL",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setVida(p.getVida()+5);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Oleada de Accion", "Descripcion de Oleada de Accion", true, "NULL",2) {
+            @Override
+            public void accion() {
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Arquetipo Marcial", "Descripcion de Arquetipo Marcial", false, "DAMAGE",3) {
+            public void accion(Character p) {
+                super.accion();
+                p.setDAMAGE(p.getDAMAGE()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",4){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 4, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Ataque Extra", "Descripcion de Ataque Extra", true, "NULL",5){
+            public void accion(){
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",6){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 6, Toast.LENGTH_SHORT).show();
+
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Estilo Combate 2", "Descripcion de Estilo Combate 2", false, "CA",7){
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+2);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",8){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 8, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+
+        return listaFeatures;
+    }
+
+    public ArrayList<Features> cargarPicaro() {
+        ArrayList<Features> listaFeatures = new ArrayList<>();
+        Features f = new Features("Estilo de combate","Descripcion de Estilo de Combate",false,"CA",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Nuevas Energias","Descripcion de Nuevas Energias",true,"HEAL",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setVida(p.getVida()+5);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Oleada de Accion", "Descripcion de Oleada de Accion", true, "NULL",2) {
+            @Override
+            public void accion() {
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Arquetipo Marcial", "Descripcion de Arquetipo Marcial", false, "DAMAGE",3) {
+            public void accion(Character p) {
+                super.accion();
+                p.setDAMAGE(p.getDAMAGE()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",4){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 4, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Ataque Extra", "Descripcion de Ataque Extra", true, "NULL",5){
+            public void accion(){
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",6){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 6, Toast.LENGTH_SHORT).show();
+
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Estilo Combate 2", "Descripcion de Estilo Combate 2", false, "CA",7){
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+2);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",8){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 8, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+
+        return listaFeatures;
+    }
+
+    public ArrayList<Features> cargarBarbaro() {
+        ArrayList<Features> listaFeatures = new ArrayList<>();
+        Features f = new Features("Estilo de combate","Descripcion de Estilo de Combate",false,"CA",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Nuevas Energias","Descripcion de Nuevas Energias",true,"HEAL",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setVida(p.getVida()+5);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Oleada de Accion", "Descripcion de Oleada de Accion", true, "NULL",2) {
+            @Override
+            public void accion() {
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Arquetipo Marcial", "Descripcion de Arquetipo Marcial", false, "DAMAGE",3) {
+            public void accion(Character p) {
+                super.accion();
+                p.setDAMAGE(p.getDAMAGE()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",4){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 4, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Ataque Extra", "Descripcion de Ataque Extra", true, "NULL",5){
+            public void accion(){
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",6){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 6, Toast.LENGTH_SHORT).show();
+
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Estilo Combate 2", "Descripcion de Estilo Combate 2", false, "CA",7){
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+2);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",8){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 8, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+
+        return listaFeatures;
     }
 }
 

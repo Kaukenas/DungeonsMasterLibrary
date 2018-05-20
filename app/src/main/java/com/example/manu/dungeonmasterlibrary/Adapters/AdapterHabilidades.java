@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Skill;
 import com.example.manu.dungeonmasterlibrary.R;
 import com.example.manu.dungeonmasterlibrary.viewHolderHabilidades;
 import com.example.manu.dungeonmasterlibrary.viewHolderMochila;
@@ -24,13 +25,13 @@ import java.util.List;
 
 public class AdapterHabilidades extends RecyclerView.Adapter<viewHolderHabilidades> {
 
-    List<Character> listaPersonajes;
+    List<Skill> listaPersonajes;
     List<Objetos> listaObjetos;
     Context context;
     LayoutInflater inflater;
     TextView txtResultadoTirada;
 
-    public AdapterHabilidades(List<Character> listaPersonajes, Context context, LayoutInflater inflater) {
+    public AdapterHabilidades(List<Skill> listaPersonajes, Context context, LayoutInflater inflater) {
         this.listaPersonajes = listaPersonajes;
         this.context=context;
         this.inflater = inflater;
@@ -44,11 +45,11 @@ public class AdapterHabilidades extends RecyclerView.Adapter<viewHolderHabilidad
 
     @Override
     public void onBindViewHolder(viewHolderHabilidades holder, int position) {
-        holder.txtItemHab.setText((CharSequence) listaPersonajes.get(position).getAbilities());
+        holder.txtItemHab.setText((CharSequence) listaPersonajes.get(position).getHabilidad());
         holder.btnDadosHab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Dialog dialog = MyCustomAlertDialog(listaObjetos.get(position).getCaras());
+                Dialog dialog = MyCustomAlertDialog(20);
                 dialog.show();
             }
         });

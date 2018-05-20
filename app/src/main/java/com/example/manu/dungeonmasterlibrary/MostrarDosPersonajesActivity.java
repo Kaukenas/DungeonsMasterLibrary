@@ -21,10 +21,12 @@ import com.example.manu.dungeonmasterlibrary.Adapters.AdapterAtaques;
 import com.example.manu.dungeonmasterlibrary.Adapters.AdapterHabilidades;
 import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Skill;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MostrarDosPersonajesActivity extends AppCompatActivity {
 
@@ -35,7 +37,7 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
     static Activity a;
     BottomNavigationView bottomNavigationView;
     ArrayList<Objetos> listaObjetos = new ArrayList<>();
-    ArrayList<Character> listaPersonajes = new ArrayList<>();
+    List<Skill> listaPersonajes = new ArrayList<>();
     RecyclerView recyclerHabilidades;
 
     @Override
@@ -58,11 +60,7 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         recyclerHabilidades = findViewById(R.id.recyclerHabilidades);
 
-        recyclerHabilidades.setAdapter(new AdapterHabilidades(listaPersonajes,MostrarDosPersonajesActivity.this, this.getLayoutInflater()));
-        recyclerHabilidades.setHasFixedSize(true);
-        LinearLayoutManager layoutManagerr = new LinearLayoutManager(getApplicationContext());
-        layoutManagerr.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerHabilidades.setLayoutManager(layoutManagerr);
+
 
         bottomNavigationView.setSelectedItemId(R.id.habilidadesItem);
 
@@ -75,14 +73,7 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
             textViewInteligenciA.setText(personajes.getAbilities().get(3).getInteligencia());
             textViewSabiduriA.setText(personajes.getAbilities().get(4).getSabiduria());
             textViewCarismA.setText(personajes.getAbilities().get(5).getCarisma());
-
-        Objetos o = new Objetos();
-        ArrayList<Objetos> objetosArrayList = cargarArmas();
-        for(int i=0; i < objetosArrayList.size(); i++) {
-            o = objetosArrayList.get(i);
-            Toast.makeText(this, "NOMBRE ARMA " + o.getNombreArma(), Toast.LENGTH_SHORT).show();
-        }
-        Objetos finalO = o;
+        listaPersonajes = personajes.getSkills();
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -160,6 +151,12 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
             }
         });
 
+        recyclerHabilidades.setAdapter(new AdapterHabilidades(listaPersonajes,MostrarDosPersonajesActivity.this, this.getLayoutInflater()));
+        recyclerHabilidades.setHasFixedSize(true);
+        LinearLayoutManager layoutManagerr = new LinearLayoutManager(getApplicationContext());
+        layoutManagerr.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerHabilidades.setLayoutManager(layoutManagerr);
+
     }
 
     public int tirarDado(int rango) {
@@ -190,9 +187,5 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
     public static void setActivity(Activity activity){
         MostrarDosPersonajesActivity.a=activity;
     }
-    public ArrayList<Objetos> cargarArmas(){
-        Objetos objetos = new Objetos("Espada corta",1,6,1,"Arma");
-        listaObjetos.add(objetos);
-        return listaObjetos;
-    }
+
 }

@@ -71,18 +71,313 @@ public class MostrarCuatroPersonajesActivity extends AppCompatActivity {
             }
         });
 
+        switch (personaje.getaClass().getId()){
+            case "1":{
+                personaje.getaClass().setFeatures(cargarGuerrero());
+                break;
+            }
+            case "2":{
+                personaje.getaClass().setFeatures(cargarMonje());
+                break;
+            }
+            case "3":{
+                personaje.getaClass().setFeatures(cargarPicaro());
+                break;
+            }
+            case "4":{
+                personaje.getaClass().setFeatures(cargarBarbaro());
+                break;
+            }
+        }
+
         listaRasgos = personaje.getaClass().getFeatures();
 
-        Toast.makeText(this, "RASGOS " + personaje.getaClass(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "RASGOS " + personaje.getaClass().getFeatures().get(0).getNombre(), Toast.LENGTH_SHORT).show();
 
-        /*recyclerRasgos.setAdapter(new AdapterRasgos(listaRasgos,MostrarCuatroPersonajesActivity.this, this.getLayoutInflater()));
+        recyclerRasgos.setAdapter(new AdapterRasgos(listaRasgos,MostrarCuatroPersonajesActivity.this, this.getLayoutInflater()));
         recyclerRasgos.setHasFixedSize(true);
         LinearLayoutManager layoutManagerr = new LinearLayoutManager(getApplicationContext());
         layoutManagerr.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerRasgos.setLayoutManager(layoutManagerr);*/
+        recyclerRasgos.setLayoutManager(layoutManagerr);
 
     }
     public static void setActivity(Activity activity){
         MostrarCuatroPersonajesActivity.c=activity;
+    }
+
+    public ArrayList<Features> cargarGuerrero() {
+        ArrayList<Features> listaFeatures = new ArrayList<>();
+        Features f = new Features("Estilo de combate","Descripcion de Estilo de Combate",false,"CA",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Nuevas Energias","Descripcion de Nuevas Energias",true,"HEAL",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setVida(p.getVida()+5);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Oleada de Accion", "Descripcion de Oleada de Accion", true, "NULL",2) {
+            @Override
+            public void accion() {
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Arquetipo Marcial", "Descripcion de Arquetipo Marcial", false, "DAMAGE",3) {
+            public void accion(Character p) {
+                super.accion();
+                p.setDAMAGE(p.getDAMAGE()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",4){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 4, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Ataque Extra", "Descripcion de Ataque Extra", true, "NULL",5){
+            public void accion(){
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",6){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 6, Toast.LENGTH_SHORT).show();
+
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Estilo Combate 2", "Descripcion de Estilo Combate 2", false, "CA",7){
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+2);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",8){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 8, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+
+        return listaFeatures;
+    }
+
+    public ArrayList<Features> cargarMonje() {
+        ArrayList<Features> listaFeatures = new ArrayList<>();
+        Features f = new Features("Estilo de combate","Descripcion de Estilo de Combate",false,"CA",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Nuevas Energias","Descripcion de Nuevas Energias",true,"HEAL",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setVida(p.getVida()+5);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Oleada de Accion", "Descripcion de Oleada de Accion", true, "NULL",2) {
+            @Override
+            public void accion() {
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Arquetipo Marcial", "Descripcion de Arquetipo Marcial", false, "DAMAGE",3) {
+            public void accion(Character p) {
+                super.accion();
+                p.setDAMAGE(p.getDAMAGE()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",4){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 4, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Ataque Extra", "Descripcion de Ataque Extra", true, "NULL",5){
+            public void accion(){
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",6){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 6, Toast.LENGTH_SHORT).show();
+
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Estilo Combate 2", "Descripcion de Estilo Combate 2", false, "CA",7){
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+2);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",8){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 8, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+
+        return listaFeatures;
+    }
+
+    public ArrayList<Features> cargarPicaro() {
+        ArrayList<Features> listaFeatures = new ArrayList<>();
+        Features f = new Features("Estilo de combate","Descripcion de Estilo de Combate",false,"CA",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Nuevas Energias","Descripcion de Nuevas Energias",true,"HEAL",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setVida(p.getVida()+5);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Oleada de Accion", "Descripcion de Oleada de Accion", true, "NULL",2) {
+            @Override
+            public void accion() {
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Arquetipo Marcial", "Descripcion de Arquetipo Marcial", false, "DAMAGE",3) {
+            public void accion(Character p) {
+                super.accion();
+                p.setDAMAGE(p.getDAMAGE()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",4){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 4, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Ataque Extra", "Descripcion de Ataque Extra", true, "NULL",5){
+            public void accion(){
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",6){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 6, Toast.LENGTH_SHORT).show();
+
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Estilo Combate 2", "Descripcion de Estilo Combate 2", false, "CA",7){
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+2);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",8){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 8, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+
+        return listaFeatures;
+    }
+
+    public ArrayList<Features> cargarBarbaro() {
+        ArrayList<Features> listaFeatures = new ArrayList<>();
+        Features f = new Features("Estilo de combate","Descripcion de Estilo de Combate",false,"CA",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Nuevas Energias","Descripcion de Nuevas Energias",true,"HEAL",1) {
+            public void accion(Character p) {
+                super.accion();
+                p.setVida(p.getVida()+5);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Oleada de Accion", "Descripcion de Oleada de Accion", true, "NULL",2) {
+            @Override
+            public void accion() {
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features("Arquetipo Marcial", "Descripcion de Arquetipo Marcial", false, "DAMAGE",3) {
+            public void accion(Character p) {
+                super.accion();
+                p.setDAMAGE(p.getDAMAGE()+1);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",4){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 4, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Ataque Extra", "Descripcion de Ataque Extra", true, "NULL",5){
+            public void accion(){
+                super.accion();
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",6){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 6, Toast.LENGTH_SHORT).show();
+
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Estilo Combate 2", "Descripcion de Estilo Combate 2", false, "CA",7){
+            public void accion(Character p) {
+                super.accion();
+                p.setCA(p.getCA()+2);
+            }
+        };
+        listaFeatures.add(f);
+        f = new Features ("Mejora Caracteristica", "Descripcion de Mejora Caracteristica", true, "NULL",8){
+            public void accion(){
+                super.accion();
+                Toast.makeText(getApplicationContext(), "Mejora Caracteristica" + 8, Toast.LENGTH_SHORT).show();
+            }
+        };
+        listaFeatures.add(f);
+
+        return listaFeatures;
     }
 }

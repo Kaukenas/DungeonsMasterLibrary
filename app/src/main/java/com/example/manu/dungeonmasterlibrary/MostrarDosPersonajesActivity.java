@@ -8,6 +8,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +17,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.manu.dungeonmasterlibrary.Adapters.AdapterAtaques;
+import com.example.manu.dungeonmasterlibrary.Adapters.AdapterHabilidades;
 import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 
@@ -31,6 +35,9 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
     static Activity a;
     BottomNavigationView bottomNavigationView;
     ArrayList<Objetos> listaObjetos = new ArrayList<>();
+    ArrayList<Character> listaPersonajes = new ArrayList<>();
+    RecyclerView recyclerHabilidades;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +56,13 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
         textViewConstitucioN = findViewById(R.id.txtCoNstitucion);
         textViewCarismA = findViewById(R.id.txtCaRisma);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        recyclerHabilidades = findViewById(R.id.recyclerHabilidades);
+
+        recyclerHabilidades.setAdapter(new AdapterHabilidades(listaPersonajes,MostrarDosPersonajesActivity.this, this.getLayoutInflater()));
+        recyclerHabilidades.setHasFixedSize(true);
+        LinearLayoutManager layoutManagerr = new LinearLayoutManager(getApplicationContext());
+        layoutManagerr.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerHabilidades.setLayoutManager(layoutManagerr);
 
         bottomNavigationView.setSelectedItemId(R.id.habilidadesItem);
 

@@ -21,7 +21,9 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,9 +33,31 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.manu.dungeonmasterlibrary.Adapters.AdapterPersonajes;
+import com.example.manu.dungeonmasterlibrary.POJOS.Personajes;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Class;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Razas;
+import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CHARACTER.GetCharactersRetrofit;
+import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.CLASSES.GetClassesRetrofit;
+import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.RACES.GetRaceRetrofit;
+import com.example.manu.dungeonmasterlibrary.RETROFIT.INTERFACES.RACES.GetRacesRetrofit;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -66,6 +90,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mLoginFormView;
 
     TextView txtDungeons, txtMasters, txtLibrary;
+    private ArrayList<Character> listaCharacters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -328,6 +353,67 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     return pieces[1].equals(mPassword);
                 }
             }
+            String baseurl = "http://thedmlibrary.ddns.net/api/index.php/";
+            ArrayList<Razas> razas = new ArrayList<>();
+            ArrayList<Class> clases = new ArrayList<>();
+            listaCharacters = new ArrayList<>();
+                Gson gson = new GsonBuilder()
+                        .setLenient()
+                        .create();
+
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(baseurl)
+                        .addConverterFactory(GsonConverterFactory.create(gson))
+                        .build();
+
+                GetCharactersRetrofit Api = retrofit.create(GetCharactersRetrofit.class);
+
+                Call<List<Character>> call = Api.loadChanges();
+            List<Character> characters = new ArrayList<>();
+
+            try {
+                characters=call.execute().body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            for (int i = 0; i < characters.size(); i++) {
+                listaCharacters.add(characters.get(i));
+            }
+
+            Retrofit retrofitrazas = new Retrofit.Builder()
+                    .baseUrl(baseurl)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+            GetRacesRetrofit Apirazas = retrofitrazas.create(GetRacesRetrofit.class);
+            Call <List<Razas>> razasCall = Apirazas.loadChanges();
+            List<Razas> listarazas= new ArrayList<>();
+            try {
+                listarazas = razasCall.execute().body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            Retrofit retrofitclases = new Retrofit.Builder()
+                    .baseUrl(baseurl)
+                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .build();
+            GetClassesRetrofit Apiclases = retrofitclases.create(GetClassesRetrofit.class);
+            Call <List<Class>> clasesCall = Apiclases.loadChanges();
+            List<Class> listaclases= new ArrayList<>();
+            try {
+                listaclases = clasesCall.execute().body();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            for (int i = 0; i <listaCharacters.size() ; i++) {
+                listaCharacters.get(i).setaClass(listaclases.get((Integer.parseInt(listaCharacters.get(i).getClassesId()))-1));
+                listaCharacters.get(i).setRaza(listarazas.get((Integer.parseInt(listaCharacters.get(i).getRacesId()))-1));
+            }
+
+
+                PersonajesActivity.setListaCharacter(listaCharacters);
+
 
             // TODO: register the new account here.
             return true;

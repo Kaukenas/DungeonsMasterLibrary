@@ -51,7 +51,7 @@ public class PersonajesActivity extends AppCompatActivity {
     MenuItem btnAddPersonajes, btnRamon;
     MenuItem btnPersonaje;
     CardView cardViewChar;
-    ArrayList<Character> listaCharacters = new ArrayList<Character>();
+    static ArrayList<Character> listaCharacters = new ArrayList<Character>();
     WebView mWebView;
 
     @Override
@@ -249,7 +249,7 @@ public class PersonajesActivity extends AppCompatActivity {
     }
 
     public void cargarPersonajes(){
-        String baseurl = "http://thedmlibrary.ddns.net/api/index.php/";
+       /* String baseurl = "http://thedmlibrary.ddns.net/api/index.php/";
 
         Gson gson = new GsonBuilder()
                 .setLenient()
@@ -271,8 +271,7 @@ public class PersonajesActivity extends AppCompatActivity {
                 for (int i = 0; i <characters.size() ; i++) {
                     listaCharacters.add(characters.get(i));
                 }
-                contenedor.setAdapter(new AdapterPersonajes(listaCharacters, PersonajesActivity.this));
-                contenedor.setHasFixedSize(true);
+
             }
 
             @Override
@@ -282,11 +281,17 @@ public class PersonajesActivity extends AppCompatActivity {
                 Log.e("ERROR",errors.toString());
                 Toast.makeText(PersonajesActivity.this, errors.toString(), Toast.LENGTH_SHORT).show();
             }
-        });
-
+        });*/
+        contenedor.setAdapter(new AdapterPersonajes(listaCharacters, PersonajesActivity.this));
+        contenedor.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         contenedor.setLayoutManager(layoutManager);
 
     }
+
+    public static void setListaCharacter(ArrayList<Character> list){
+        listaCharacters=list;
+    }
 }
+

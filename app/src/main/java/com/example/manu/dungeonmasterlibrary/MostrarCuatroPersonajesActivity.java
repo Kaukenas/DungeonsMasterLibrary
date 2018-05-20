@@ -17,7 +17,7 @@ public class MostrarCuatroPersonajesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_cuatro_personajes);
-
+        c.finish();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.rasgosItem);
 

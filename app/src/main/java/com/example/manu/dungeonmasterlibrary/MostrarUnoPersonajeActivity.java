@@ -47,7 +47,9 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mostrar_uno_personaje);
-
+        if(MA!=null){
+            MA.finish();
+        }
         pbVida= findViewById(R.id.pbVida);
         imageButton51 = findViewById(R.id.imageButton51);
         imageButton52 = findViewById(R.id.imageButton52);

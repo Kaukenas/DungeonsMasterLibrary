@@ -6,21 +6,41 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.example.manu.dungeonmasterlibrary.Adapters.AdapterHabilidades;
+import com.example.manu.dungeonmasterlibrary.Adapters.AdapterRasgos;
+import com.example.manu.dungeonmasterlibrary.POJOS.Features;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Skill;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Trait;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MostrarCuatroPersonajesActivity extends AppCompatActivity {
 
     static Activity c;
     BottomNavigationView bottomNavigationView;
+    RecyclerView recyclerRasgos;
+    List<Features> listaRasgos = new ArrayList<>();
+    Character personaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        recyclerRasgos = findViewById(R.id.recyclerRasgos);
+
+        personaje = getIntent().getExtras().getParcelable("PERSONAJE");
+
         setContentView(R.layout.activity_mostrar_cuatro_personajes);
         c.finish();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.rasgosItem);
-
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -50,6 +70,16 @@ public class MostrarCuatroPersonajesActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        listaRasgos = personaje.getaClass().getFeatures();
+
+        Toast.makeText(this, "RASGOS " + personaje.getaClass(), Toast.LENGTH_SHORT).show();
+
+        /*recyclerRasgos.setAdapter(new AdapterRasgos(listaRasgos,MostrarCuatroPersonajesActivity.this, this.getLayoutInflater()));
+        recyclerRasgos.setHasFixedSize(true);
+        LinearLayoutManager layoutManagerr = new LinearLayoutManager(getApplicationContext());
+        layoutManagerr.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerRasgos.setLayoutManager(layoutManagerr);*/
 
     }
     public static void setActivity(Activity activity){

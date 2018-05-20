@@ -17,7 +17,7 @@ public class viewHolderHabilidades extends RecyclerView.ViewHolder {
     public viewHolderHabilidades(View itemView) {
         super(itemView);
 
-        btnDadosHab = itemView.findViewById(R.id.btnDadosHab);
+        btnDadosHab = itemView.findViewById(R.id.btnDadosRas);
         txtItemHab = itemView.findViewById(R.id.txtItemHab);
     }
 }

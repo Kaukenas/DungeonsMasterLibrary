@@ -26,7 +26,6 @@ import java.util.List;
 public class AdapterHabilidades extends RecyclerView.Adapter<viewHolderHabilidades> {
 
     List<Skill> listaPersonajes;
-    List<Objetos> listaObjetos;
     Context context;
     LayoutInflater inflater;
     TextView txtResultadoTirada;
@@ -45,7 +44,7 @@ public class AdapterHabilidades extends RecyclerView.Adapter<viewHolderHabilidad
 
     @Override
     public void onBindViewHolder(viewHolderHabilidades holder, int position) {
-        holder.txtItemHab.setText((CharSequence) listaPersonajes.get(position).getHabilidad());
+        holder.txtItemHab.setText( listaPersonajes.get(position).getHabilidad());
         holder.btnDadosHab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

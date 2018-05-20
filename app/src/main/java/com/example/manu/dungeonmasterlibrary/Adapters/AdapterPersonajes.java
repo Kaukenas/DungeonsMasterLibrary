@@ -36,7 +36,6 @@ public class AdapterPersonajes extends RecyclerView.Adapter<viewHolder> {
         this.context=context;
     }
 
-
     @Override
     public viewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_item,parent,false);
@@ -50,7 +49,6 @@ public class AdapterPersonajes extends RecyclerView.Adapter<viewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Ramon siempre tiene razon", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, MostrarUnoPersonajeActivity.class);
                 Bundle bundle = new Bundle();
                 Character c =listaPersonajes.get(position);
@@ -60,8 +58,7 @@ public class AdapterPersonajes extends RecyclerView.Adapter<viewHolder> {
                 context.startActivity(intent);
             }
         });
-        //byte[] decodedString = Base64.decode(listaPersonajes.get(position).getPhoto(), Base64.DEFAULT);
-        //Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
         holder.imgCardView.setImageResource(R.drawable.barbaro);
         holder.txtTituloCardView.setText(listaPersonajes.get(position).getName());
 

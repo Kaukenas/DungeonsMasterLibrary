@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.MostrarUnoPersonajeActivity;
 import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
@@ -47,6 +48,7 @@ public class AdapterMochila extends RecyclerView.Adapter<viewHolderMochila> {
             @Override
             public void onClick(View view) {
                 MostrarUnoPersonajeActivity.listaObjetos.add(listaObjetos.get(position));
+                Toast.makeText(context, "Has añadido el objeto: " + listaObjetos.get(position).getNombreArma(), Toast.LENGTH_SHORT).show();
             }
         });
 

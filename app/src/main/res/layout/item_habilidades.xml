@@ -6,26 +6,26 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/txtAtack"
-        android:layout_width="251dp"
-        android:layout_height="36dp"
+        android:id="@+id/txtItemHab"
+        android:layout_width="283dp"
+        android:layout_height="51dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:gravity="center"
         android:text="TextView"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnDadosTirada"
+        app:layout_constraintEnd_toStartOf="@+id/btnDadosHab"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnDadosTirada"
-        android:layout_width="52dp"
-        android:layout_height="56dp"
+        android:id="@+id/btnDadosHab"
+        android:layout_width="65dp"
+        android:layout_height="52dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"

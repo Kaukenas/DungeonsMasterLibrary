@@ -9,57 +9,54 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.manu.dungeonmasterlibrary.MostrarUnoPersonajeActivity;
 import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
+import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 import com.example.manu.dungeonmasterlibrary.R;
-import com.example.manu.dungeonmasterlibrary.viewHolderAtaques;
+import com.example.manu.dungeonmasterlibrary.viewHolderHabilidades;
 import com.example.manu.dungeonmasterlibrary.viewHolderMochila;
 
-import java.awt.font.TextAttribute;
 import java.util.List;
 
 /**
- * Created by Manu on 19/05/2018.
+ * Created by Manu on 20/05/2018.
  */
 
-public class AdapterAtaques extends RecyclerView.Adapter<viewHolderAtaques> {
+public class AdapterHabilidades extends RecyclerView.Adapter<viewHolderHabilidades> {
 
+    List<Character> listaPersonajes;
     List<Objetos> listaObjetos;
     Context context;
     LayoutInflater inflater;
     TextView txtResultadoTirada;
 
-    public AdapterAtaques(List<Objetos> listaObjetos, Context context, LayoutInflater inflater) {
-        this.listaObjetos = listaObjetos;
+    public AdapterHabilidades(List<Character> listaPersonajes, Context context, LayoutInflater inflater) {
+        this.listaPersonajes = listaPersonajes;
         this.context=context;
-        this.inflater=inflater;
+        this.inflater = inflater;
     }
 
     @Override
-    public viewHolderAtaques onCreateViewHolder(ViewGroup parent, int viewType) {
-        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ataques,parent,false);
-        return new viewHolderAtaques(vista);
+    public viewHolderHabilidades onCreateViewHolder(ViewGroup parent, int viewType) {
+        View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_habilidades,parent,false);
+        return new viewHolderHabilidades(vista);
     }
 
     @Override
-    public void onBindViewHolder(viewHolderAtaques holder, int position) {
-        holder.txtAtack.setText(listaObjetos.get(position).getNombreArma());
-        Toast.makeText(context, "TEXTO ", Toast.LENGTH_SHORT).show();
-        holder.btnDadosTirada.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(viewHolderHabilidades holder, int position) {
+        holder.txtItemHab.setText((CharSequence) listaPersonajes.get(position).getAbilities());
+        holder.btnDadosHab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Dialog dialog = MyCustomAlertDialog(listaObjetos.get(position).getCaras());
                 dialog.show();
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-        return listaObjetos.size();
+        return listaPersonajes.size();
     }
 
     public AlertDialog MyCustomAlertDialog(int caras){
@@ -84,5 +81,4 @@ public class AdapterAtaques extends RecyclerView.Adapter<viewHolderAtaques> {
         resultado=Math.random()*rango;
         return (int)resultado;
     }
-
 }

@@ -32,12 +32,12 @@ public class MostrarCuatroPersonajesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mostrar_cuatro_personajes);
 
         recyclerRasgos = findViewById(R.id.recyclerRasgos);
 
         personaje = getIntent().getExtras().getParcelable("PERSONAJE");
 
-        setContentView(R.layout.activity_mostrar_cuatro_personajes);
         c.finish();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.rasgosItem);
@@ -94,7 +94,9 @@ public class MostrarCuatroPersonajesActivity extends AppCompatActivity {
 
         Toast.makeText(this, "RASGOS " + personaje.getaClass().getFeatures().get(0).getNombre(), Toast.LENGTH_SHORT).show();
 
-        recyclerRasgos.setAdapter(new AdapterRasgos(listaRasgos,MostrarCuatroPersonajesActivity.this, this.getLayoutInflater()));
+        AdapterRasgos adpater = new AdapterRasgos(listaRasgos,MostrarCuatroPersonajesActivity.this, this.getLayoutInflater());
+
+        recyclerRasgos.setAdapter(adpater);
         recyclerRasgos.setHasFixedSize(true);
         LinearLayoutManager layoutManagerr = new LinearLayoutManager(getApplicationContext());
         layoutManagerr.setOrientation(LinearLayoutManager.VERTICAL);

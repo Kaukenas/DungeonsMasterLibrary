@@ -58,7 +58,7 @@ public class AdapterRasgos extends RecyclerView.Adapter<viewHolderRasgos> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listaRasgos.size();
     }
 
     public AlertDialog MyCustomAlertDialog(int caras){

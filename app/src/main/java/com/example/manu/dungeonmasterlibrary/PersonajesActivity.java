@@ -109,7 +109,10 @@ public class PersonajesActivity extends AppCompatActivity {
                         });
                         //Cargar la URL
                         mWebView.loadUrl(url);
-
+                    case R.id.tiendaItem:
+                        Toast.makeText(PersonajesActivity.this, "En desarrollo", Toast.LENGTH_SHORT).show();
+                    case R.id.masterItem:
+                        Toast.makeText(PersonajesActivity.this, "En desarrollo", Toast.LENGTH_SHORT).show();
                 }
 
                 return true;

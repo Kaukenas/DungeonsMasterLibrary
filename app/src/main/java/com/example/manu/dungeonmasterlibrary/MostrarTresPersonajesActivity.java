@@ -51,24 +51,25 @@ public class MostrarTresPersonajesActivity extends AppCompatActivity {
         addObject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (listaObjects != null && listaObjects.size() > 0) {
+                if (!spinnerBag.getSelectedItemsAsString().equals("")){
+
                     for (int i=0; i < listaObjects.size(); i++){
                         if(listaObjects.get(i).getNombreArma().equals(MostrarTresPersonajesActivity.this.spinnerBag.obtenerSeleccion().get(0))){
-                            Toast.makeText(MostrarTresPersonajesActivity.this, "UE", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(MostrarTresPersonajesActivity.this, "UE", Toast.LENGTH_SHORT).show();
                             objetos = listaObjects.get(i);
                         }
+                        recyclerMochila.setAdapter(new AdapterMochila(listaObjects,MostrarTresPersonajesActivity.this));
+                        recyclerMochila.setHasFixedSize(true);
+                        LinearLayoutManager layoutManagerr = new LinearLayoutManager(getApplicationContext());
+                        layoutManagerr.setOrientation(LinearLayoutManager.VERTICAL);
+                        recyclerMochila.setLayoutManager(layoutManagerr);
                     }
 
-                    recyclerMochila.setAdapter(new AdapterMochila(listaObjects,MostrarTresPersonajesActivity.this));
-                    recyclerMochila.setHasFixedSize(true);
-                    LinearLayoutManager layoutManagerr = new LinearLayoutManager(getApplicationContext());
-                    layoutManagerr.setOrientation(LinearLayoutManager.VERTICAL);
-                    recyclerMochila.setLayoutManager(layoutManagerr);
                 } else {
-                    Toast.makeText(MostrarTresPersonajesActivity.this, "Debes seleccionar un ataque", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MostrarTresPersonajesActivity.this, "Debes seleccionar una ataque", Toast.LENGTH_SHORT).show();
                 }
-
             }
+
         });
 
         //Toast.makeText(c, listaObjects.size(), Toast.LENGTH_SHORT).show();

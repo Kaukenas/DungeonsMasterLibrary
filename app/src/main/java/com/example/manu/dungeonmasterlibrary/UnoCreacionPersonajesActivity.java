@@ -151,7 +151,7 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                 } else {
-                    Toast.makeText(UnoCreacionPersonajesActivity.this, "Debes seleccionar una Clase y una Raza, no intentes explotarnos la APP", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UnoCreacionPersonajesActivity.this, "Debes seleccionar una Clase y una Raza", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -164,7 +164,6 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
             }
         });
     }
-
 
     public void tirarDados(){
         txtFuerza.setText(""+tirarDadejo());

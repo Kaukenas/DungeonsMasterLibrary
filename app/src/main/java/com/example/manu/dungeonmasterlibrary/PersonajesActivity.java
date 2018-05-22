@@ -60,7 +60,7 @@ public class PersonajesActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         contenedor = findViewById(R.id.contenedor);
         btnAddPersonajes = findViewById(R.id.btnAddPersonajes);
-        btnRamon = findViewById(R.id.btnRamon);
+        //btnRamon = findViewById(R.id.btnRamon);
         cardViewChar = findViewById(R.id.cardViewChar);
 
 
@@ -187,7 +187,7 @@ public class PersonajesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        super.onBackPressed();
     }
 
     @Override
@@ -208,9 +208,6 @@ public class PersonajesActivity extends AppCompatActivity {
             startActivityForResult(
                     new Intent(PersonajesActivity.this,
                             UnoCreacionPersonajesActivity.class),1);
-        }
-        if(id == R.id.btnRamon){
-
         }
 
         //noinspection SimplifiableIfStatement

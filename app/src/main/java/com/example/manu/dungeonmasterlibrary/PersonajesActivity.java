@@ -49,10 +49,8 @@ public class PersonajesActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     RecyclerView contenedor;
     MenuItem btnAddPersonajes, btnRamon;
-    MenuItem btnPersonaje;
     CardView cardViewChar;
     static ArrayList<Character> listaCharacters = new ArrayList<Character>();
-    WebView mWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,45 +72,21 @@ public class PersonajesActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.personajesItem:
-                        //setContentView(R.layout.activity_personajes);
                         cargarPersonajes();
                         break;
                     case R.id.wikiItem:
-                        setContentView(R.layout.webview_wiki);
-                        //obteniendo el webview
-                        mWebView = findViewById(R.id.mWebView);
-
-                        String url = "https://www.d20pfsrd.com/";
-                        if(savedInstanceState != null){
-                            url = savedInstanceState.getString("URL");
-                        }
-
-                        WebSettings webSettings = mWebView.getSettings();
-                        webSettings.setJavaScriptEnabled(true);
-                        mWebView.setFocusable(true);
-                        mWebView.setFocusableInTouchMode(true);
-                        webSettings.setRenderPriority(WebSettings.RenderPriority.HIGH);
-                        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-                        webSettings.setDatabaseEnabled(true);
-                        webSettings.setAppCacheEnabled(true);
-                        mWebView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
-                            //webSettings.setBlockNetworkLoads(false);
-                            webSettings.setDomStorageEnabled(true);
-                        }
-                        mWebView.setWebViewClient(new WebViewClient(){
-                            @Override
-                            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                                view.loadUrl(url);
-                                return true;
-                            }
-                        });
-                        //Cargar la URL
-                        mWebView.loadUrl(url);
+                        //setContentView(R.layout.webview_wiki);
+                        Intent intent = new Intent(PersonajesActivity.this,WikiActivity.class);
+                        WikiActivity.setActivity(PersonajesActivity.this);
+                        startActivity(intent);
+                        break;
                     case R.id.tiendaItem:
                         Toast.makeText(PersonajesActivity.this, "En desarrollo", Toast.LENGTH_SHORT).show();
+                        break;
                     case R.id.masterItem:
                         Toast.makeText(PersonajesActivity.this, "En desarrollo", Toast.LENGTH_SHORT).show();
+                        break;
+                    default:
                 }
 
                 return true;
@@ -135,11 +109,11 @@ public class PersonajesActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.personajesItem);
     }
 
-    @Override
+    /*@Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
         super.onSaveInstanceState(outState, outPersistentState);
         outState.putString("URL",mWebView.getUrl());
-    }
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -213,12 +187,6 @@ public class PersonajesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        if (mWebView.canGoBack()){
-            mWebView.goBack();
-        } else {
-            super.onBackPressed();
-        }
 
     }
 

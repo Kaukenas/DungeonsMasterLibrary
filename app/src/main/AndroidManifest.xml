@@ -40,7 +40,8 @@
         <activity android:name=".MostrarUnoPersonajeActivity" />
         <activity android:name=".MostrarDosPersonajesActivity" />
         <activity android:name=".MostrarTresPersonajesActivity" />
-        <activity android:name=".MostrarCuatroPersonajesActivity"></activity>
+        <activity android:name=".MostrarCuatroPersonajesActivity" />
+        <activity android:name=".WikiActivity"></activity>
     </application>
 
 </manifest>

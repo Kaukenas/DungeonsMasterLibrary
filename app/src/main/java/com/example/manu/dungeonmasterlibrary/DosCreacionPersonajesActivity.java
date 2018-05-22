@@ -71,7 +71,7 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
         btnNextDos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!spinner2.getSelectedItemsAsString().equals("") && !spinner.getSelectedItemsAsString().equals("")) {
+                if (!spinner2.getSelectedItemsAsString().equals("") && !spinner.getSelectedItemsAsString().equals("") && !txtNombrePersonaje.getText().toString().equals("")) {
                     Character p = personajes;
                     ArrayList<String> habilidades = spinner.obtenerSeleccion();
                     ArrayList<Skill> hab = new ArrayList<>();

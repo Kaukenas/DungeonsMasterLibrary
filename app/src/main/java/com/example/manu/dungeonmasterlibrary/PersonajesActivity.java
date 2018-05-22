@@ -164,10 +164,7 @@ public class PersonajesActivity extends AppCompatActivity {
             LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             contenedor.setLayoutManager(layoutManager);
-        }else{
-            Toast.makeText(this, "wah wah wah", Toast.LENGTH_SHORT).show();
         }
-
         bottomNavigationView.setSelectedItemId(R.id.personajesItem);
 
     }

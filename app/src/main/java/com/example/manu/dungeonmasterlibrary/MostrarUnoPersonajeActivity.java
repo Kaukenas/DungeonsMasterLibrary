@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
+import android.graphics.Typeface;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -20,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manu.dungeonmasterlibrary.Adapters.AdapterAtaques;
-import com.example.manu.dungeonmasterlibrary.Adapters.AdapterMochila;
 import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 
@@ -88,63 +86,59 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         ArrayList<Objetos> objetosArrayList = cargarArmas();
         for (int i=0; i < objetosArrayList.size(); i++) {
             o = objetosArrayList.get(i);
-            Toast.makeText(this, "NOMBRE ARMA " + o.getNombreArma(), Toast.LENGTH_SHORT).show();
         }
-
 
         pbVida.setProgress(100);
         pbVida.getProgressDrawable().setColorFilter(
                 Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
         txtVidaCambia.setText(String.valueOf(100));
 
-        imageButton51.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        imageButton51.setOnClickListener(view -> {
+            int x = pbVida.getProgress();
+            if (x > 0) {
                 sumar = sumar -2;
-                int x = pbVida.getProgress();
                 pbVida.setProgress(x + (sumar));
                 int z = Integer.parseInt(String.valueOf(txtVidaCambia.getText()));
                 txtVidaCambia.setText(String.valueOf(z + (sumar)));
                 sumar=0;
+            } else {
+                Toast.makeText(this, "Estas muerto", Toast.LENGTH_SHORT).show();
+            }
 
-                if (pbVida.getProgress() >= 50){
-                    pbVida.getProgressDrawable().setColorFilter(
-                            Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
-                } else {
-                    pbVida.getProgressDrawable().setColorFilter(
-                            Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-                }
+
+            if (pbVida.getProgress() >= 50){
+                pbVida.getProgressDrawable().setColorFilter(
+                        Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
+            } else {
+                pbVida.getProgressDrawable().setColorFilter(
+                        Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
             }
         });
 
-        imageButton52.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        imageButton52.setOnClickListener(view -> {
+            int y = pbVida.getProgress();
+            if (y < 100) {
                 sumar = sumar +2;
-                int y = pbVida.getProgress();
                 pbVida.setProgress(y + (sumar));
                 int w = Integer.parseInt(String.valueOf(txtVidaCambia.getText()));
                 txtVidaCambia.setText(String.valueOf(w + (sumar)));
                 sumar=0;
-
-                if (pbVida.getProgress() >= 50){
-                    pbVida.getProgressDrawable().setColorFilter(
-                            Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
-                } else {
-                    pbVida.getProgressDrawable().setColorFilter(
-                            Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
-                }
+            } else {
+                Toast.makeText(this, "Estas completamente regenerado", Toast.LENGTH_SHORT).show();
             }
 
+            if (pbVida.getProgress() >= 50){
+                pbVida.getProgressDrawable().setColorFilter(
+                        Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
+            } else {
+                pbVida.getProgressDrawable().setColorFilter(
+                        Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+            }
         });
 
         personajes = getIntent().getExtras().getParcelable("PERSONAJE");
-        //Toast.makeText(this, "Atributos"+ personajes.getAtributos(), Toast.LENGTH_SHORT).show();
-
 
         cargarAtributos();
-
-
 
         int destreza = Integer.parseInt(String.valueOf(txtDestreza.getText()));
         if (destreza %2 == 0) {
@@ -164,12 +158,9 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         txtCA.setText(String.valueOf(iniciativa+14));
         txtADistancia.setText(String.valueOf(iniciativa));
 
-        imageButton62.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int CA = Integer.parseInt(String.valueOf(txtCA.getText()));
-                txtCA.setText(String.valueOf(CA+1));
-            }
+        imageButton62.setOnClickListener(view -> {
+            int CA = Integer.parseInt(String.valueOf(txtCA.getText()));
+            txtCA.setText(String.valueOf(CA+1));
         });
 
         imageButton61.setOnClickListener(new View.OnClickListener() {
@@ -181,94 +172,68 @@ public class MostrarUnoPersonajeActivity extends AppCompatActivity {
         });
 
         Objetos finalO = o;
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("ARMAS", finalO);
-                bundle.putParcelable("PERSONAJE",getIntent().getExtras().getParcelable("PERSONAJE"));
-                switch (item.getItemId()) {
-                    case R.id.combateItem:
-                        //setContentView(R.layout.activity_mostrar_uno_personaje);
-                        break;
-                    case R.id.habilidadesItem:
-                        Intent intent = new Intent(MostrarUnoPersonajeActivity.this,MostrarDosPersonajesActivity.class);
-                        intent.putExtras(bundle);
-                        MostrarDosPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
-                        startActivity(intent);
-                        break;
-                    case R.id.equipamientoItem:
-                        Intent intentEquipamiento = new Intent(MostrarUnoPersonajeActivity.this,MostrarTresPersonajesActivity.class);
-                        intentEquipamiento.putExtras(bundle);
-                        MostrarTresPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
-                        startActivity(intentEquipamiento);
-                        break;
-                    case R.id.rasgosItem:
-                        Intent intentRas = new Intent(MostrarUnoPersonajeActivity.this,MostrarCuatroPersonajesActivity.class);
-                        intentRas.putExtras(bundle);
-                        MostrarCuatroPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
-                        startActivity(intentRas);
-                        break;
-                }
-
-                return true;
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("ARMAS", finalO);
+            bundle.putParcelable("PERSONAJE",getIntent().getExtras().getParcelable("PERSONAJE"));
+            switch (item.getItemId()) {
+                case R.id.combateItem:
+                    break;
+                case R.id.habilidadesItem:
+                    Intent intent = new Intent(MostrarUnoPersonajeActivity.this,MostrarDosPersonajesActivity.class);
+                    intent.putExtras(bundle);
+                    MostrarDosPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
+                    startActivity(intent);
+                    break;
+                case R.id.equipamientoItem:
+                    Intent intentEquipamiento = new Intent(MostrarUnoPersonajeActivity.this,MostrarTresPersonajesActivity.class);
+                    intentEquipamiento.putExtras(bundle);
+                    MostrarTresPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
+                    startActivity(intentEquipamiento);
+                    break;
+                case R.id.rasgosItem:
+                    Intent intentRas = new Intent(MostrarUnoPersonajeActivity.this,MostrarCuatroPersonajesActivity.class);
+                    intentRas.putExtras(bundle);
+                    MostrarCuatroPersonajesActivity.setActivity(MostrarUnoPersonajeActivity.this);
+                    startActivity(intentRas);
+                    break;
             }
+            return true;
         });
 
-        imageButtonDados1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+        imageButtonDados1.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
         });
 
-        imageButtonDados2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+        imageButtonDados2.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
         });
 
-        imageButtonDados3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+        imageButtonDados3.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
         });
 
-        imageButtonDados4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+        imageButtonDados4.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
         });
 
-        imageButtonDados5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+        imageButtonDados5.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
         });
 
-        imageButtonDados6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+        imageButtonDados6.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
         });
 
-        imageButtonDados7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+        imageButtonDados7.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
         });
     }
 

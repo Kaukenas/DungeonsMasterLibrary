@@ -48,7 +48,7 @@ public class PersonajesActivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
     RecyclerView contenedor;
-    MenuItem btnAddPersonajes, btnRamon;
+    MenuItem btnAddPersonajes;
     CardView cardViewChar;
     static ArrayList<Character> listaCharacters = new ArrayList<Character>();
 
@@ -60,37 +60,31 @@ public class PersonajesActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         contenedor = findViewById(R.id.contenedor);
         btnAddPersonajes = findViewById(R.id.btnAddPersonajes);
-        //btnRamon = findViewById(R.id.btnRamon);
         cardViewChar = findViewById(R.id.cardViewChar);
-
 
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
 
-                switch (item.getItemId()) {
-                    case R.id.personajesItem:
-                        cargarPersonajes();
-                        break;
-                    case R.id.wikiItem:
-                        //setContentView(R.layout.webview_wiki);
-                        Intent intent = new Intent(PersonajesActivity.this,WikiActivity.class);
-                        WikiActivity.setActivity(PersonajesActivity.this);
-                        startActivity(intent);
-                        break;
-                    case R.id.tiendaItem:
-                        Toast.makeText(PersonajesActivity.this, "En desarrollo", Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.masterItem:
-                        Toast.makeText(PersonajesActivity.this, "En desarrollo", Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                }
-
-                return true;
+            switch (item.getItemId()) {
+                case R.id.personajesItem:
+                    cargarPersonajes();
+                    break;
+                case R.id.wikiItem:
+                    Intent intent = new Intent(PersonajesActivity.this,WikiActivity.class);
+                    WikiActivity.setActivity(PersonajesActivity.this);
+                    startActivity(intent);
+                    break;
+                case R.id.tiendaItem:
+                    Toast.makeText(PersonajesActivity.this, "En desarrollo", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.masterItem:
+                    Toast.makeText(PersonajesActivity.this, "En desarrollo", Toast.LENGTH_SHORT).show();
+                    break;
+                default:
             }
+
+            return true;
         });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -108,12 +102,6 @@ public class PersonajesActivity extends AppCompatActivity {
         super.onResume();
         bottomNavigationView.setSelectedItemId(R.id.personajesItem);
     }
-
-    /*@Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        outState.putString("URL",mWebView.getUrl());
-    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -155,12 +143,13 @@ public class PersonajesActivity extends AppCompatActivity {
                     StringWriter errors = new StringWriter();
                     t.printStackTrace(new PrintWriter(errors));
                     Log.e("ERROR subir",errors.toString());
-                    Toast.makeText(PersonajesActivity.this, errors.toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(PersonajesActivity.this, errors.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
+
             listaCharacters.add(personaje);
-        contenedor.setAdapter(new AdapterPersonajes(listaCharacters, PersonajesActivity.this));
-        contenedor.setHasFixedSize(true);
+            contenedor.setAdapter(new AdapterPersonajes(listaCharacters, PersonajesActivity.this));
+            contenedor.setHasFixedSize(true);
             LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             contenedor.setLayoutManager(layoutManager);
@@ -207,46 +196,11 @@ public class PersonajesActivity extends AppCompatActivity {
                             UnoCreacionPersonajesActivity.class),1);
         }
 
-        //noinspection SimplifiableIfStatement
-
-
         return super.onOptionsItemSelected(item);
     }
 
     public void cargarPersonajes(){
-       /* String baseurl = "http://thedmlibrary.ddns.net/api/index.php/";
 
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(baseurl)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
-
-        GetCharactersRetrofit Api = retrofit.create(GetCharactersRetrofit.class);
-
-        Call <List<Character>> call = Api.loadChanges();
-        call.enqueue(new Callback<List<Character>>() {
-            @Override
-            public void onResponse(Call<List<Character>> call, Response<List<Character>> response) {
-                listaCharacters= new ArrayList<>();
-                List<Character> characters = response.body();
-                for (int i = 0; i <characters.size() ; i++) {
-                    listaCharacters.add(characters.get(i));
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Character>> call, Throwable t) {
-                StringWriter errors = new StringWriter();
-                t.printStackTrace(new PrintWriter(errors));
-                Log.e("ERROR",errors.toString());
-                Toast.makeText(PersonajesActivity.this, errors.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });*/
         contenedor.setAdapter(new AdapterPersonajes(listaCharacters, PersonajesActivity.this));
         contenedor.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());

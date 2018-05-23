@@ -42,33 +42,30 @@ public class MostrarCuatroPersonajesActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.rasgosItem);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.combateItem:
-                        Intent intent = new Intent(MostrarCuatroPersonajesActivity.this,MostrarUnoPersonajeActivity.class);
-                        intent.putExtras(getIntent().getExtras());
-                        MostrarUnoPersonajeActivity.setActivity(MostrarCuatroPersonajesActivity.this);
-                        startActivity(intent);
-                        break;
-                    case R.id.habilidadesItem:
-                        Intent intentHab = new Intent(MostrarCuatroPersonajesActivity.this,MostrarDosPersonajesActivity.class);
-                        intentHab.putExtras(getIntent().getExtras());
-                        MostrarDosPersonajesActivity.setActivity(MostrarCuatroPersonajesActivity.this);
-                        startActivity(intentHab);
-                        break;
-                    case R.id.equipamientoItem:
-                        Intent intentEqui = new Intent(MostrarCuatroPersonajesActivity.this,MostrarTresPersonajesActivity.class);
-                        intentEqui.putExtras(getIntent().getExtras());
-                        MostrarTresPersonajesActivity.setActivity(MostrarCuatroPersonajesActivity.this);
-                        startActivity(intentEqui);
-                        break;
-                    case R.id.rasgosItem:
-                        break;
-                }
-                return true;
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.combateItem:
+                    Intent intent = new Intent(MostrarCuatroPersonajesActivity.this,MostrarUnoPersonajeActivity.class);
+                    intent.putExtras(getIntent().getExtras());
+                    MostrarUnoPersonajeActivity.setActivity(MostrarCuatroPersonajesActivity.this);
+                    startActivity(intent);
+                    break;
+                case R.id.habilidadesItem:
+                    Intent intentHab = new Intent(MostrarCuatroPersonajesActivity.this,MostrarDosPersonajesActivity.class);
+                    intentHab.putExtras(getIntent().getExtras());
+                    MostrarDosPersonajesActivity.setActivity(MostrarCuatroPersonajesActivity.this);
+                    startActivity(intentHab);
+                    break;
+                case R.id.equipamientoItem:
+                    Intent intentEqui = new Intent(MostrarCuatroPersonajesActivity.this,MostrarTresPersonajesActivity.class);
+                    intentEqui.putExtras(getIntent().getExtras());
+                    MostrarTresPersonajesActivity.setActivity(MostrarCuatroPersonajesActivity.this);
+                    startActivity(intentEqui);
+                    break;
+                case R.id.rasgosItem:
+                    break;
             }
+            return true;
         });
 
         switch (personaje.getaClass().getId()){

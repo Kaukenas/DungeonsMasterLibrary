@@ -15,16 +15,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.manu.dungeonmasterlibrary.Adapters.AdapterAtaques;
 import com.example.manu.dungeonmasterlibrary.Adapters.AdapterHabilidades;
 import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Character;
 import com.example.manu.dungeonmasterlibrary.POJOS2.Skill;
-
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,95 +54,73 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         recyclerHabilidades = findViewById(R.id.recyclerHabilidades);
 
-
-
         bottomNavigationView.setSelectedItemId(R.id.habilidadesItem);
 
         a.finish();
         personajes = getIntent().getExtras().getParcelable("PERSONAJE");
 
-            textViewFuerzA.setText(personajes.getAbilities().get(0).getFuerza());
-            textViewDestrezA.setText(personajes.getAbilities().get(1).getDestreza());
-            textViewConstitucioN.setText(personajes.getAbilities().get(2).getConstitucion());
-            textViewInteligenciA.setText(personajes.getAbilities().get(3).getInteligencia());
-            textViewSabiduriA.setText(personajes.getAbilities().get(4).getSabiduria());
-            textViewCarismA.setText(personajes.getAbilities().get(5).getCarisma());
+        textViewFuerzA.setText(personajes.getAbilities().get(0).getFuerza());
+        textViewDestrezA.setText(personajes.getAbilities().get(1).getDestreza());
+        textViewConstitucioN.setText(personajes.getAbilities().get(2).getConstitucion());
+        textViewInteligenciA.setText(personajes.getAbilities().get(3).getInteligencia());
+        textViewSabiduriA.setText(personajes.getAbilities().get(4).getSabiduria());
+        textViewCarismA.setText(personajes.getAbilities().get(5).getCarisma());
         listaPersonajes = personajes.getSkills();
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.combateItem:
-                        Intent intent = new Intent(MostrarDosPersonajesActivity.this,MostrarUnoPersonajeActivity.class);
-                        intent.putExtras(getIntent().getExtras());
-                        MostrarUnoPersonajeActivity.setActivity(MostrarDosPersonajesActivity.this);
-                        startActivity(intent);
-                        break;
-                    case R.id.habilidadesItem:
-                        break;
-                    case R.id.equipamientoItem:
-                        Intent intentEquipamiento = new Intent(MostrarDosPersonajesActivity.this,MostrarTresPersonajesActivity.class);
-                        Bundle bundle = new Bundle();
-                        intentEquipamiento.putExtras(getIntent().getExtras());
-                        MostrarTresPersonajesActivity.setActivity(MostrarDosPersonajesActivity.this);
-                        startActivity(intentEquipamiento);
-                        break;
-                    case R.id.rasgosItem:
-                        Intent intentRas = new Intent(MostrarDosPersonajesActivity.this,MostrarCuatroPersonajesActivity.class);
-                        intentRas.putExtras(getIntent().getExtras());
-                        MostrarCuatroPersonajesActivity.setActivity(MostrarDosPersonajesActivity.this);
-                        startActivity(intentRas);
-                        break;
-                }
-                return true;
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.combateItem:
+                    Intent intent = new Intent(MostrarDosPersonajesActivity.this,MostrarUnoPersonajeActivity.class);
+                    intent.putExtras(getIntent().getExtras());
+                    MostrarUnoPersonajeActivity.setActivity(MostrarDosPersonajesActivity.this);
+                    startActivity(intent);
+                    break;
+                case R.id.habilidadesItem:
+                    break;
+                case R.id.equipamientoItem:
+                    Intent intentEquipamiento = new Intent(MostrarDosPersonajesActivity.this,MostrarTresPersonajesActivity.class);
+                    intentEquipamiento.putExtras(getIntent().getExtras());
+                    MostrarTresPersonajesActivity.setActivity(MostrarDosPersonajesActivity.this);
+                    startActivity(intentEquipamiento);
+                    break;
+                case R.id.rasgosItem:
+                    Intent intentRas = new Intent(MostrarDosPersonajesActivity.this,MostrarCuatroPersonajesActivity.class);
+                    intentRas.putExtras(getIntent().getExtras());
+                    MostrarCuatroPersonajesActivity.setActivity(MostrarDosPersonajesActivity.this);
+                    startActivity(intentRas);
+                    break;
             }
-        });
-        imgBtn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+            return true;
         });
 
-        imgBtn12.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+        imgBtn1.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
         });
 
-        imgBtn21.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+        imgBtn12.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
         });
 
-        imgBtn22.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+        imgBtn21.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
         });
 
-        imgBtn31.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+        imgBtn22.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
         });
 
-        imgBtn32.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog dialog =MyCustomAlertDialog();
-                dialog.show();
-            }
+        imgBtn31.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
+        });
+
+        imgBtn32.setOnClickListener(view -> {
+            AlertDialog dialog =MyCustomAlertDialog();
+            dialog.show();
         });
 
         recyclerHabilidades.setAdapter(new AdapterHabilidades(listaPersonajes,MostrarDosPersonajesActivity.this, this.getLayoutInflater()));
@@ -173,16 +145,11 @@ public class MostrarDosPersonajesActivity extends AppCompatActivity {
         txtResultadoTirada =  mylayout.findViewById(R.id.txtResultadoTirada);
         int tirada=tirarDado(20);
         txtResultadoTirada.setText(""+tirada);
-        builder.setView(mylayout).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
+        builder.setView(mylayout).setPositiveButton("Aceptar", (dialogInterface, i) -> {
         });
+
         return builder.create();
     }
-
-
 
     public static void setActivity(Activity activity){
         MostrarDosPersonajesActivity.a=activity;

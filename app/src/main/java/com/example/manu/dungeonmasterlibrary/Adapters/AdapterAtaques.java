@@ -2,22 +2,17 @@ package com.example.manu.dungeonmasterlibrary.Adapters;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.manu.dungeonmasterlibrary.MostrarUnoPersonajeActivity;
 import com.example.manu.dungeonmasterlibrary.POJOS.Objetos;
 import com.example.manu.dungeonmasterlibrary.R;
 import com.example.manu.dungeonmasterlibrary.viewHolderAtaques;
-import com.example.manu.dungeonmasterlibrary.viewHolderMochila;
 
-import java.awt.font.TextAttribute;
 import java.util.List;
 
 /**
@@ -46,13 +41,9 @@ public class AdapterAtaques extends RecyclerView.Adapter<viewHolderAtaques> {
     @Override
     public void onBindViewHolder(viewHolderAtaques holder, int position) {
         holder.txtAtack.setText(listaObjetos.get(position).getNombreArma());
-        Toast.makeText(context, "TEXTO ", Toast.LENGTH_SHORT).show();
-        holder.btnDadosTirada.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Dialog dialog = MyCustomAlertDialog(listaObjetos.get(position).getCaras());
-                dialog.show();
-            }
+        holder.btnDadosTirada.setOnClickListener(view -> {
+            Dialog dialog = MyCustomAlertDialog(listaObjetos.get(position).getCaras());
+            dialog.show();
         });
 
     }
@@ -70,11 +61,8 @@ public class AdapterAtaques extends RecyclerView.Adapter<viewHolderAtaques> {
         txtResultadoTirada =  mylayout.findViewById(R.id.txtResultadoTirada);
         int tirada=tirarDado(caras);
         txtResultadoTirada.setText(""+tirada);
-        builder.setView(mylayout).setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
+        builder.setView(mylayout).setPositiveButton("Aceptar", (dialogInterface, i) -> {
 
-            }
         });
         return builder.create();
     }

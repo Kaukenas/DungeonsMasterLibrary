@@ -93,7 +93,6 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
         btnNextUno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //IF ha seleccionado algo en clase y ha seleccionado algo en raza
                 if (!spinnerClases.getSelectedItemsAsString().equals("") && !spinnerRazas.getSelectedItemsAsString().equals("")){
 
                     Class c = new Class();
@@ -109,10 +108,7 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
 
 
                         for (int i=0; i < listarazas.size(); i++){
-                            Toast.makeText(UnoCreacionPersonajesActivity.this,"lista raza "+listarazas.get(i).getName()+" raza "+UnoCreacionPersonajesActivity.this.spinnerRazas.obtenerSeleccion().get(0), Toast.LENGTH_SHORT).show();
                             if(listarazas.get(i).getName().equals(UnoCreacionPersonajesActivity.this.spinnerRazas.obtenerSeleccion().get(0))){
-
-                                Toast.makeText(UnoCreacionPersonajesActivity.this, "entrando al if", Toast.LENGTH_SHORT).show();
                                 r = listarazas.get(i);
                             }
                         }
@@ -157,12 +153,7 @@ public class UnoCreacionPersonajesActivity extends AppCompatActivity {
             }
         });
 
-        btnCancelUno.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        btnCancelUno.setOnClickListener(view -> finish());
     }
 
     public void tirarDados(){

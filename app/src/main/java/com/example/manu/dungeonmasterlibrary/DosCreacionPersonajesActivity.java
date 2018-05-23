@@ -41,7 +41,7 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
 
 
         personajes = getIntent().getExtras().getParcelable("PERSONAJE");
-        Toast.makeText(this, "personaje = "+personajes, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "personaje = "+personajes, Toast.LENGTH_LONG).show();
         List<Skill> habilidades = personajes.getaClass().getSkills();
         for (int i = 0; i <habilidades.size() ; i++) {
             list.add(habilidades.get(i).getHabilidad());
@@ -68,37 +68,30 @@ public class DosCreacionPersonajesActivity extends AppCompatActivity {
 
         spinner2.setItems(list2);
 
-        btnNextDos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!spinner2.getSelectedItemsAsString().equals("") && !spinner.getSelectedItemsAsString().equals("") && !txtNombrePersonaje.getText().toString().equals("")) {
-                    Character p = personajes;
-                    ArrayList<String> habilidades = spinner.obtenerSeleccion();
-                    ArrayList<Skill> hab = new ArrayList<>();
-                    for (int i = 0; i < habilidades.size(); i++) {
-                        hab.add(new Skill(habilidades.get(i)));
-                    }
+        btnNextDos.setOnClickListener(view -> {
+            if (!spinner2.getSelectedItemsAsString().equals("") && !spinner.getSelectedItemsAsString().equals("") && !txtNombrePersonaje.getText().toString().equals("")) {
+                Character p = personajes;
+                ArrayList<String> habilidades1 = spinner.obtenerSeleccion();
+                ArrayList<Skill> hab = new ArrayList<>();
+                for (int i = 0; i < habilidades1.size(); i++) {
+                    hab.add(new Skill(habilidades1.get(i)));
+                }
 
 
-                    p.setSkills(hab);
-                    p.setName(txtNombrePersonaje.getText().toString());
-                    p.setAlineamiento(spinner2.obtenerSeleccion().get(0));
-                    //Toast.makeText(DosCreacionPersonajesActivity.this, p.getName().toString(), Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(DosCreacionPersonajesActivity.this, "ATTTTTTRRS " + personajes.getAbilities(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(DosCreacionPersonajesActivity.this, TresCreacionPersonajesActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putParcelable("PERSONAJE", p);
-                    intent.putExtras(bundle);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-                    startActivity(intent);
-                    finish();
-                } else {
-                        Toast.makeText(DosCreacionPersonajesActivity.this, "Debes seleccionar las Habilidades, el Alineamiento", Toast.LENGTH_SHORT).show();
-                    }
-            }
+                p.setSkills(hab);
+                p.setName(txtNombrePersonaje.getText().toString());
+                p.setAlineamiento(spinner2.obtenerSeleccion().get(0));
+                Intent intent = new Intent(DosCreacionPersonajesActivity.this, TresCreacionPersonajesActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("PERSONAJE", p);
+                intent.putExtras(bundle);
+                intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                startActivity(intent);
+                finish();
+            } else {
+                    Toast.makeText(DosCreacionPersonajesActivity.this, "Debes seleccionar las Habilidades, el Alineamiento y el Nombre", Toast.LENGTH_SHORT).show();
+                }
         });
-
-
 
         btnCancelDos.setOnClickListener(view -> onBackPressed());
         

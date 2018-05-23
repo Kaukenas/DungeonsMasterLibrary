@@ -48,17 +48,14 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
         if (mSelection != null && which < mSelection.length) {
             if (isChecked) {
                 if (contador < max) {
-                    //Toast.makeText(getContext(), "Sumando: "+this.max+" "+this.contador, Toast.LENGTH_SHORT).show();
                     contador++;
                     simple_adapter.clear();
                     simple_adapter.add(buildSelectedItemString());
                 } else {
-                   // Toast.makeText(getContext(), "WHICH" + which, Toast.LENGTH_SHORT).show();
                     mSelection[which] = false;
                     ((AlertDialog)dialog).getListView().setItemChecked(which, false);
                 }
             } else {
-                //Toast.makeText(getContext(), "Restando: ", Toast.LENGTH_SHORT).show();
                 contador--;
                 simple_adapter.clear();
                 simple_adapter.add(buildSelectedItemString());
@@ -74,14 +71,11 @@ public class MultiSelectionSpinner extends android.support.v7.widget.AppCompatSp
         final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMultiChoiceItems(_items, mSelection, this);
 
-        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-                seleccion = new ArrayList<>();
-                for (int i = 0; i < _items.length; ++i) {
-                    if (mSelection[i]) {
-                        seleccion.add(_items[i]);
-                    }
+        builder.setPositiveButton("Ok", (arg0, arg1) -> {
+            seleccion = new ArrayList<>();
+            for (int i = 0; i < _items.length; ++i) {
+                if (mSelection[i]) {
+                    seleccion.add(_items[i]);
                 }
             }
         });

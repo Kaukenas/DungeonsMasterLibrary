@@ -24,6 +24,7 @@ public class TresCreacionPersonajesActivity extends AppCompatActivity {
     ImageView imageViewMonje, imageViewPicaro, imageViewBarbaro, imageViewGuerrero;
     Character personajes;
     Bitmap bitmapend= null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,6 @@ public class TresCreacionPersonajesActivity extends AppCompatActivity {
         imageViewPicaro = findViewById(R.id.imageViewPicaro);
 
         personajes = getIntent().getExtras().getParcelable("PERSONAJE");
-
 
         /*//////////////////////////REESCALADO DE IMAGEN ////////////////////////////////////////*/
         Bitmap bitmap = ((BitmapDrawable)imageViewGuerrero.getDrawable()).getBitmap();
@@ -60,7 +60,6 @@ public class TresCreacionPersonajesActivity extends AppCompatActivity {
 
         btnBackTres.setOnClickListener(view -> finish());
 
-
         btnFinish.setOnClickListener(view -> {
             if(bitmapend!=null){
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -75,7 +74,7 @@ public class TresCreacionPersonajesActivity extends AppCompatActivity {
                 setResult(RESULT_OK,returnIntent);
                 finish();
             }else{
-                Toast.makeText(TresCreacionPersonajesActivity.this, "Manu no tiene puta idea", Toast.LENGTH_SHORT).show();
+                Toast.makeText(TresCreacionPersonajesActivity.this, "Selecciona una Imagen", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -93,9 +92,6 @@ public class TresCreacionPersonajesActivity extends AppCompatActivity {
                 imageViewPicaro.setBackground(Drawable.createFromPath(""));
                 bitmapend = ((BitmapDrawable)imageViewMonje.getDrawable()).getBitmap();
             }
-
-
-
         });
 
         imageViewGuerrero.setOnClickListener(view -> {
@@ -118,7 +114,6 @@ public class TresCreacionPersonajesActivity extends AppCompatActivity {
                 imageViewPicaro.setBackground(Drawable.createFromPath(""));
                 bitmapend = ((BitmapDrawable)imageViewBarbaro.getDrawable()).getBitmap();
             }
-
         });
 
         imageViewPicaro.setOnClickListener(view -> {
@@ -130,7 +125,6 @@ public class TresCreacionPersonajesActivity extends AppCompatActivity {
                 imageViewBarbaro.setBackground(Drawable.createFromPath(""));
                 bitmapend = ((BitmapDrawable)imageViewPicaro.getDrawable()).getBitmap();
             }
-
         });
     }
 }

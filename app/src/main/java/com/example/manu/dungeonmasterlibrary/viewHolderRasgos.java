@@ -1,5 +1,6 @@
 package com.example.manu.dungeonmasterlibrary;
 
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageButton;
@@ -19,5 +20,6 @@ public class viewHolderRasgos extends RecyclerView.ViewHolder {
 
         btnDadosRas = itemView.findViewById(R.id.btnDadosRas);
         txtItemRas = itemView.findViewById(R.id.txtItemRas);
+
     }
 }

@@ -36,20 +36,14 @@ public class AdapterMochila extends RecyclerView.Adapter<viewHolderMochila> {
 
     @Override
     public void onBindViewHolder(viewHolderMochila holder, int position) {
-        holder.btnEliminarAtack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listaObjetos.remove(position);
-                notifyDataSetChanged();
-            }
+        holder.btnEliminarAtack.setOnClickListener(view -> {
+            listaObjetos.remove(position);
+            notifyDataSetChanged();
         });
 
-        holder.btnAddAtack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MostrarUnoPersonajeActivity.listaObjetos.add(listaObjetos.get(position));
-                Toast.makeText(context, "Has añadido el objeto: " + listaObjetos.get(position).getNombreArma(), Toast.LENGTH_SHORT).show();
-            }
+        holder.btnAddAtack.setOnClickListener(view -> {
+            MostrarUnoPersonajeActivity.listaObjetos.add(listaObjetos.get(position));
+            Toast.makeText(context, "Has añadido el objeto: " + listaObjetos.get(position).getNombreArma(), Toast.LENGTH_SHORT).show();
         });
 
         holder.txtNombreArma.setText(listaObjetos.get(position).getNombreArma());
